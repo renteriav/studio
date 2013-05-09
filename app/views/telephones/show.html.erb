@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+  <%= formated_name(@customer.first, @customer.last) %>
+</h2>
+<p>
+  <b>Number:</b>
+  <%= formated_phone(@telephone.area, @telephone.prefix, @telephone.sufix) %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @telephone.description %>
+</p>
+
+
+<%= link_to 'Edit', [:edit, @customer, @telephone] %> |
+<%= link_to 'Back', customer_telephones_path %>

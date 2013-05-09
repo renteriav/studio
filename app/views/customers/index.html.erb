@@ -1,0 +1,26 @@
+<% provide(:title, 'Customers') %>
+<h1>Listing customers</h1>
+
+<table class="table table-hover">
+  <tr>
+    <th>First</th>
+    <th>Last</th>
+    <th>Email</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.first.capitalize %></td>
+        <td><%= customer.last.capitalize %></td>
+        <td><%= customer.email %></td>
+        <td><%= link_to 'Show', customer %></td>
+        <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+        <td><%= link_to 'Destroy', customer, method: :delete, remote: true, class: "triger" %></td>
+      </tr>
+    <% end %>
+</table>
+<%= link_to 'New Customer', new_customer_path, class: "btn btn-small btn-primary" %>
+<%= render :partial => 'shared/alert' %>
+

@@ -1,0 +1,24 @@
+<h1>Telephones for <%= formated_name(@customer.first, @customer.last) %></h1>
+<table>
+  <tr>
+    <th>Number</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @telephones.each do |telephone| %>
+  <tr>
+    <td><%= formated_phone(telephone.area, telephone.prefix, telephone.sufix) %></td>
+    <td><%= telephone.description %></td>
+    <td><%= link_to 'Show', customer_telephone_path(@customer, telephone) %></td>
+    <td><%= link_to 'Edit', [:edit, @customer, telephone] %></td>
+    <td><%= link_to 'Destroy', customer_telephone_path(@customer, telephone), confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Customer telephone', new_customer_telephone_path %>

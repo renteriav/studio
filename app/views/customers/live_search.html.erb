@@ -1,0 +1,8 @@
+<% 
+	@search_result.each do |result| 
+	formated_name(result.first, result.last) 
+%>
+	<p>
+		<%= link_to "#{@name}", result %>
+	</p>
+<% end %>

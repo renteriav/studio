@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+	<b>Customer:</b>
+	<%= formated_name(@customer.first, @customer.last) %>
+</p>
+<p>
+  <b>Email:</b>
+  <%= @customer.email %>
+</p>
+<ul>
+	<% for telephone in @customer.telephones %>
+	<li>
+		<%= formated_phone(telephone.area, telephone.prefix, telephone.sufix) %>&nbsp;
+		<%= telephone.description %>
+		</li>
+	<% end %>
+</ul>
+
+
+<%= link_to 'Edit', edit_customer_path(@customer) %> |
+<%= link_to 'Back', customers_path %> |
+<%= link_to 'Add Telephone', new_customer_telephone_path(@customer) %>
