@@ -1,4 +1,4 @@
-Whitby::Application.routes.draw do
+Studio::Application.routes.draw do
   root to: 'customers#index'
   
   get "customers/live_search"

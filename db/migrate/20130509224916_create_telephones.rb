@@ -1,5 +1,5 @@
 class CreateTelephones < ActiveRecord::Migration
-  def up
+  def change
     create_table :telephones do |t|
       t.string :area
       t.string :sufix
@@ -8,10 +8,6 @@ class CreateTelephones < ActiveRecord::Migration
       t.integer :customer_id
 
       t.timestamps
-  end
-end
-  end
-
-  def down
+    end
   end
 end

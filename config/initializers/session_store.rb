@@ -1,8 +1,8 @@
 # Be sure to restart your server when you modify this file.
 
-Whitby::Application.config.session_store :cookie_store, key: '_Whitby_session'
+Studio::Application.config.session_store :cookie_store, key: '_Studio_session'
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rails generate session_migration")
-# Whitby::Application.config.session_store :active_record_store
+# Studio::Application.config.session_store :active_record_store
