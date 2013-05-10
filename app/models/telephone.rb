@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: telephones
+#
+#  id          :integer          not null, primary key
+#  area        :string(255)
+#  sufix       :string(255)
+#  prefix      :string(255)
+#  description :string(255)
+#  customer_id :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Telephone < ActiveRecord::Base
 
 	belongs_to :customer

@@ -11,18 +11,15 @@
     </div>
   <% end %>
 
-  
+  <div class="phone_field fields">
     <%= f.hidden_field :customer_id , :value=>params[:customer_id] %>
     <%= f.label :area, "Number" %>
-    <div class="phone_field">
     <span class="phone_field">(</span>
     <%= f.text_field :area, maxlength: 3, class: "autojump area"%>
     <span class="phone_field">)&nbsp;-</span>
     <%= f.text_field :prefix, maxlength: 3, class: "autojump prefix"%>
     <span class="phone_field">-</span>
     <%= f.text_field :sufix, maxlength: 4, class: "autojump sufix"%>
-  </div>
-  <div class="field">
     <%= f.label :description %>
     <%= f.select :description, [['Mr. cell', 'Mr. cell'], ['Mrs. cell', 'Mrs. cell'], ['Home', 'Home']] %>
   </div>
