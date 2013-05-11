@@ -1,4 +1,6 @@
 Studio::Application.routes.draw do
+  resources :addresses
+
   root to: 'customers#index'
   
   get "customers/live_search"

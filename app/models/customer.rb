@@ -13,6 +13,10 @@
 class Customer < ActiveRecord::Base
 	has_many :telephones, :dependent => :destroy
 	accepts_nested_attributes_for :telephones, :allow_destroy => true
+  
+  has_many :address_details
+  has_many :addresses, :through => :address_details
+  
 	attr_accessible :email, :first, :last, :telephones_attributes
 	validates :first, presence: true, length: { maximum: 30 }
 	validates :last, presence: true, length: { maximum: 30 }
