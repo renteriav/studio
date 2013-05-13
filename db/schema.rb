@@ -11,26 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130511015116) do
-
-  create_table "address_details", :force => true do |t|
-    t.integer  "customer_id"
-    t.integer  "address_id"
-    t.string   "description"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130513062832) do
 
   create_table "addresses", :force => true do |t|
-    t.string   "customer_id"
-    t.string   "address_id"
-    t.string   "description"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.string   "street"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "customer_id"
   end
 
   create_table "customers", :force => true do |t|
@@ -39,6 +29,13 @@ ActiveRecord::Schema.define(:version => 20130511015116) do
     t.string   "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "preferred_addresses", :force => true do |t|
+    t.integer  "address_id"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "telephones", :force => true do |t|

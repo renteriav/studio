@@ -10,6 +10,9 @@ class CustomersController < ApplicationController
   def new
     @customer = Customer.new
     @customer.telephones.build
+    @address = @customer.addresses.build
+    @address.build_mailing_address
+
   end
 
   def edit

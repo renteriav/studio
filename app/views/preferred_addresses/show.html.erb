@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Address:</b>
+  <%= @preferred_address.address_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @preferred_address.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_preferred_address_path(@preferred_address) %> |
+<%= link_to 'Back', preferred_addresses_path %>

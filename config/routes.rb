@@ -1,11 +1,13 @@
 Studio::Application.routes.draw do
-  resources :addresses
 
   root to: 'customers#index'
   
   get "customers/live_search"
   resources :customers do
     resources :telephones
+    resources :addresses do
+      resources :preffered_addresses
+    end
   end
 
   # The priority is based upon order of creation:

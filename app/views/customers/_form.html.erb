@@ -23,12 +23,18 @@
     <%= f.label :email %>
     <%= f.text_field :email, autocomplete: "off" %>
   </div>
-  <%= f.fields_for :telephones do |builder| %>
-    <%= render "telephone_fields", :f => builder %>
-  <% end %>
+  	<%= f.fields_for :telephones do |builder| %>
+    	<%= render "telephone_fields", :f => builder %>
+  	<% end %>
   <div>
    <%= link_to_add_fields "Add Telephone", f, :telephones %>
- </div>
+  </div>
+  <div>
+	<%= f.fields_for :addresses do |builder| %>
+  		<%= render "addresses_fields", :f => builder %>
+	<% end %>
+  </div>
+		
   <div class="actions">
     <%= f.submit submit_button_message(yield(:button_message)), class: "btn btn-large btn-primary" %>
   </div>
