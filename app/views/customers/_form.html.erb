@@ -24,14 +24,14 @@
     <%= f.text_field :email, autocomplete: "off" %>
   </div>
   	<%= f.fields_for :telephones do |builder| %>
-    	<%= render "telephone_fields", :f => builder %>
+    	<%= render "telephones/telephone_fields", :f => builder %>
   	<% end %>
   <div>
    <%= link_to_add_fields "Add Telephone", f, :telephones %>
   </div>
   <div>
 	<%= f.fields_for :addresses do |builder| %>
-  		<%= render "addresses_fields", :f => builder %>
+  		<%= render "addresses/addresses_fields", :f => builder %>
 	<% end %>
   </div>
 		

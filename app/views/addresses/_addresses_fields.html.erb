@@ -1,0 +1,23 @@
+<div class="field">
+  <%= f.label :street %></br>
+  <%= f.text_field :street %>
+</div>
+<div class="field">
+  <%= f.label :city %></br>
+  <%= f.text_field :city %>
+</div>
+<div class="field"> 
+  <%= f.label :state %></br>
+  <% if current_page?(url_for(:controller => 'customers', :action => 'new')) %>
+  <%= f.select :state, options_for_select(us_states, 'AZ') %>
+  <% else %> 
+  <%= f.select :state, us_states %>
+  <% end %>
+</div>
+<div class="field">
+  <%= f.label :zip %></br>
+  <%= f.text_field :zip %>
+</div>
+<%= f.fields_for :preferred_addresses do |builder| %>
+	<%= builder.hidden_field :description, :value => "mailing" %>
+<% end %>
