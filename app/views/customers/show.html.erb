@@ -16,7 +16,11 @@
 		</li>
 	<% end %>
 </ul>
-
+<p>
+    <b>Address:</b>
+    <%= "#{@mailing.street}" %></br> 
+	<%= "#{@mailing.city}, #{@mailing.state} #{@mailing.zip}" %>	
+ </p>
 
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %> |

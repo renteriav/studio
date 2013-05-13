@@ -2,14 +2,15 @@
 #
 # Table name: addresses
 #
-#  id          :integer          not null, primary key
-#  street      :string(255)
-#  city        :string(255)
-#  state       :string(255)
-#  zip         :string(255)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  customer_id :integer
+#  id               :integer          not null, primary key
+#  street           :string(255)
+#  city             :string(255)
+#  state            :string(255)
+#  zip              :string(255)
+#  addressable_id   :integer
+#  addressable_type :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
 
 require 'spec_helper'

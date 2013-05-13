@@ -5,13 +5,16 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
+    @preferred_mailing = @customer.preferred_addresses.where("description = 'mailing'").last
+    @mailing = @customer.addresses(@preferred_mailing.address_id).first
+    
   end
 
   def new
     @customer = Customer.new
     @customer.telephones.build
     @address = @customer.addresses.build
-    @address.build_mailing_address
+    @address.preferred_addresses.build
 
   end
 

@@ -11,11 +11,11 @@
 #
 
 class Customer < ActiveRecord::Base
-	has_many :telephones, :dependent => :destroy
+	has_many :telephones, :as => :phoneable, :dependent => :destroy
 	accepts_nested_attributes_for :telephones, :allow_destroy => true
   
   #has_many :addresses
-  has_many :addresses
+  has_many :addresses, :as => :addressable
   has_many :preferred_addresses, :through => :addresses
   accepts_nested_attributes_for :addresses
   

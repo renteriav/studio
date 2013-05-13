@@ -14,3 +14,6 @@
   <%= f.label :zip %><br />
   <%= f.text_field :zip %>
 </div>
+<%= f.fields_for :preferred_addresses do |builder| %>
+	<%= builder.hidden_field :description, :value => "mailing" %>
+<% end %>

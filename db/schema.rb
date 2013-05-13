@@ -18,9 +18,10 @@ ActiveRecord::Schema.define(:version => 20130513062832) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "customer_id"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "customers", :force => true do |t|
@@ -40,12 +41,13 @@ ActiveRecord::Schema.define(:version => 20130513062832) do
 
   create_table "telephones", :force => true do |t|
     t.string   "area"
-    t.string   "sufix"
     t.string   "prefix"
+    t.string   "sufix"
     t.string   "description"
-    t.integer  "customer_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "phoneable_id"
+    t.string   "phoneable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
 end

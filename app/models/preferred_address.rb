@@ -3,7 +3,7 @@
 # Table name: preferred_addresses
 #
 #  id          :integer          not null, primary key
-#  address_id  :string(255)
+#  address_id  :integer
 #  description :string(255)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
