@@ -1,9 +1,12 @@
 Studio::Application.routes.draw do
 
+  resources :students
+
   root to: 'customers#index'
   
   get "customers/live_search"
   resources :customers do
+    resources :students
     resources :telephones
     resources :addresses do
       resources :preffered_addresses

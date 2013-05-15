@@ -8,7 +8,7 @@
 #  state            :string(255)
 #  zip              :string(255)
 #  addressable_id   :integer
-#  addressable_type :integer
+#  addressable_type :string(255)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

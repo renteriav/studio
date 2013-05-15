@@ -14,6 +14,7 @@ group :development, :test do
   gem 'guard-rspec', '0.5.5'
   gem 'annotate'
   gem 'factory_girl_rails', '1.4.0'
+  gem "nifty-generators"
 end
 
 # Gems used only for assets and not required
@@ -59,3 +60,5 @@ end
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+gem "mocha", :group => :test
