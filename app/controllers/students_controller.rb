@@ -6,6 +6,7 @@ class StudentsController < ApplicationController
   def new
     @customer = Customer.find(params[:customer_id])
     @student = Student.new
+    @student.telephones.build
   end
 
   def create

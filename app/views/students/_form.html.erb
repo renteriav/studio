@@ -1,29 +1,32 @@
 <%= form_for [@customer, @student] do |f| %>
   
-  <p>
-    <%= f.label :first %><br />
-    <%= f.text_field :first %>
-  </p>
-  <p>
+<div>
+	<%= f.label :first %><br />
+	<%= f.text_field :first %>
+</div>
+<div>
     <%= f.label :last %><br />
     <%= f.text_field :last %>
-  </p>
-  <p>
-    <%= f.label :cell %><br />
-    <%= f.text_field :cell %>
-  </p>
-  <p>
+</div>
+<div>
+	<%= f.fields_for :telephones do |builder| %>
+	<% @collection = [['Mr. cell', 'Mr. cell'], ['Mrs. cell', 'Mrs. cell'], ['Home', 'Home']] %>
+  	<%= render "telephones/telephone_fields", :f => builder %>
+	<% end %>
+</div>
+  
+<div>
     <%= f.label :email %><br />
     <%= f.text_field :email %>
-  </p>
-  <p>
+</div>
+<div>
     <%= f.label :birthdate %><br />
     <%= f.date_select :birthdate, :order => [:month, :day, :year], :start_year => 1950, :prompt => [:day => 'Select day', :month => 'Select month', :year => 'Select year']%>
-  </p>
-  <p>
+</div>
+<div>
     <%= f.label :grade %><br />
     <%= f.number_field :grade %>
-  </p>
+</div>
   
-  <p><%= f.submit %></p>
+<div><%= f.submit %></div>
 <% end %>

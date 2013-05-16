@@ -3,9 +3,7 @@
 # Table name: telephones
 #
 #  id             :integer          not null, primary key
-#  area           :string(255)
-#  prefix         :string(255)
-#  sufix          :string(255)
+#  number         :string(255)
 #  description    :string(255)
 #  phoneable_id   :integer
 #  phoneable_type :string(255)
@@ -16,10 +14,9 @@
 class Telephone < ActiveRecord::Base
 
 	belongs_to :phoneable, :polymorphic => true
-	attr_accessible :area, :prefix, :sufix, :description, :phoneable_id, :phoneable_type
+	attr_accessible :number, :description, :phoneable_id, :phoneable_type
 
-	#validates :area, presence: true, length: { minimum: 3 }
-	#validates :prefix, presence: true, length: { minimum: 3 }
-	#validates :sufix, presence: true, length: { minimum: 4 }
+  before_save { |telephone| telephone.number = telephone.number.to_s.gsub(/[^0-9]/, "") }
+	#validates :number, presence: true, length: { minimum: 3 }
 	#validates :description, presence: true
 end

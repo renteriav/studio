@@ -15,5 +15,9 @@
 #
 
 class Student < ActiveRecord::Base
+  
+	has_many :telephones, :as => :phoneable, :dependent => :destroy
+	accepts_nested_attributes_for :telephones, :allow_destroy => true
+  
   attr_accessible :first, :last, :cell, :email, :birthdate, :grade, :customer_id
 end

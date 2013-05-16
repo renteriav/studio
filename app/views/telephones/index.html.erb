@@ -10,7 +10,7 @@
 
 <% @telephones.each do |telephone| %>
   <tr>
-    <td><%= formated_phone(telephone.area, telephone.prefix, telephone.sufix) %></td>
+    <td><%= formated_phone(telephone.number) %></td>
     <td><%= telephone.description %></td>
     <td><%= link_to 'Show', customer_telephone_path(@customer, telephone) %></td>
     <td><%= link_to 'Edit', [:edit, @customer, telephone] %></td>

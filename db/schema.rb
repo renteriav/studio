@@ -52,9 +52,7 @@ ActiveRecord::Schema.define(:version => 20130514214102) do
   end
 
   create_table "telephones", :force => true do |t|
-    t.string   "area"
-    t.string   "prefix"
-    t.string   "sufix"
+    t.string   "number"
     t.string   "description"
     t.integer  "phoneable_id"
     t.string   "phoneable_type"

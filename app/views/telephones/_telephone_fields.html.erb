@@ -1,12 +1,10 @@
-<div class="phone_fields fields">
-    <%= f.label :area, "Number" %>
-    <span class="phone_field">(</span>
-    <%= f.text_field :area, maxlength: 3, class: "autojump area", autocomplete: "off" %>
-    <span class="phone_field">)&nbsp;-</span>
-    <%= f.text_field :prefix, maxlength: 3, class: "autojump prefix", autocomplete: "off" %>
-    <span class="phone_field">-</span>
-    <%= f.text_field :sufix, maxlength: 4, class: "autojump sufix", autocomplete: "off" %>
-    <%= f.label :description %>
-    <%= f.select :description, [['Mr. cell', 'Mr. cell'], ['Mrs. cell', 'Mrs. cell'], ['Home', 'Home']] %> 
-    <%= link_to_remove_fields "remove", f %>
-  </div>
+<div class="fields">
+<div class="field phone_fields inline">
+    <%= f.label :number, "Phone" %>
+    <%= f.text_field :number, class: "phone input-med", autocomplete: "off" %>
+</div>
+<div class="field inline">
+    <%= phone_description(@collection, f, "input-med field") %> 
+    <%= link_to_remove_fields '<i class="icon-minus icon-white"></i>'.html_safe, f, "btn btn-danger bold" %>
+</div>
+</div>

@@ -11,7 +11,7 @@
 <ul>
 	<% for telephone in @customer.telephones %>
 	<li>
-		<%= formated_phone(telephone.area, telephone.prefix, telephone.sufix) %>&nbsp;
+		<%= formated_phone(telephone.number) %>&nbsp;
 		<%= telephone.description %>
 		</li>
 	<% end %>
