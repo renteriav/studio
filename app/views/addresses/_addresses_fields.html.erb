@@ -8,16 +8,12 @@
 </div>
 <div class="field"> 
   <%= f.label :state %>
-  <% if current_page?(url_for(:controller => 'customers', :action => 'new')) %>
-  <%= f.select :state, options_for_select(us_states, 'AZ') %>
-  <% else %> 
-  <%= f.select :state, us_states %>
-  <% end %>
+  <%= f.select :state, options_for_select(us_states, @selected) %>
 </div>
 <div class="field">
   <%= f.label :zip %>
   <%= f.text_field :zip %>
 </div>
-<%= f.fields_for :preferred_addresses do |builder| %>
-	<%= builder.hidden_field :description, :value => "mailing" %>
+<%= f.fields_for :preferred_addresses do |preferred| %>
+	<%= preferred.hidden_field :description, :value => @address_description %>
 <% end %>

@@ -16,11 +16,15 @@ class CustomersController < ApplicationController
     @customer.telephones.build
     @address = @customer.addresses.build
     @address.preferred_addresses.build
-
+    @selected = 'AZ'
+    @address_description = 'mailing'
   end
 
   def edit
    @customer = Customer.find(params[:id])
+   @preferred_mailing = @customer.preferred_addresses.where("description = 'mailing'").last
+   @selected = @customer.addresses(@preferred_mailing.address_id).first.state
+   @address_description = 'mailing'
   end
 
   def create
@@ -61,7 +65,7 @@ class CustomersController < ApplicationController
    @first_keyword = params[:keyword1]
    @last_keyword = params[:keyword2]
     if @first_keyword != "" || @last_keyword != ""
-      @search_result = Customer.find(:all, conditions: ["first LIKE ? AND last LIKE ?", "#{@first_keyword}%", "#{@last_keyword}%"])
+      @search_result = Customer.find(:all, conditions: ["first ILIKE ? AND last ILIKE ?", "#{@first_keyword}%", "#{@last_keyword}%"])
     end
 
     render :layout => false

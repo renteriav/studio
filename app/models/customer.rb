@@ -11,6 +11,7 @@
 #
 
 class Customer < ActiveRecord::Base
+  include FieldSanitizer
 	has_many :telephones, :as => :phoneable, :dependent => :destroy
 	accepts_nested_attributes_for :telephones, :allow_destroy => true
   
@@ -22,6 +23,7 @@ class Customer < ActiveRecord::Base
   
 	attr_accessible :email, :first, :last, :telephones_attributes, :addresses_attributes
   
+  #before_save :capitalize_and_strip
 	#validates :first, presence: true, length: { maximum: 30 }
 	#validates :last, presence: true, length: { maximum: 30 }
 	#validates :email, presence: true, length: { maximum: 80 }
