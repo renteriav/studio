@@ -13,4 +13,6 @@ class PreferredAddress < ActiveRecord::Base
   
   belongs_to :addresses
   attr_accessible :address_id, :description
+  
+  validates :description, presence: true
 end

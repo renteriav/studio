@@ -1,4 +1,5 @@
 class CustomersController < ApplicationController
+  include FieldSanitizer
   def index
     @customers = Customer.all
   end
@@ -41,6 +42,9 @@ class CustomersController < ApplicationController
 
   def update
     @customer = Customer.find(params[:id])
+    @preferred_mailing = @customer.preferred_addresses.where("description = 'mailing'").last
+    @selected = @customer.addresses(@preferred_mailing.address_id).first.state
+    @address_description = 'mailing'
 
     respond_to do |format|
       if @customer.update_attributes(params[:customer])

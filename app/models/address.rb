@@ -14,11 +14,17 @@
 #
 
 class Address < ActiveRecord::Base
-  
+  include FieldSanitizer
   belongs_to :addressable, :polymorphic => true
   has_many :preferred_addresses
   accepts_nested_attributes_for :preferred_addresses
   
   attr_accessible :street, :city, :state, :zip, :addressable_id, :addressable_type, :preferred_addresses_attributes
+  
+  before_validation { |address| address.nameize :street, :city }
+  
+  validates :street, presence: true
+  validates :city, presence: true
+  
 end
 

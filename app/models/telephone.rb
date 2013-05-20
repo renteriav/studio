@@ -16,7 +16,7 @@ class Telephone < ActiveRecord::Base
 	belongs_to :phoneable, :polymorphic => true
 	attr_accessible :number, :description, :phoneable_id, :phoneable_type
 
-  before_save { |telephone| telephone.number = telephone.number.to_s.gsub(/[^0-9]/, "") }
+  before_validation { |telephone| telephone.number = telephone.number.to_s.gsub(/[^0-9]/, "") }
 	#validates :number, presence: true, length: { minimum: 3 }
 	#validates :description, presence: true
 end

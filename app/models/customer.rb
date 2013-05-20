@@ -23,8 +23,10 @@ class Customer < ActiveRecord::Base
   
 	attr_accessible :email, :first, :last, :telephones_attributes, :addresses_attributes
   
-  #before_save :capitalize_and_strip
-	#validates :first, presence: true, length: { maximum: 30 }
+  before_validation { |customer| customer.nameize :first, :last }
+  before_validation { |customer| customer.email = customer.email.strip.downcase }
+  
+	validates :first, presence: true, length: { maximum: 30 }
 	#validates :last, presence: true, length: { maximum: 30 }
 	#validates :email, presence: true, length: { maximum: 80 }
 	#validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }

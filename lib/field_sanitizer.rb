@@ -6,9 +6,9 @@ module FieldSanitizer
         name.each do |part|
           case
             when (part.match(/^mac/i) && part.length > 3)
-              part.gsub!(/^mac/i, "").capitalize!.insert(0, "Mac")
+              part.replace(part.gsub(/^mac/i, "").capitalize.insert(0, "Mac"))
             when (part.match(/^mc/i) && part.length > 2)
-              part.gsub!(/^mc/i, "").capitalize!.insert(0, "Mc")
+              part.replace(part.gsub(/^mc/i, "").capitalize.insert(0, "Mc"))
             when (part.match(/^o\'/i) && part.length > 2)
               part.replace(part.split("'").each{ |piece| piece.capitalize! }.join("'"))
             when (part.match(/-/) && part.length > 2)
