@@ -10,7 +10,7 @@
 </div>
 <div>
 	<%= f.fields_for :telephones do |builder| %>
-	<% @collection = [['Mr. cell', 'Mr. cell'], ['Mrs. cell', 'Mrs. cell'], ['Home', 'Home']] %>
+	<% @collection = [['cell', 'cell']] %>
   	<%= render "telephones/telephone_fields", :f => builder %>
 	<% end %>
 </div>
@@ -21,7 +21,7 @@
 </div>
 <div>
     <%= f.label :birthdate %><br />
-    <%= f.date_select :birthdate, :order => [:month, :day, :year], :start_year => 1950, :prompt => [:day => 'Select day', :month => 'Select month', :year => 'Select year']%>
+    <%= f.date_select :birthdate, {:order => [:month, :day, :year], :start_year => 1950, :use_short_month => true, :prompt => [:day => 'Select day', :month => 'Select month', :year => 'Select year']}, {:class => "input-sm"} %>
 </div>
 <div>
     <%= f.label :grade %><br />

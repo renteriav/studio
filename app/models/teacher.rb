@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: customers
+# Table name: teachers
 #
 #  id         :integer          not null, primary key
 #  first      :string(255)
@@ -10,21 +10,20 @@
 #  updated_at :datetime         not null
 #
 
-class Customer < ActiveRecord::Base
+class Teacher < ActiveRecord::Base
   include FieldSanitizer
+  
 	has_many :telephones, :as => :phoneable, :dependent => :destroy
 	accepts_nested_attributes_for :telephones, :allow_destroy => true
   
-  has_many :students
-  
   has_many :addresses, :as => :addressable
-  has_many :preferred_addresses, :through => :addresses
+  
   accepts_nested_attributes_for :addresses
   
-	attr_accessible :email, :first, :last, :telephones_attributes, :addresses_attributes
+  attr_accessible :address_id, :email, :first, :last, :telephones_attributes, :addresses_attributes
   
-  before_validation { |customer| customer.nameize :first, :last }
-  before_validation { |customer| customer.email = customer.email.strip.downcase }
+  before_validation { |teacher| teacher.nameize :first, :last }
+  before_validation { |teacher| teacher.email = teacher.email.strip.downcase }
   
 	validates :first, presence: true, length: { maximum: 30 }
 	validates :last, presence: true, length: { maximum: 30 }

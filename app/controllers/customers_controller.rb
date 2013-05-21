@@ -35,6 +35,8 @@ class CustomersController < ApplicationController
       if @customer.save
         format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
       else
+        @selected = params[:customer][:addresses_attributes].values.first[:state]
+        @address_description = 'mailing'
         format.html { render action: "new" }
       end
     end

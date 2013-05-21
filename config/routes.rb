@@ -1,5 +1,7 @@
 Studio::Application.routes.draw do
 
+  resources :teachers
+
   resources :students
 
   root to: 'customers#index'

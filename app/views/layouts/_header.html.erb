@@ -1,12 +1,23 @@
-<header class="navbar navbar-fixed-top">
-	<div class="navbar-inner">
-		<div class="container">
-			<%= link_to "Whitby Studio", root_path, id: "logo" %>
-			<nav>
+<header >
+	<div class = "navbar-fixed-top">
+		<div class = "header-top" >
+			<%= link_to "Whitby Studio", root_path, class: "logo" %>
+		</div>
+
+		<div class="navbar">
+			<div class="navbar-inner">
 				<ul class="nav pull-right">
-					<li><%= link_to "Home", root_path, :class => current_page?(root_path) ? "current" : "" %></li>
+					<li class = "<%= current_page?(root_path) ? "active" : "" %>" >
+						<%= link_to "Home", root_path %>
+					</li>
+					<li class = "<%= current_page?(customers_path) ? "active" : "" %>" >
+						<%= link_to "Customers", customers_path %>
+					</li>
+					<li class = "<%= current_page?(students_path) ? "active" : "" %>" >
+						<%= link_to "Students", students_path %>
+					</li>
 				</ul>
-			</nav>
+			</div>
         </div>
-      </div>
+	</div>
 </header>
