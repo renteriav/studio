@@ -1,12 +1,10 @@
 <h1>Listing teachers</h1>
 
-<table>
+<table class="table table-hover">
   <tr>
     <th>First</th>
     <th>Last</th>
     <th>Email</th>
-    <th>Address</th>
-    <th>Telephone</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,11 +15,9 @@
     <td><%= teacher.first %></td>
     <td><%= teacher.last %></td>
     <td><%= teacher.email %></td>
-    <td><%= teacher.address_id %></td>
-    <td><%= teacher.telephone_id %></td>
     <td><%= link_to 'Show', teacher %></td>
     <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
-    <td><%= link_to 'Destroy', teacher, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Delete', teacher, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

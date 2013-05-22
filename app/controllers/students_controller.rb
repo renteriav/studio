@@ -24,6 +24,9 @@ class StudentsController < ApplicationController
 
   def edit
     @student = Student.find(params[:id])
+    if @student.telephones.empty? 
+      @student.telephones.build
+    end
   end
 
   def update

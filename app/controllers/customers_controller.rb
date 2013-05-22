@@ -1,5 +1,4 @@
 class CustomersController < ApplicationController
-  include FieldSanitizer
   def index
     @customers = Customer.all
   end
@@ -26,6 +25,9 @@ class CustomersController < ApplicationController
    @preferred_mailing = @customer.preferred_addresses.where("description = 'mailing'").last
    @selected = @customer.addresses(@preferred_mailing.address_id).first.state
    @address_description = 'mailing'
+   if @customer.telephones.empty? 
+     @customer.telephones.build
+   end
   end
 
   def create

@@ -1,3 +1,4 @@
+<div class="form-container">
 <%= form_for(@teacher) do |f| %>
   <% if @teacher.errors.any? %>
     <div id="error_explanation">
@@ -10,28 +11,34 @@
       </ul>
     </div>
   <% end %>
-
+  
+  <fieldset><legend>Contact Info</legend>
+	<%= render "layouts/basic_info_form", :f => f %>
+	  
+  	<%= f.fields_for :telephones do |builder| %>
+	<% @collection = phone_collection "B" %>
+	<!-- view telephones_helper for available collections -->
+    	<%= render "telephones/telephone_fields", :f => builder %>
+  	<% end %>
   <div class="field">
-    <%= f.label :first %><br />
-    <%= f.text_field :first %>
+   <%= link_to_add_fields '<i class="icon-plus icon-white"></i>'.html_safe, f, :telephones, "btn btn-success" %>
   </div>
-  <div class="field">
-    <%= f.label :last %><br />
-    <%= f.text_field :last %>
+</fieldset>
+  <div>
+	<%= f.fields_for :addresses do |builder| %>
+  		<%= render "addresses/addresses_fields", :f => builder, :person => @teacher %>
+	<% end %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :address_id %><br />
-    <%= f.number_field :address_id %>
-  </div>
-  <div class="field">
-    <%= f.label :telephone_id %><br />
-    <%= f.number_field :telephone_id %>
-  </div>
+  
+  <% for instrument in Instrument.find(:all) %>  
+      <div>  
+        <%= check_box_tag "teacher[instrument_ids][]", instrument.id, @teacher.instruments.include?(instrument), :class => 'checkbox' %>  
+        <%= instrument.name %>  
+      </div>  
+  <% end %>  
+		
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit submit_button_message(yield(:button_message)), class: "btn btn-large btn-primary" %>
   </div>
 <% end %>
+</div>

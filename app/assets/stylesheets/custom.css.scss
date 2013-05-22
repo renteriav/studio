@@ -25,14 +25,14 @@ textarea {
 }
 
 .center { 
-	text-align: center;
+	text-align: center !important;
 	h1 { 
 	margin-bottom: 10px;
 	}
 }
 
 .inline {
-	display: inline-block;
+	display: inline-block !important;
 }
 
 
@@ -138,8 +138,7 @@ input, textarea, select, .uneditable-input {
 	border: 1px solid #bbb;
 	/*width: 100%;*/
 	padding: 5px;
-	height: auto; 
-	margin-bottom: 0px !important;
+	height: auto;
 	/*@include box_sizing;*/
 	color: black;
 }
@@ -157,6 +156,14 @@ input, textarea, select, .uneditable-input {
 }
 .field {
 	margin-right:10px;
+	a{
+		margin-bottom:10px !important;
+	}
+}
+
+.alert-error {
+	padding:6px !important;
+	vertical-align: middle !important;
 }
 
 #error_explanation { 
@@ -168,6 +175,7 @@ ul {
 .field_with_errors { 
 	@extend .control-group; 
 	@extend .error;
+	color: #B94A48;
 }
 
 /* jquery dialog*/

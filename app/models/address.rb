@@ -23,7 +23,7 @@ class Address < ActiveRecord::Base
   
   before_validation { |address| address.nameize :street, :city }
   
-  validates :street, presence: true
+  validates :street, presence: { message: "Please enter a street name." }
   validates :city, presence: true
   
 end

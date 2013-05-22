@@ -1,29 +1,40 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>First:</b>
-  <%= @teacher.first %>
+	<b>Teacher:</b>
+	<%= "#{@teacher.first} #{@teacher.last}" %> 
 </p>
-
-<p>
-  <b>Last:</b>
-  <%= @teacher.last %>
-</p>
-
 <p>
   <b>Email:</b>
   <%= @teacher.email %>
 </p>
-
 <p>
-  <b>Address:</b>
-  <%= @teacher.address_id %>
+  <b>Telephones:</b>
+</p>
+<ul>
+	<% if @teacher.telephones.any? 
+		for telephone in @teacher.telephones %>
+			<li>
+				<%= formated_phone(telephone.number) %>&nbsp;
+				<%= telephone.description %>
+			</li>
+		<% end %>
+	<% end %>
+</ul>
+<p>
+    <b>Address:</b></br>
+    <%= "#{@mailing.street}" %></br> 
+	<%= "#{@mailing.city}, #{@mailing.state} #{@mailing.zip}" %>	
+</p>
+<p>
+    <b>Instruments:</b></br>
+	<ul>
+	<% for instrument in @teacher.instruments %>
+    <li><%= "#{instrument.name}" %></li>
+	<% end %>
+</ul>
 </p>
 
-<p>
-  <b>Telephone:</b>
-  <%= @teacher.telephone_id %>
-</p>
 
 
 <%= link_to 'Edit', edit_teacher_path(@teacher) %> |

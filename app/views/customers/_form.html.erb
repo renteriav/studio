@@ -11,32 +11,25 @@
       </ul>
     </div>
   <% end %>
-  <fieldset><legend>Contact Info</legend>
-	  <div>
-  <div class="field inline">
-    <%= f.label :first %>
-    <%= f.text_field :first, class: "live_search_field span2", autocomplete: "off" %>
-  </div>
-  <div class="field inline">
-    <%= f.label :last %>
-    <%= f.text_field :last, class: "live_search_field span2", autocomplete: "off" %>
-  </div>
-</div>
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email, autocomplete: "off", class: "input-lrg" %>
-  </div>
-  	<%= f.fields_for :telephones do |builder| %>
-	<% @collection = [['Home', 'Home'], ['Mr. cell', 'Mr. cell'], ['Mrs. cell', 'Mrs. cell'], ['Mr. work', 'Mr. work'], ['Mrs. work', 'Mrs. work']] %>
+  
+  <fieldset>
+	  <legend>Contact Info</legend>
+	  
+	  <%= render "layouts/basic_info_form", :f => f %>
+	  
+	  <%= f.fields_for :telephones do |builder| %>
+		<% @collection = phone_collection "A" %> 
+		<!-- view telephones_helper for available collections -->
     	<%= render "telephones/telephone_fields", :f => builder %>
-  	<% end %>
-  <div class="field">
-   <%= link_to_add_fields '<i class="icon-plus icon-white"></i>'.html_safe, f, :telephones, "btn btn-success" %>
-  </div>
-</fieldset>
+	  <% end %>
+	  <div class="field">
+   	  	<%= link_to_add_fields '<i class="icon-plus icon-white"></i>'.html_safe, f, :telephones, "btn btn-success" %>
+	  </div>
+   </fieldset>
+   
   <div>
 	<%= f.fields_for :addresses do |builder| %>
-  		<%= render "addresses/addresses_fields", :f => builder %>
+  		<%= render "addresses/addresses_fields", :f => builder, :person => @customer %>
 	<% end %>
   </div>
 		

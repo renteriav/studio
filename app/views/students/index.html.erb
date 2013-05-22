@@ -1,13 +1,14 @@
 <% provide(:title, 'Students') %>
 
-<table>
+<h1>Listing Students</h1>
+<table class="table table-hover">
   <tr>
     <th>First</th>
     <th>Last</th>
     <th>Cell</th>
     <th>Email</th>
     <th>Birthdate</th>
-    <th>Grade</th>
+    <th class = "center">Grade</th>
     <th>Customer</th>
   </tr>
   <% for student in @students %>
@@ -16,8 +17,8 @@
       <td><%= student.last %></td>
       <td><%= student.cell %></td>
       <td><%= student.email %></td>
-      <td><%= student.birthdate %></td>
-      <td><%= student.grade %></td>
+      <td><%= student.birthdate.strftime('%b %d, %Y') %></td>
+      <td class = "center"><%= student.grade %></td>
       <td><%= student.customer_id %></td>
       <td><%= link_to "Edit", edit_student_path(student) %></td>
     </tr>

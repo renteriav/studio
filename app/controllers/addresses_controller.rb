@@ -1,44 +1,21 @@
 class AddressesController < ApplicationController
-  # GET /addresses
-  # GET /addresses.json
+  
   def index
     @addresses = Address.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @addresses }
-    end
   end
 
-  # GET /addresses/1
-  # GET /addresses/1.json
   def show
     @address = Address.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @address }
-    end
   end
 
-  # GET /addresses/new
-  # GET /addresses/new.json
   def new
     @address = Address.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @address }
-    end
   end
 
-  # GET /addresses/1/edit
   def edit
     @address = Address.find(params[:id])
   end
 
-  # POST /addresses
-  # POST /addresses.json
   def create
     @address = Address.new(params[:address])
 

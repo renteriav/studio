@@ -1,6 +1,16 @@
-<div class="field">
-  <%= f.label :street %>
-  <%= f.text_field :street %>
+
+	<div>
+	<%= f.label :street %>
+</div><div>
+<div class="field inline">
+	<%= f.text_field :street %>
+</div>
+<% if person.errors.any? %>
+<div class="field inline alert alert-error">
+	 <i class="icon-warning-sign icon-white"></i>
+	 <%= "#{person.errors[:'addresses.street'].first}" %>
+</div>
+<% end %>
 </div>
 <div class="field">
   <%= f.label :city %>

@@ -206,6 +206,7 @@ DEPENDENCIES
   mocha
   nifty-generators
   pg (= 0.12.2)
+  pry
   rails (= 3.2.3)
   rb-fsevent
   rspec-rails (= 2.9.0)

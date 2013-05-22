@@ -9,18 +9,20 @@
   <%= @customer.email %>
 </p>
 <ul>
-	<% for telephone in @customer.telephones %>
-	<li>
-		<%= formated_phone(telephone.number) %>&nbsp;
-		<%= telephone.description %>
-		</li>
+	<% if @customer.telephones.any? 
+		for telephone in @customer.telephones %>
+			<li>
+				<%= formated_phone(telephone.number) %>&nbsp;
+				<%= telephone.description %>
+			</li>
+		<% end %>
 	<% end %>
 </ul>
 <p>
     <b>Address:</b>
     <%= "#{@mailing.street}" %></br> 
 	<%= "#{@mailing.city}, #{@mailing.state} #{@mailing.zip}" %>	
- </p>
+</p>
  
    <h3>Students:</h3>
 <p>

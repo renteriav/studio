@@ -1,5 +1,9 @@
 Studio::Application.routes.draw do
 
+  resources :instruments
+
+  resources :rooms
+
   resources :teachers
 
   resources :students
