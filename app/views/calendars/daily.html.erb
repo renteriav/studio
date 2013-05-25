@@ -1,0 +1,51 @@
+<%= render 'header' %>
+<% @start_time = Time.new(2000, 1, 1, 6, 0, 0 ) %>
+<% i = 6 %>
+<div id="grid-hour">
+	<table id="hour-column" >		
+		
+		<% while i < 20 do %>
+			<% @hour = @start_time.strftime("%l : %M %p") %>
+		
+			<tr>
+				<td class="time-header">
+					<p class="time-display"><%= "#{@hour}"%></p>
+				</td>
+			</tr>
+			<% @start_time += (60 * 60) %>
+			<% i +=1 %>
+			
+			<% end %>
+			
+	</table>
+</div>
+
+<div id="test">
+	<div id="day-container">
+
+		<% r = 0 %>
+		<% while r < 8 do %>
+			<% @room = r %>
+
+			<div class="grid-day" id="<%= '#{@room}' %>">
+				<table class="day-column" >
+					<% i = 0 %>
+					<% while i < 14 do %>
+						<% e = 0 %>
+						<% while e < 4 do %>
+							<% if e < 3 %>
+								<tr><td class="time-slot"></td></tr>
+							<% else %>	
+								<tr><td class="time-slot-hour"></td></tr>
+							<% end %>
+							<% e += 1 %>
+						<% end %>
+						<% i += 1 %>
+					<% end %>			
+				</table>
+			</div>
+			<% r += 1 %>
+		<% end %>
+	
+
+	

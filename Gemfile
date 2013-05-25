@@ -4,6 +4,8 @@ gem 'rails', '3.2.3'
 gem 'bootstrap-sass-rails'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'thin'
+gem 'bootstrap-timepicker-rails'
+gem 'chronic'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 #gem 'sqlite3'

@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Student:</b>
+  <%= @lesson.student_id %>
+</p>
+
+<p>
+  <b>Teacher:</b>
+  <%= @lesson.teacher_id %>
+</p>
+
+<p>
+  <b>Instrument:</b>
+  <%= @lesson.instrument_id %>
+</p>
+
+<p>
+  <b>Weekday:</b>
+  <%= @lesson.weekday %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= format_time @lesson.start_time %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= format_time @lesson.end_time %>
+</p>
+
+<p>
+  <b>Frequency:</b>
+  <%= @lesson.frequency %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @lesson.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @lesson.end_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_lesson_path(@lesson) %> |
+<%= link_to 'Back', lessons_path %>

@@ -1,0 +1,55 @@
+<%= form_for(@lesson) do |f| %>
+  <% if @lesson.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lesson.errors.count, "error") %> prohibited this lesson from being saved:</h2>
+
+      <ul>
+      <% @lesson.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :student_id %><br />
+    <%= f.number_field :student_id %>
+  </div>
+  <div class="field">
+    <%= f.label :teacher_id %><br />
+    <%= f.number_field :teacher_id %>
+  </div>
+  <div class="field">
+    <%= f.label :instrument_id %><br />
+    <%= f.number_field :instrument_id %>
+  </div>
+  <div class="field">
+    <%= f.label :weekday %><br />
+    <%= f.number_field :weekday %>
+  </div>
+  <div class="field input-append bootstrap-timepicker">
+    <%= f.label :start_time %><br />
+    <%= f.text_field :start_time, :class => "timepicker input-sm" %>
+	<span class="add-on"><i class="icon-time"></i></span>
+  </div>
+  <div class="field input-append bootstrap-timepicker">
+    <%= f.label :end_time %><br />
+    <%= f.text_field :end_time, :class => "timepicker input-sm" %>
+	<span class="add-on"><i class="icon-time"></i></span>
+  </div>
+  <div class="field">
+    <%= f.label :frequency %><br />
+    <%= f.number_field :frequency %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date, :include_blank => true %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br />
+    <%= f.date_select :end_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

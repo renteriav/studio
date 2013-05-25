@@ -1,4 +1,8 @@
 Studio::Application.routes.draw do
+  
+  get '/daily', to: 'calendars#daily' 
+  
+  resources :lessons
 
   resources :instruments
 
@@ -17,6 +21,8 @@ Studio::Application.routes.draw do
     resources :addresses do
       resources :preffered_addresses
     end
+    
+  
   end
 
   # The priority is based upon order of creation:
