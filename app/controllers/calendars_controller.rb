@@ -9,7 +9,14 @@ class CalendarsController < ApplicationController
     
     @rooms = Room.all
     
-    @date = Time.now
-    @day =  @date.strftime('%A, %b %e, %Y')
+    if params[:date]
+      @date = Time.at((params[:date]).to_i)
+    else
+      @date = Time.now
+    end
+    @day =  @date.strftime("%A, %b #{@date.day.ordinalize}, %Y")
+    gon.date = @date.strftime('%m/%d/%Y')
+    @previous = (@date - (24*60*60)).strftime('%s')
+    @next = (@date + (24*60*60)).strftime('%s')
   end
 end

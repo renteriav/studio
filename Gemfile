@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.13'
 gem 'bootstrap-sass-rails'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'thin'
 gem 'bootstrap-timepicker-rails'
 gem 'chronic'
+gem 'gon'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 #gem 'sqlite3'
@@ -43,6 +44,7 @@ gem 'rb-fsevent', :require => false
 gem 'growl', '1.0.3'
 gem 'guard-spork', '0.3.2'
 gem 'spork', '0.9.0'
+gem 'mocha'
 end
 
 group :production do 
@@ -63,5 +65,3 @@ end
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
-
-gem "mocha", :group => :test

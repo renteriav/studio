@@ -1,15 +1,10 @@
-<% #$prev_link = "location.href='index.html?day=".$previous."'";
-#$next_link = "location.href='index.html?day=".$next."'";
-#$today_link = "location.href='index.html'";
-
-%>
 <div id = "top-wrapper">
 	<div id="header">
 		<div id="buttons">
-			<input id="datepicker" type="text" readonly="readonly" class="link-button" style="height:28px; width:140px; padding:0px 10px;">
-			<button id="previous" class="link-button" onclick="prev_link"><</button>
-			<button id="today" class="link-button" onclick="today_link">Today</button>
-			<button id="next" class="link-button" onclick="next_link">></button>
+			<input  id = "date-select" class ="link-button" type="text" readonly="readonly">
+			<%= link_to "<", daily_path(date: @previous), method: "get", class: "link-button", id: "previous"  %>
+			<%= link_to "Today", daily_path, method: "get", class: "link-button", id: "today"%>
+			<%= link_to ">", daily_path(date: @next), method: "get", class: "link-button", id: "next"  %>
 		</div>
 		<div id="day"><%= @day %></div>
 	</div>

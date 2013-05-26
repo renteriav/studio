@@ -1,0 +1,17 @@
+$(document).ready(function(){
+	
+	$('.link-button')
+	  .button()
+	  .css({visibility: "visible"});
+	
+	$("#date-select").datepicker({
+		onSelect: function(date, instance) {
+			var newdate = new Date(date);
+			var ms = newdate.valueOf();
+			var timeStamp = ms/1000;
+			window.location = "?date="+timeStamp;
+		}
+	});	
+		
+	$('#date-select').val(gon.date);
+});

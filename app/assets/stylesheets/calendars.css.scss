@@ -51,6 +51,17 @@ padding:2px 15px;
 font-size:18px;
 }
 
+.link-button {
+	margin: 0px !important;
+	color: white !important;
+	visibility: hidden;
+}
+
+input#date-select {
+	cursor: pointer;
+	width:110px;
+}
+
 #grid-container{
 	position:absolute;
 	height:auto;
