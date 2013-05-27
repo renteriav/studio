@@ -4,6 +4,7 @@ class CreateLessons < ActiveRecord::Migration
       t.integer :student_id
       t.integer :teacher_id
       t.integer :instrument_id
+      t.integer :room_id
       t.integer :weekday
       t.time :start_time
       t.time :end_time

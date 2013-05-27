@@ -24,6 +24,10 @@
     <%= f.number_field :instrument_id %>
   </div>
   <div class="field">
+    <%= f.label :room_id %><br />
+    <%= f.number_field :room_id %>
+  </div>
+  <div class="field">
     <%= f.label :weekday %><br />
     <%= f.number_field :weekday %>
   </div>
@@ -43,11 +47,11 @@
   </div>
   <div class="field">
     <%= f.label :start_date %><br />
-    <%= f.date_select :start_date, :include_blank => true %>
+    <%= f.date_select :start_date %>
   </div>
   <div class="field">
     <%= f.label :end_date %><br />
-    <%= f.date_select :end_date %>
+    <%= f.date_select :end_date, {:include_blank => true} %>
   </div>
   <div class="actions">
     <%= f.submit %>

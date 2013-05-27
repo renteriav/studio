@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20130523035104) do
     t.integer  "student_id"
     t.integer  "teacher_id"
     t.integer  "instrument_id"
+    t.integer  "room_id"
     t.integer  "weekday"
     t.time     "start_time"
     t.time     "end_time"
