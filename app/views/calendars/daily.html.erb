@@ -1,17 +1,8 @@
 <%= render 'header' %>
+<%= 
+%>
 <% @start_time = Time.new(2000, 1, 1, 6, 0, 0 ) %>
 <% i = 6 %>
-<% @max_num.each do |number| 
-%>
-<%
-%>
-<% if number != nil
-%>
-<%= number
-%>
-
-<% end end
-%>
 <div id="grid-hour">
 	<table id="hour-column" >		
 		
@@ -34,9 +25,9 @@
 <div id="test">
 	<div id="day-container">
 
-		<% r = 0 %>
-		<% while r < 8 do %>
-			<% @room = r %>
+		<% d = 1 %>
+		<% while d < 9 do %>
+			<% @room = d %>
 
 			<div class="grid-day" id="<%= '#{@room}' %>">
 				<table class="day-column" >
@@ -54,9 +45,29 @@
 						<% i += 1 %>
 					<% end %>			
 				</table>
+				
+				<% if @columns[d] != nil
+					@columns[d].each do |column|
+						@height = (column[:length]*25).to_i
+						@width = (100/@max_num[d][column[:id]]*@num_slots[column[:id]]).to_i
+						@x_ind = (100/@max_num[d][column[:id]]*@index_array[d][column[:id]]).to_i
+						@top = (column[:slot]*25).to_i
+						@lesson_id = column[:id] %>
+				
+				<div class="event" style="position:absolute; top: <%= @top %>px; left: <%= @x_ind %>%; height: <%= @height %>px; width: <%= @width %>%; background-color: blue;">
+					<input class="start_time" type="hidden" value="">
+					<input class="order_id" type="hidden" value="order">
+					<h4 style="background-color:red;">Test</h4>
+					<p class="purpose"></p>
+				</div>
+					<% end %>
+				<% end %>
 			</div>
-			<% r += 1 %>
+			
+			<% d += 1 %>
 		<% end %>
+	</div>
+</div>
 	
 
 	
