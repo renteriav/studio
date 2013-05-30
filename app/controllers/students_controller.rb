@@ -49,7 +49,6 @@ class StudentsController < ApplicationController
   end
   
   def show
-    @customer = Customer.find(params[:customer_id])
     @student = Student.find(params[:id])
   end
 end

@@ -14,4 +14,14 @@ $(document).ready(function(){
 	});	
 		
 	$('#date-select').val(gon.date);
+	
+	var scroll = 0;
+	$(".event").each(function(){
+		var topVal = $(this).position().top;
+		if(topVal<scroll)
+		{
+			scroll = topVal;
+		}
+	});
+	$(document).scrollTop(scroll);
 });

@@ -18,8 +18,12 @@ class Student < ActiveRecord::Base
  
   include FieldSanitizer
   
+  belongs_to :customer
+  
 	has_many :telephones, :as => :phoneable, :dependent => :destroy
 	accepts_nested_attributes_for :telephones, :allow_destroy => true, :reject_if => proc { |attributes| attributes['number'].blank? }
+  
+  has_many :lessons
   
   attr_accessible :first, :last, :telephones_attributes, :email, :birthdate, :grade, :customer_id
   

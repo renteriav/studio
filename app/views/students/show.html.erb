@@ -1,0 +1,21 @@
+	<b>Student:</b>
+	<%= "#{@student.first} #{@student.last}" %>
+</p>
+<p>
+  <b>Email:</b>
+  <%= @student.email %>
+</p>
+<ul>
+	<% if @student.telephones.any? 
+		for telephone in @student.telephones %>
+			<li>
+				<%= formated_phone(telephone.number) %>&nbsp;
+				<%= telephone.description %>
+			</li>
+		<% end %>
+	<% end %>
+</ul>
+
+<%= link_to 'Edit', edit_student_path(@student) %> |
+<%= link_to 'Back', students_path %> |
+<%= link_to 'Add Lesson', new_student_lesson_path(@student) %>

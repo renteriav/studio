@@ -148,9 +148,10 @@ div.event{
 	z-index:2;
 	overflow:hidden;
 }
-h1{
+h4.event_heading{
+	background-color:red;
 	text-align:center;
-	margin-top:0px;
+	margin:0px;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
 	top:0px;
@@ -159,7 +160,7 @@ h1{
 	padding:4px;
 	overflow:hidden;
 }
-.purpose{
+p.purpose{
 	margin-top:0px;
 	text-align:center;
 	width:100%;

@@ -18,5 +18,9 @@
 #
 
 class Lesson < ActiveRecord::Base
+  
+  belongs_to :student
+  belongs_to :teacher
+  
   attr_accessible :end_date, :end_time, :frequency, :instrument_id, :room_id, :start_date, :start_time, :student_id, :teacher_id, :weekday
 end

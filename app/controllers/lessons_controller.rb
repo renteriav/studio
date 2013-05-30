@@ -1,6 +1,5 @@
 class LessonsController < ApplicationController
-  # GET /lessons
-  # GET /lessons.json
+
   def index
     @lessons = Lesson.all
 
@@ -10,8 +9,6 @@ class LessonsController < ApplicationController
     end
   end
 
-  # GET /lessons/1
-  # GET /lessons/1.json
   def show
     @lesson = Lesson.find(params[:id])
 
@@ -21,9 +18,8 @@ class LessonsController < ApplicationController
     end
   end
 
-  # GET /lessons/new
-  # GET /lessons/new.json
   def new
+    @student = Student.find(params[:student_id])
     @lesson = Lesson.new
 
     respond_to do |format|
@@ -32,29 +28,22 @@ class LessonsController < ApplicationController
     end
   end
 
-  # GET /lessons/1/edit
   def edit
     @lesson = Lesson.find(params[:id])
   end
 
-  # POST /lessons
-  # POST /lessons.json
   def create
-    @lesson = Lesson.new(params[:lesson])
-
+    @student = Student.find(params[:student_id])
+    @lesson = @student.lessons.build(params[:lesson])
     respond_to do |format|
       if @lesson.save
         format.html { redirect_to @lesson, notice: 'Lesson was successfully created.' }
-        format.json { render json: @lesson, status: :created, location: @lesson }
       else
         format.html { render action: "new" }
-        format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /lessons/1
-  # PUT /lessons/1.json
   def update
     @lesson = Lesson.find(params[:id])
 

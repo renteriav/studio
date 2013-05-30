@@ -21,6 +21,8 @@ class Teacher < ActiveRecord::Base
   
   has_and_belongs_to_many :instruments
   
+  has_many :lessons
+  
   attr_accessible :address_id, :email, :first, :last, :telephones_attributes, :addresses_attributes, :instrument_ids
   
   before_validation { |teacher| teacher.nameize :first, :last }

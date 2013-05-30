@@ -52,13 +52,15 @@
 						@width = (100/@max_num[d][column[:id]]*@num_slots[column[:id]]).to_i
 						@x_ind = (100/@max_num[d][column[:id]]*@index_array[d][column[:id]]).to_i
 						@top = (column[:slot]*25).to_i
-						@lesson_id = column[:id] %>
+						@lesson_id = column[:id] 
+						@teacher = column[:teacher] 
+						@student = column[:student] %>
 				
-				<div class="event" style="position:absolute; top: <%= @top %>px; left: <%= @x_ind %>%; height: <%= @height %>px; width: <%= @width %>%; background-color: blue;">
+				<div class="event" style="position:absolute; top: <%= @top %>px; left: <%= @x_ind %>%; height: <%= @height %>px; width: <%= @width %>%; background-color: coral;">
 					<input class="start_time" type="hidden" value="">
 					<input class="order_id" type="hidden" value="order">
-					<h4 style="background-color:red;">Test</h4>
-					<p class="purpose"></p>
+					<h4 class="event_heading"><%= @teacher %></h4>
+					<p class="purpose"><%= @student %></p>
 				</div>
 					<% end %>
 				<% end %>

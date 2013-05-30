@@ -2,7 +2,7 @@
 
 <p>
   <b>Student:</b>
-  <%= @lesson.student_id %>
+  <%= "#{@lesson.student.first} #{@lesson.student.last}" %>
 </p>
 
 <p>
@@ -17,7 +17,7 @@
 
 <p>
   <b>Weekday:</b>
-  <%= @lesson.weekday %>
+  <%= Date::DAYNAMES[@lesson.weekday] %>
 </p>
 
 <p>
@@ -42,7 +42,7 @@
 
 <p>
   <b>End date:</b>
-  <%= @lesson.end_date %>
+  <%= @lesson.end_date ? @lesson.end_date : "N/A" %>
 </p>
 
 

@@ -46,7 +46,8 @@ class CalendarsController < ApplicationController
         @columns[@room].push({ 
           :id => lesson.id, 
           :room => @room, 
-          :teacher => lesson.teacher_id, 
+          :teacher => lesson.teacher.first,
+          :student => lesson.student.last, 
           :start_time => @start_time, 
           :end_time => @end_time, 
           :slot => @slot_number,  

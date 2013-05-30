@@ -1,5 +1,7 @@
 Studio::Application.routes.draw do
   
+  root to: 'customers#index'
+  
   get '/daily', to: 'calendars#daily' 
   
   resources :lessons
@@ -10,9 +12,9 @@ Studio::Application.routes.draw do
 
   resources :teachers
 
-  resources :students
-
-  root to: 'customers#index'
+  resources :students do
+    resources :lessons
+  end
   
   get "customers/live_search"
   resources :customers do
