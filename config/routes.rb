@@ -2,6 +2,8 @@ Studio::Application.routes.draw do
   
   root to: 'customers#index'
   
+  get 'update_instruments', to: 'instruments#update_instruments'
+  
   get '/daily', to: 'calendars#daily' 
   
   resources :lessons

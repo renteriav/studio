@@ -7,12 +7,12 @@
 
 <p>
   <b>Teacher:</b>
-  <%= @lesson.teacher_id %>
+  <%= @lesson.teacher.first %>
 </p>
 
 <p>
   <b>Instrument:</b>
-  <%= @lesson.instrument_id %>
+  <%= @lesson.instrument.name %>
 </p>
 
 <p>
@@ -32,7 +32,7 @@
 
 <p>
   <b>Frequency:</b>
-  <%= @lesson.frequency %>
+  <%= @lesson.frequency ? frequency_display[@lesson.frequency] : "N/A" %>
 </p>
 
 <p>

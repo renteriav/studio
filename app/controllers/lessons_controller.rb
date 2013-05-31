@@ -21,6 +21,7 @@ class LessonsController < ApplicationController
   def new
     @student = Student.find(params[:student_id])
     @lesson = Lesson.new
+    @instruments = ""
 
     respond_to do |format|
       format.html # new.html.erb
@@ -30,6 +31,8 @@ class LessonsController < ApplicationController
 
   def edit
     @lesson = Lesson.find(params[:id])
+    @instruments = @lesson.teacher.instruments.map{|i| [i.name, i.id]}
+    @selected = @lesson.instrument.id
   end
 
   def create
@@ -46,6 +49,8 @@ class LessonsController < ApplicationController
 
   def update
     @lesson = Lesson.find(params[:id])
+    @instruments = @lesson.teacher.instruments.map{|i| [i.name, i.id]}
+    @selected = @lesson.instrument.id
 
     respond_to do |format|
       if @lesson.update_attributes(params[:lesson])

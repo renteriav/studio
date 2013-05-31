@@ -12,44 +12,44 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :teacher %><br />
-    <%= f.number_field :teacher_id %>
+    <%= f.label :teacher %>
+    <%= collection_select(:lesson, :teacher_id, Teacher.all, :id, :first, {:include_blank => "Select a teacher"}, {:id => 'teachers_select'})%>
   </div>
   <div class="field">
-    <%= f.label :instrument %><br />
-    <%= f.number_field :instrument_id %>
+    <%= f.label :instrument %>
+    <%= f.select :instrument_id, options_for_select(@instruments, @selected), :include_blank => "Select an instrument"  %>
   </div>
   <div class="field">
-    <%= f.label :room %><br />
-    <%= f.number_field :room_id %>
+    <%= f.label :room %>
+    <%= collection_select(:lesson, :room_id, Room.find(:all, :order => "id ASC"), :id, :room_description, {:include_blank => "Select a room"})%>
   </div>
   <div class="field">
-    <%= f.label :weekday %><br />
-    <%= f.number_field :weekday %>
+    <%= f.label :weekday %>
+    <%= f.select :weekday, days_of_week, :include_blank => "Select day of the week" %>
   </div>
   <div class="field input-append bootstrap-timepicker">
-    <%= f.label :start_time %><br />
+    <%= f.label :start_time %>
     <%= f.text_field :start_time, :class => "timepicker input-sm" %>
 	<span class="add-on"><i class="icon-time"></i></span>
   </div>
   <div class="field input-append bootstrap-timepicker">
-    <%= f.label :end_time %><br />
+    <%= f.label :end_time %>
     <%= f.text_field :end_time, :class => "timepicker input-sm" %>
 	<span class="add-on"><i class="icon-time"></i></span>
   </div>
   <div class="field">
-    <%= f.label :frequency %><br />
-    <%= f.number_field :frequency %>
+    <%= f.label :frequency %>
+    <%= f.select :frequency, frequency_select, :include_blank => "Select frequency" %>
   </div>
   <div class="field">
-    <%= f.label :start_date %><br />
-    <%= f.date_select :start_date %>
+    <%= f.label :start_date %>
+    <%= f.date_select :start_date, {:order => [:month, :day, :year], :use_short_month => true,}, {:class => "input-sm"} %>
   </div>
   <div class="field">
-    <%= f.label :end_date %><br />
-    <%= f.date_select :end_date, {:include_blank => true} %>
+    <%= f.label :end_date %>
+    <%= f.date_select :end_date, {:order => [:month, :day, :year], :use_short_month => true, :prompt => [:day => 'Select day', :month => 'Select month', :year => 'Select year']}, {:class => "input-sm"} %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit submit_button_message(yield(:button_message)), {class: "btn btn-large btn-primary"} %>
   </div>
 <% end %>

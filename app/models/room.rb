@@ -17,4 +17,9 @@ class Room < ActiveRecord::Base
   
   before_validation { |room| room.nameize :name, :location }
   before_validation { |room| room.description = room.description.strip.capitalize }
+  
+  def room_description
+    loc = location.empty? ? "" : "(#{location})"
+    "#{name} #{loc}"
+  end
 end

@@ -11,6 +11,7 @@
 class Instrument < ActiveRecord::Base
   include FieldSanitizer
   has_and_belongs_to_many :teachers
+  has_many :lessons
   attr_accessible :name
   before_validation { |instrument| instrument.nameize :name }
 end
