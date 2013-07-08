@@ -2,7 +2,7 @@ Studio::Application.routes.draw do
   
   root to: 'customers#index'
   
-  get 'update_instruments', to: 'instruments#update_instruments'
+  get 'update_teachers', to: 'lessons#update_teachers'
   
   get '/daily', to: 'calendars#daily' 
   

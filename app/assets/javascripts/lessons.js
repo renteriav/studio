@@ -1,16 +1,16 @@
 $(document).ready(function(){
 	$('.timepicker').timepicker()
 	
-	$('#teachers_select').change(function(){
+	$('#instrument_select').change(function(){
 		$.ajax({
-	    	url: "/update_instruments",
+	    	url: "/update_teachers",
 	        data: {
-	          teacher_id : $('#teachers_select').val()
+	          instrument_id : $('#instrument_select').val()
 	        },
 	        type: "GET",
 			success: function(result)
 			{
-				$('#lesson_instrument_id').html(result).show();
+				$('#lesson_teacher_id').html(result).show();
 			}
 	   	});
 	 });

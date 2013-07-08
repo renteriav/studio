@@ -47,14 +47,4 @@ class InstrumentsController < ApplicationController
       format.html { redirect_to instruments_url }
     end
   end
-  
-  def update_instruments
-    if params[:teacher_id] == ''
-    @instruments = [['Select an instrument', ""]]
-    else
-    @teacher = Teacher.find(params[:teacher_id])
-    @instruments = @teacher.instruments.map{|i| [i.name, i.id]}.insert(0, ["Select an instrument", ""])
-    end
-    render :layout => false
-  end
 end

@@ -1,7 +1,4 @@
 module LessonsHelper
-  def frequency
-    [['Every week', 1], ['Every other week', 2], ['Once a month', 4]]
-  end
   
   def days_of_week
     [['Sunday', 0], ['Monday', 1], ['Tuesday', 2], 

@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :teacher %>
-    <%= collection_select(:lesson, :teacher_id, Teacher.all, :id, :first, {:include_blank => "Select a teacher"}, {:id => 'teachers_select'})%>
+    <%= f.label :instrument %>
+    <%= collection_select(:lesson, :instrument_id, Instrument.all, :id, :name, {:include_blank => "Select an instrument"}, {:id => 'instrument_select'})%>
   </div>
   <div class="field">
-    <%= f.label :instrument %>
-    <%= f.select :instrument_id, options_for_select(@instruments, @selected), :include_blank => "Select an instrument"  %>
+    <%= f.label :teacher %>
+    <%= f.select :teacher_id, options_for_select(@teachers, @selected), :include_blank => "Select a teacher"  %>
   </div>
   <div class="field">
     <%= f.label :room %>

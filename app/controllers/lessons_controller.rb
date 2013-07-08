@@ -21,7 +21,7 @@ class LessonsController < ApplicationController
   def new
     @student = Student.find(params[:student_id])
     @lesson = Lesson.new
-    @instruments = ""
+    @teachers = ""
 
     respond_to do |format|
       format.html # new.html.erb
@@ -31,8 +31,8 @@ class LessonsController < ApplicationController
 
   def edit
     @lesson = Lesson.find(params[:id])
-    @instruments = @lesson.teacher.instruments.map{|i| [i.name, i.id]}
-    @selected = @lesson.instrument.id
+    @teachers = @lesson.instrument.teachers.map{|i| [i.first, i.id]}
+    @selected = @lesson.teacher.id
   end
 
   def create
@@ -49,8 +49,8 @@ class LessonsController < ApplicationController
 
   def update
     @lesson = Lesson.find(params[:id])
-    @instruments = @lesson.teacher.instruments.map{|i| [i.name, i.id]}
-    @selected = @lesson.instrument.id
+    @teachers = @lesson.instrument.teachers.map{|i| [i.first, i.id]}
+    @selected = @lesson.teacher.id
 
     respond_to do |format|
       if @lesson.update_attributes(params[:lesson])
@@ -73,5 +73,15 @@ class LessonsController < ApplicationController
       format.html { redirect_to lessons_url }
       format.json { head :no_content }
     end
+  end
+  
+  def update_teachers
+    if params[:instrument_id] == ''
+    @teachers = [['Select a teacher', ""]]
+    else
+    @instrument = Instrument.find(params[:instrument_id])
+    @teachers = @instrument.teachers.map{|i| [i.first, i.id]}.insert(0, ["Select a teacher", ""])
+    end
+    render :layout => false
   end
 end

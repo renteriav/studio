@@ -1,20 +1,19 @@
+<% prerender_calendar(@lessons, @rooms, @num_rooms, @num_rows, @first_slot_time) %>
 <%= render 'header' %>
-<%= 
-%>
-<% @start_time = Time.new(2000, 1, 1, 6, 0, 0 ) %>
+<% @calendar_start_time = Time.new(2000, 1, 1, 6, 0, 0 ) %>
 <% i = 6 %>
 <div id="grid-hour">
 	<table id="hour-column" >		
 		
 		<% while i < 20 do %>
-			<% @hour = @start_time.strftime("%l : %M %p") %>
+			<% @hour = @calendar_start_time.strftime("%l : %M %p") %>
 		
 			<tr>
 				<td class="time-header">
 					<p class="time-display"><%= "#{@hour}"%></p>
 				</td>
 			</tr>
-			<% @start_time += (60 * 60) %>
+			<% @calendar_start_time += (60 * 60) %>
 			<% i +=1 %>
 			
 			<% end %>
@@ -54,12 +53,13 @@
 						@top = (column[:slot]*25).to_i
 						@lesson_id = column[:id] 
 						@teacher = column[:teacher] 
-						@student = column[:student] %>
+						@student = column[:student]
+						@status = column[:status]
+						@color = event_color(column[:status])
+						@h_color = @color - 50 %>
 				
-				<div class="event" style="position:absolute; top: <%= @top %>px; left: <%= @x_ind %>%; height: <%= @height %>px; width: <%= @width %>%; background-color: coral;">
-					<input class="start_time" type="hidden" value="">
-					<input class="order_id" type="hidden" value="order">
-					<h4 class="event_heading"><%= @teacher %></h4>
+				<div id = "<%= "#{@lesson_id}-#{@status}" %>" class="event" style="position:absolute; top: <%= @top %>px; left: <%= @x_ind %>%; height: <%= @height %>px; width: <%= @width %>%; background-color: #<%= @color.to_s(16) %>; color:black;">
+					<h4 class="event_heading" style = "background-color: #<%= @h_color.to_s(16) %>;"><%= @teacher %></h4>
 					<p class="purpose"><%= @student %></p>
 				</div>
 					<% end %>
