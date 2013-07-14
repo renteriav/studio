@@ -1,21 +1,61 @@
 	<b>Student:</b>
 	<%= "#{@student.first} #{@student.last}" %>
 </p>
+<% if @student.email != "" %>
 <p>
   <b>Email:</b>
   <%= @student.email %>
 </p>
-<ul>
-	<% if @student.telephones.any? 
-		for telephone in @student.telephones %>
+<% end %>
+	<% if @student.telephones.any? %>
+<p>
+	<b>Telephones:</b></br>
+	<ul>
+		<% for telephone in @student.telephones %>
 			<li>
 				<%= formated_phone(telephone.number) %>&nbsp;
 				<%= telephone.description %>
 			</li>
 		<% end %>
 	<% end %>
-</ul>
+	</ul>
+</p>
+<p>
+	<b>Lessons:</b></br>
+</p>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Instrument</th>
+				<th>Day</th>
+				<th>Start Time</th>
+				<th>End Time</th>
+				<th>Teacher</th>
+			</tr>
+		</thead>
+		<% for lesson in @lessons %>
+		<tr>
+			<td>
+				<%= Instrument.find(lesson.instrument_id).name %>
+			</td>
+			<td>
+				<%= Date::DAYNAMES[lesson.weekday]%>
+			</td>
+			<td>
+				<%= lesson.start_time.strftime("%l:%M %p") %>
+			</td>
+			<td>
+				<%= lesson.end_time.strftime("%l:%M %p") %>
+			</td>
+			<td>
+				<%= Teacher.find(lesson.teacher_id).first %>
+			</td>
+		</tr>
+			
+		<% end %>
+	</table>
+
 
 <%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %> |
+<%= link_to 'Customer Info', customer_path(@student.customer) %> |
 <%= link_to 'Add Lesson', new_student_lesson_path(@student) %>

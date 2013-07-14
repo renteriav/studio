@@ -1,0 +1,3 @@
+<p>Attendance for <%= "#{@student.first} #{@student.last}" %></p>
+<p>on <%= @date.strftime("%A, %b #{@date.day.ordinalize}, %Y") %></p>
+<%= render 'form' %>

@@ -26,7 +26,8 @@ module CalendarsHelper
           :start_time => @start_time, 
           :end_time => @end_time, 
           :slot => @slot_number,  
-          :length => @lesson_length, 
+          :length => @lesson_length,
+          :attendable_type => lesson.attendable_type, 
           :status => @status }) #  default is (s = scheduled)
       end
     end
@@ -234,9 +235,11 @@ module CalendarsHelper
       when "s" # scheduled
         0XACCFFC
       when "c" # canceled
-        0XFF1050
-      when "a" #attended
         0XFFFF99
+      when "a" #attended
+        0x66EE60
+      when "m" #missed
+        0XFF1050
       end
     end
     

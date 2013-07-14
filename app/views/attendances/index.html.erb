@@ -1,0 +1,15 @@
+<h1>Listing attendance</h1>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Status</th>
+  </tr>
+
+<% @attendances.each do |attendance| %>
+  <tr>
+    <td><%= attendance.date %></td>
+    <td><%= attendance.status %></td>
+  </tr>
+<% end %>
+</table>

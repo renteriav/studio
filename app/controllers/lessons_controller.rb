@@ -84,4 +84,9 @@ class LessonsController < ApplicationController
     end
     render :layout => false
   end
+  
+  def attendance_form
+    @lesson = Lesson.find(params[:lesson_id])
+  end
+  
 end

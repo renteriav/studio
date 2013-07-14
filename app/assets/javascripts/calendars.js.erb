@@ -1,5 +1,9 @@
 $(document).ready(function(){
 	
+	var scrollCookie = $.cookie('scroll_cookie');
+	$.removeCookie('scroll_cookie');
+	$(document).scrollTop(scrollCookie);
+	
 	$('.link-button')
 	  .button()
 	  .css({visibility: "visible"});
@@ -15,7 +19,7 @@ $(document).ready(function(){
 		
 	$('#date-select').val(gon.date);
 	
-	var scroll = 0;
+	var scroll = 1000;
 	$(".event").each(function(){
 		var topVal = $(this).position().top;
 		if(topVal<scroll)
@@ -23,5 +27,43 @@ $(document).ready(function(){
 			scroll = topVal;
 		}
 	});
+	if (scrollCookie === undefined)
+	{
 	$(document).scrollTop(scroll);
+	}
+	
+//  dialog for attendance	
+	
+	$('.event').click(function(){
+		var id = $(this).attr('id').split("-", 1);
+		$.ajax({
+	    	url: "/attendances/dialog",
+	        data: "lesson_id="+id+"&date="+gon.ruby_date,
+	        type: "GET",
+			success: function(result)
+			{
+				$('#attendance-dialog').html(result);
+			}
+	   	}); 
+		
+		$( "#attendance-dialog" ).dialog(
+			{buttons:[
+                {
+                    text: "Cancel", click: function() {
+                        $( this ).dialog( "close" );
+                    }
+                },
+                {
+                	text: "Submit", click: function() {
+						var scrollCookie = $(document).scrollTop();
+						$.cookie('scroll_cookie', scrollCookie);
+						$('#submit').trigger('click');
+                       // $( this ).dialog( "close" );
+                    }
+                }
+            ]},
+            {"modal": "true"}
+        );
+		
+	});
 });

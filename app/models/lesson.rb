@@ -22,8 +22,12 @@ class Lesson < ActiveRecord::Base
   belongs_to :student
   belongs_to :teacher
   belongs_to :instrument
+  has_many :attendances, :as => :attendable
+  
+  accepts_nested_attributes_for :attendances
   
   attr_accessor :status
+  attr_accessor :attendable_type
   
-  attr_accessible :end_date, :end_time, :frequency, :instrument_id, :room_id, :start_date, :start_time, :student_id, :teacher_id, :weekday
+  attr_accessible :end_date, :end_time, :frequency, :instrument_id, :room_id, :start_date, :start_time, :student_id, :teacher_id, :weekday, :attendances_attributes
 end

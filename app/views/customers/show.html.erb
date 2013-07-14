@@ -28,14 +28,13 @@
 <p>
 	<ul>
      <% for student in @students %> 
-	 <li>
- 	<%= "#{student.first} #{student.last}" %>
-</li>
-<% end %>
-</ul>
+	 	<li>
+ 			<%= link_to "#{student.first} #{student.last}", customer_student_path(@customer, student) %>
+		</li>
+	<% end %>
+	</ul>
   </p>
 
-<%= link_to 'Edit', edit_customer_path(@customer) %> |
-<%= link_to 'Back', customers_path %> |
-<%= link_to 'Add Telephone', new_customer_telephone_path(@customer) %>
-<%= link_to 'Add Student', new_customer_student_path(@customer) %>
+<%= link_to 'Edit Customer Info', edit_customer_path(@customer) %> |
+<%= link_to 'Add Student', new_customer_student_path(@customer) %> |
+<%= link_to 'List Customers', customers_path %> |

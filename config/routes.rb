@@ -2,11 +2,15 @@ Studio::Application.routes.draw do
   
   root to: 'customers#index'
   
+  get '/daily', to: 'calendars#daily'
+  
   get 'update_teachers', to: 'lessons#update_teachers'
   
-  get '/daily', to: 'calendars#daily' 
+  resources :lessons do
+    resources :attendances
+  end
   
-  resources :lessons
+  get "attendances/dialog"
 
   resources :instruments
 
@@ -19,6 +23,7 @@ Studio::Application.routes.draw do
   end
   
   get "customers/live_search"
+  
   resources :customers do
     resources :students
     resources :telephones

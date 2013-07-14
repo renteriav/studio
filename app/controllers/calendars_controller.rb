@@ -14,6 +14,7 @@ class CalendarsController < ApplicationController
       @date = Time.now.midnight
     end
     gon.date = @date.strftime('%m/%d/%Y')
+    gon.ruby_date = @date.strftime('%d/%m/%Y')
     @day =  @date.strftime("%A, %b #{@date.day.ordinalize}, %Y")
     
     @previous = (@date - (24*60*60)).to_i
@@ -21,14 +22,24 @@ class CalendarsController < ApplicationController
     @day_of_week = @date.wday
     @sunday = @date - (@day_of_week*24*60*60)
     
-    @lessons = Lesson.where("weekday = ? AND start_date <= ? AND (end_date >= ? OR end_date IS NULL)", @day_of_week, @date, @date).order("start_time ASC, end_time ASC")
+    if @teacher != nil
+      @lessons = @teacher.lessons.where("weekday = ? AND start_date <= ? AND (end_date >= ? OR end_date IS NULL)", @day_of_week, @date, @date).order("start_time ASC, end_time ASC")
+    else
+      @lessons = Lesson.where("weekday = ? AND start_date <= ? AND (end_date >= ? OR end_date IS NULL)", @day_of_week, @date, @date).order("start_time ASC, end_time ASC")
+    end
+    
+    @lessons.each do |lesson|
+      lesson.attendable_type = "l"
+    end
     
     @attendances = Attendance.where("date = ?", @date.to_date)
     
     if @attendances.any?
       @attendances.each do |attendance|
         @lesson_index = @lessons.find_index{|n| n['id'] == attendance.attendable_id }
-        @lessons[@lesson_index].status = attendance.status
+        if @lesson_index
+          @lessons[@lesson_index].status = attendance.status
+        end
       end
     end
     

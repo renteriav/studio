@@ -34,7 +34,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '4.0.2'
 gem 'jquery-ui-themes'
 
 group :test do

@@ -1,0 +1,21 @@
+<%= form_for [@lesson, @attendance] do |f| %>
+	
+	<label class="radio">
+	<%= f.radio_button :status, "s" %>Scheduled
+	</label>  
+	<label class="radio">
+		<%= f.radio_button :status, "a" %>Attended
+	</label>
+	<label class="radio">
+		<%= f.radio_button :status, "m" %>Missed
+	</label>
+	<label class="radio">
+		<%= f.radio_button :status, "c" %>Canceled
+	</label>
+	
+	<%= f.hidden_field :date, :value => @date %>
+
+  <div class="actions" style="display:none;">
+    <%= f.submit submit_button_message('add'), class: "btn btn-large btn-primary link-class", id: "submit" %>
+  </div>
+<% end %>

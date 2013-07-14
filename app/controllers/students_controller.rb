@@ -50,5 +50,6 @@ class StudentsController < ApplicationController
   
   def show
     @student = Student.find(params[:id])
+    @lessons = @student.lessons.order("weekday ASC, start_time ASC")
   end
 end

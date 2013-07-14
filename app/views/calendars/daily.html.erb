@@ -55,10 +55,11 @@
 						@teacher = column[:teacher] 
 						@student = column[:student]
 						@status = column[:status]
+						@attendable_type = column[:attendable_type]
 						@color = event_color(column[:status])
 						@h_color = @color - 50 %>
 				
-				<div id = "<%= "#{@lesson_id}-#{@status}" %>" class="event" style="position:absolute; top: <%= @top %>px; left: <%= @x_ind %>%; height: <%= @height %>px; width: <%= @width %>%; background-color: #<%= @color.to_s(16) %>; color:black;">
+				<div id = "<%= "#{@lesson_id}-#{@attendable_type}" %>" class="event" style="position:absolute; top: <%= @top %>px; left: <%= @x_ind %>%; height: <%= @height %>px; width: <%= @width %>%; background-color: #<%= @color.to_s(16) %>; color:black;">
 					<h4 class="event_heading" style = "background-color: #<%= @h_color.to_s(16) %>;"><%= @teacher %></h4>
 					<p class="purpose"><%= @student %></p>
 				</div>
@@ -70,6 +71,5 @@
 		<% end %>
 	</div>
 </div>
-	
-
-	
+<div id="attendance-dialog" style="display:none;">
+</div>		
