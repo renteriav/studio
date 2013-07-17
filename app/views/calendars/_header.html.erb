@@ -1,6 +1,7 @@
 <div id = "top-wrapper">
-	<div id="header">
+	<div id="header">	
 		<div id="buttons">
+			<%= link_to '<i class="icon-home icon-white"></i>'.html_safe, root_path, class: "link-button" %>
 			<input  id = "date-select" class ="link-button" type="text" readonly="readonly">
 			<%= link_to "<", daily_path(date: @previous), method: "get", class: "link-button", id: "previous"  %>
 			<%= link_to "Today", daily_path, method: "get", class: "link-button", id: "today"%>

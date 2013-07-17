@@ -15,7 +15,7 @@ class CalendarsController < ApplicationController
     end
     gon.date = @date.strftime('%m/%d/%Y')
     gon.ruby_date = @date.strftime('%d/%m/%Y')
-    @day =  @date.strftime("%A, %b #{@date.day.ordinalize}, %Y")
+    @day =  view_context.format_day(@date)
     
     @previous = (@date - (24*60*60)).to_i
     @next = (@date + (24*60*60)).to_i
@@ -29,16 +29,25 @@ class CalendarsController < ApplicationController
     end
     
     @lessons.each do |lesson|
-      lesson.attendable_type = "l"
+      lesson.comp_id = lesson.id.to_s + "-lesson"
     end
     
     @attendances = Attendance.where("date = ?", @date.to_date)
     
     if @attendances.any?
       @attendances.each do |attendance|
-        @lesson_index = @lessons.find_index{|n| n['id'] == attendance.attendable_id }
-        if @lesson_index
-          @lessons[@lesson_index].status = attendance.status
+        case attendance.attendable_type
+        when "Lesson"
+          @lesson_index = @lessons.find_index{|n| n['id'] == attendance.attendable_id }
+          if @lesson_index
+            @lessons[@lesson_index].status = attendance.status
+          end
+          
+        
+        when "Extra"
+          @extra = Extra.find(attendance.attendable_id)
+          @extra_lesson = Lesson.new(comp_id: @extra.id.to_s + "-extra", student_id: @extra.student_id, teacher_id: @extra.teacher_id, room_id: @extra.room_id, start_time: @extra.start_time, end_time: @extra.end_time, status: attendance.status)
+          @lessons.push(@extra_lesson)
         end
       end
     end

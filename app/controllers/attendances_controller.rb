@@ -11,13 +11,21 @@ class AttendancesController < ApplicationController
   
   def dialog
     @date = Time.parse(params[:date]).to_date
-    @lesson = Lesson.find(params[:lesson_id])
-    @student = @lesson.student
+    if params[:lesson_id]
+      @lesson = Lesson.find(params[:lesson_id])
+    end
+    
+    if params[:extra_id]
+      @lesson = Extra.find(params[:extra_id])
+    end
+    
     if @lesson.attendances.where("date = ?", @date).any?
       @attendance = @lesson.attendances.where("date = ?", @date).first
     else
       @attendance = Attendance.new(:status => "s")
     end
+    
+    @student = @lesson.student
     render :layout => false
   end
   
@@ -30,7 +38,12 @@ class AttendancesController < ApplicationController
   
   def edit
     @date = params[:date]
-    @lesson = Lesson.find(params[:lesson_id])
+    if params[:lesson_id]
+      @lesson = Lesson.find(params[:lesson_id])
+    end
+    if params[:extra_id]
+      @lesson = Lesson.find(params[:lesson_id])
+    end
     @attendance = @lesson.attendances.where("date = ?", @date).first
   end
 

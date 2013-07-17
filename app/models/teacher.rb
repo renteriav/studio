@@ -22,6 +22,7 @@ class Teacher < ActiveRecord::Base
   has_and_belongs_to_many :instruments
   
   has_many :lessons
+  has_many :extras
   
   attr_accessible :address_id, :email, :first, :last, :telephones_attributes, :addresses_attributes, :instrument_ids
   

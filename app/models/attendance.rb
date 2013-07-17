@@ -5,6 +5,7 @@
 #  id              :integer          not null, primary key
 #  attendable_id   :integer
 #  attendable_type :string(255)
+#  teacher_id      :integer
 #  date            :date
 #  status          :string(255)
 #  created_at      :datetime         not null

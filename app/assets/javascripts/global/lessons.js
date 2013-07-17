@@ -1,5 +1,7 @@
 $(document).ready(function(){
-	$('.timepicker').timepicker()
+	$('#timepicker_start').timepicker('setTime', gon.start_time);
+
+	$('#timepicker_end').timepicker('setTime', gon.end_time);
 	
 	$('#instrument_select').change(function(){
 		$.ajax({
@@ -10,7 +12,7 @@ $(document).ready(function(){
 	        type: "GET",
 			success: function(result)
 			{
-				$('#lesson_teacher_id').html(result).show();
+				$('#teacher_list').html(result).show();
 			}
 	   	});
 	 });

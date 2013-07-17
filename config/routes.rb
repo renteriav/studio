@@ -4,9 +4,13 @@ Studio::Application.routes.draw do
   
   get '/daily', to: 'calendars#daily'
   
-  get 'update_teachers', to: 'lessons#update_teachers'
+  get 'update_teachers', to: 'shared#update_teachers'
   
   resources :lessons do
+    resources :attendances
+  end
+  
+  resources :extras do
     resources :attendances
   end
   
@@ -20,6 +24,7 @@ Studio::Application.routes.draw do
 
   resources :students do
     resources :lessons
+    resources :extras
   end
   
   get "customers/live_search"

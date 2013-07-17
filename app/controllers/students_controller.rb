@@ -51,5 +51,6 @@ class StudentsController < ApplicationController
   def show
     @student = Student.find(params[:id])
     @lessons = @student.lessons.order("weekday ASC, start_time ASC")
+    @extras =  @student.extras.where("date >= ?", Time.now.to_date).order("date ASC")
   end
 end

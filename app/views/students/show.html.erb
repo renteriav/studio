@@ -21,41 +21,78 @@
 	</ul>
 </p>
 <p>
-	<b>Lessons:</b></br>
+	<b>Regular Lessons:</b></br>
 </p>
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>Instrument</th>
-				<th>Day</th>
-				<th>Start Time</th>
-				<th>End Time</th>
-				<th>Teacher</th>
-			</tr>
-		</thead>
-		<% for lesson in @lessons %>
+<table class="table table-hover">
+	<thead>
 		<tr>
-			<td>
-				<%= Instrument.find(lesson.instrument_id).name %>
-			</td>
-			<td>
-				<%= Date::DAYNAMES[lesson.weekday]%>
-			</td>
-			<td>
-				<%= lesson.start_time.strftime("%l:%M %p") %>
-			</td>
-			<td>
-				<%= lesson.end_time.strftime("%l:%M %p") %>
-			</td>
-			<td>
-				<%= Teacher.find(lesson.teacher_id).first %>
-			</td>
+			<th>Instrument</th>
+			<th>Day</th>
+			<th>Start Time</th>
+			<th>End Time</th>
+			<th>Teacher</th>
 		</tr>
-			
-		<% end %>
-	</table>
+	</thead>
+	<% for lesson in @lessons %>
+	<tr>
+		<td>
+			<%= Instrument.find(lesson.instrument_id).name %>
+		</td>
+		<td>
+			<%= Date::DAYNAMES[lesson.weekday]%>
+		</td>
+		<td>
+			<%= format_time(lesson.start_time) %>
+		</td>
+		<td>
+			<%= format_time(lesson.end_time) %>
+		</td>
+		<td>
+			<%= Teacher.find(lesson.teacher_id).first %>
+		</td>
+	</tr>		
+	<% end %>
+</table>
+<p>
+	<b>Upcoming Make Up and Extra Lessons:</b></br>
+</p>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Instrument</th>
+			<th>Date</th>
+			<th>Start Time</th>
+			<th>End Time</th>
+			<th>Teacher</th>
+			<th></th>
+		</tr>
+	</thead>
+	<% for extra in @extras %>
+	<tr>
+		<td>
+			<%= Instrument.find(extra.instrument_id).name %>
+		</td>
+		<td>
+			<%= format_day(extra.date)%>
+		</td>
+		<td>
+			<%= format_time(extra.start_time) %>
+		</td>
+		<td>
+			<%= format_time(extra.end_time) %>
+		</td>
+		<td>
+			<%= Teacher.find(extra.teacher_id).first %>
+		</td>
+		<td>
+			<%= link_to 'Edit', edit_student_extra_path(@student, extra) %>
+		</td>
+	</tr>		
+	<% end %>
+</table>
 
 
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Customer Info', customer_path(@student.customer) %> |
-<%= link_to 'Add Lesson', new_student_lesson_path(@student) %>
+<%= link_to 'Add Lesson', new_student_lesson_path(@student) %> |
+<%= link_to 'Add Make Up/Extra Lesson', new_student_extra_path(@student) %>

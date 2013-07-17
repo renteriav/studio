@@ -35,10 +35,10 @@ $(document).ready(function(){
 //  dialog for attendance	
 	
 	$('.event').click(function(){
-		var id = $(this).attr('id').split("-", 1);
+		var id = $(this).attr('id').split("-");
 		$.ajax({
 	    	url: "/attendances/dialog",
-	        data: "lesson_id="+id+"&date="+gon.ruby_date,
+	        data: id[1]+"_id="+id[0]+"&date="+gon.ruby_date,
 	        type: "GET",
 			success: function(result)
 			{

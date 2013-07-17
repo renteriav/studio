@@ -19,7 +19,7 @@ module CalendarsHelper
         lesson.status.nil? ? @status = "s" : @status = lesson.status
       
         @columns[@room].push({ 
-          :id => lesson.id, 
+          :id => lesson.comp_id, 
           :room => @room, 
           :teacher => lesson.teacher.first,
           :student => lesson.student.last, 
@@ -27,7 +27,6 @@ module CalendarsHelper
           :end_time => @end_time, 
           :slot => @slot_number,  
           :length => @lesson_length,
-          :attendable_type => lesson.attendable_type, 
           :status => @status }) #  default is (s = scheduled)
       end
     end

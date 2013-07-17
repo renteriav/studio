@@ -3,6 +3,7 @@ class CreateAttendances < ActiveRecord::Migration
     create_table :attendances do |t|
       t.integer :attendable_id
       t.string :attendable_type
+      t.integer :teacher_id
       t.date :date
       t.string :status
 

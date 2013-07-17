@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h4><%= extra_category_description(@extra.category) %>&nbsp;for</h4>
+</p>
+<p>
+<b>Student:</b>
+  <%= "#{@extra.student.first} #{@extra.student.last}" %>
+</p>
+
+<p>
+  <b>Instrument:</b>
+  <%= @extra.instrument.name 
+  %>
+</p>
+
+<p>
+  <b>Teacher:</b>
+  <%= @extra.teacher.first %>
+</p>
+
+<p>
+  <b>date:</b>
+  <%= format_day(@extra.attendances.first.date) %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= format_time @extra.start_time %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= format_time @extra.end_time %>
+</p>
+
+<%= link_to 'Edit', edit_extra_path(@extra) %> |
+<%= link_to 'Back', extras_path %>

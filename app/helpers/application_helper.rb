@@ -25,6 +25,19 @@ module ApplicationHelper
   	end
     
     def format_time(t)
-      t.strftime("%l:%M %p") 
-    end      
+      t.strftime("%I:%M %p") 
+    end
+    
+    def format_day(d)
+      d.strftime("%A, %b #{d.day.ordinalize}, %Y")
+    end
+    
+    def dynamic_teachers(instrument_id)
+      if instrument_id == ''
+      [['Select a teacher', ""]]
+      else
+      Instrument.find(instrument_id).teachers.map{|i| [i.first, i.id]}.insert(0, ["Select a teacher", ""])
+      end
+
+    end   
 end

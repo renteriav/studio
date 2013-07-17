@@ -5,7 +5,6 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @lessons }
     end
   end
 
@@ -14,7 +13,6 @@ class LessonsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @lesson }
     end
   end
 
@@ -22,10 +20,10 @@ class LessonsController < ApplicationController
     @student = Student.find(params[:student_id])
     @lesson = Lesson.new
     @teachers = ""
-
+    gon.start_time = "03:00 PM"
+    gon.end_time = "03:30 PM"
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @lesson }
     end
   end
 
@@ -33,6 +31,8 @@ class LessonsController < ApplicationController
     @lesson = Lesson.find(params[:id])
     @teachers = @lesson.instrument.teachers.map{|i| [i.first, i.id]}
     @selected = @lesson.teacher.id
+    gon.start_time = view_context.format_time(@lesson.start_time)
+    gon.end_time = view_context.format_time(@lesson.end_time)
   end
 
   def create
@@ -55,16 +55,12 @@ class LessonsController < ApplicationController
     respond_to do |format|
       if @lesson.update_attributes(params[:lesson])
         format.html { redirect_to @lesson, notice: 'Lesson was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @lesson.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /lessons/1
-  # DELETE /lessons/1.json
   def destroy
     @lesson = Lesson.find(params[:id])
     @lesson.destroy
@@ -73,16 +69,6 @@ class LessonsController < ApplicationController
       format.html { redirect_to lessons_url }
       format.json { head :no_content }
     end
-  end
-  
-  def update_teachers
-    if params[:instrument_id] == ''
-    @teachers = [['Select a teacher', ""]]
-    else
-    @instrument = Instrument.find(params[:instrument_id])
-    @teachers = @instrument.teachers.map{|i| [i.first, i.id]}.insert(0, ["Select a teacher", ""])
-    end
-    render :layout => false
   end
   
   def attendance_form

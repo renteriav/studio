@@ -16,10 +16,10 @@ class Room < ActiveRecord::Base
   attr_accessible :description, :location, :name
   
   before_validation { |room| room.nameize :name, :location }
-  before_validation { |room| room.description = room.description.strip.capitalize }
+  #before_validation { |room| room.description = room.description.strip.capitalize }
   
   def room_description
-    loc = location.empty? ? "" : "(#{location})"
+    loc = location.nil? ? "" : "(#{location})"
     "#{name} #{loc}"
   end
 end

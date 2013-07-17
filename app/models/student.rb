@@ -24,6 +24,7 @@ class Student < ActiveRecord::Base
 	accepts_nested_attributes_for :telephones, :allow_destroy => true, :reject_if => proc { |attributes| attributes['number'].blank? }
   
   has_many :lessons
+  has_many :extras
   
   attr_accessible :first, :last, :telephones_attributes, :email, :birthdate, :grade, :customer_id
   
