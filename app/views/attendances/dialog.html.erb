@@ -1,3 +1,3 @@
-<p>Attendance for <%= "#{@student.first} #{@student.last}" %></p>
+<p>Attendance for <%= link_to "#{@student.first} #{@student.last}", student_path(@student), class: "attendance_dialog" %></p>
 <p>on <%= @date.strftime("%A, %b #{@date.day.ordinalize}, %Y") %></p>
 <%= render 'form' %>

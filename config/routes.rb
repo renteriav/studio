@@ -22,6 +22,8 @@ Studio::Application.routes.draw do
 
   resources :teachers
 
+  get 'attendance_search', to: 'students#attendance_search'
+  
   resources :students do
     resources :lessons
     resources :extras

@@ -20,9 +20,15 @@ module ApplicationHelper
     	new_object = f.object.class.reflect_on_association(association).klass.new
     	fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       		render(association.to_s + "/" + association.to_s.singularize + "_fields", :f => builder)
-      	end
+      end
     	link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", class: classes)
-  	end
+  end
+  
+  def active_link(c)
+    unless current_page?(root_path)
+      params[:controller] == c ? "active" : ""
+    end
+  end
     
     def format_time(t)
       t.strftime("%I:%M %p") 
@@ -39,5 +45,18 @@ module ApplicationHelper
       Instrument.find(instrument_id).teachers.map{|i| [i.first, i.id]}.insert(0, ["Select a teacher", ""])
       end
 
-    end   
+    end  
+    
+    def status_name(status)
+      case status
+      when "s" 
+        "Scheduled"
+      when "c" 
+        "Canceled"
+      when "a" 
+        "Attended"
+      when "m" 
+        "Missed"
+      end
+    end
 end

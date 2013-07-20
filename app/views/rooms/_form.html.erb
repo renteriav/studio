@@ -24,6 +24,6 @@
     <%= f.text_area :description, :size => "20x5" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit submit_button_message(yield(:button_message)), class: "btn btn-large btn-primary" %>
   </div>
 <% end %>

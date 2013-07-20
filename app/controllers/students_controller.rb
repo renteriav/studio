@@ -50,7 +50,15 @@ class StudentsController < ApplicationController
   
   def show
     @student = Student.find(params[:id])
+    @id = @student.id
     @lessons = @student.lessons.order("weekday ASC, start_time ASC")
     @extras =  @student.extras.where("date >= ?", Time.now.to_date).order("date ASC")
+    @date = Time.now.beginning_of_month
+  end
+  
+  def attendance_search
+    @student = Student.find(params[:id])
+    @lessons = @student.lessons
+    render :layout => false
   end
 end

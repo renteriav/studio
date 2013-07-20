@@ -90,7 +90,15 @@
 	</tr>		
 	<% end %>
 </table>
+<p>
+	<b>Attendance:</b></br>
+</p>
+<%= select_date Date.current, {:order => [:year, :month], :use_short_month => true, :end_year => Time.now.year}, {:class => "input-sm date-search"} %>
 
+<input type="hidden" id="hidden_field" value='<%= "#{@student.id}" %>' />
+<div id="attendance_result">
+	<%= render file: "/students/attendance_search" %>
+</div>
 
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Customer Info', customer_path(@student.customer) %> |

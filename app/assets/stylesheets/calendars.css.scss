@@ -6,6 +6,10 @@ html, body{
 	font-family:helvetica;
 }
 
+a.attendance_dialog:hover {
+	background-color: inherit !important;
+}
+
 #test{
 	position:relative;
 }

@@ -1,4 +1,9 @@
 $linkColor: #cfaa99;
+$navbarText:                      white !default;
+$navbarLinkColor:                 white;
+$navbarLinkColorHover:            #B6819E;
+$navbarLinkColorActive:           #E0E0EB;
+$navbarLinkBackgroundActive:      #A4748E;
 $navbarBackgroundHighlight: rgb(2, 0, 49); 
 $navbarBackground: rgb(109, 51, 83);
 @import "twitter/bootstrap";
@@ -6,6 +11,9 @@ $navbarBackground: rgb(109, 51, 83);
 /* universal */
 h1 {
 	margin-bottom: 10px;
+	background-color: grey;
+	padding: 10px;
+	background-image: linear-gradient(to bottom, #C4C0C4, #D9DADB);
 }
 
 html {
@@ -58,10 +66,6 @@ textarea {
 .logo:hover {
 	color: gray; 
 	text-decoration: none;
-}
-
-a.current, {
-	color:red !important;
 }
 
 /* footer */

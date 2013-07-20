@@ -10,22 +10,22 @@
 					<li class = "<%= current_page?(root_path) ? "active" : "" %>" >
 						<%= link_to "Home", root_path %>
 					</li>
-					<li class = "<%= current_page?(customers_path) ? "active" : "" %>" >
+					<li class = <%= active_link("customers") %> >
 						<%= link_to "Customers", customers_path %>
 					</li>
-					<li class = "<%= current_page?(students_path) ? "active" : "" %>" >
+					<li class = <%= active_link("students") %> >
 						<%= link_to "Students", students_path %>
 					</li>
-					<li class = "<%= current_page?(teachers_path) ? "active" : "" %>" >
+					<li class = <%= active_link("teachers") %> >
 						<%= link_to "Teachers", teachers_path %>
 					</li>
-					<li class = "<%= current_page?(instruments_path) ? "active" : "" %>" >
+					<li class = <%= active_link("instruments") %> >
 						<%= link_to "Instruments", instruments_path %>
 					</li>
-					<li class = "<%= current_page?(rooms_path) ? "active" : "" %>" >
+					<li class = <%= active_link("rooms") %> >
 						<%= link_to "Rooms", rooms_path %>
 					</li>
-					<li class = "<%= current_page?(daily_path) ? "active" : "" %>" >
+					<li class = <%= active_link("calendars") %> >
 						<%= link_to "Calendar", daily_path %>
 					</li>
 					

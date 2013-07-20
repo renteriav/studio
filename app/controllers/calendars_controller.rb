@@ -7,6 +7,9 @@ class CalendarsController < ApplicationController
     end
     
     @rooms = Room.find(:all, :order => "id ASC")
+    @num_rooms = Room.count
+    @num_rows = 56
+    @first_slot_time = Time.utc(2000,1,1,6,0,0)
     
     if params[:date]
       @date = Time.at((params[:date]).to_i).midnight
@@ -16,7 +19,6 @@ class CalendarsController < ApplicationController
     gon.date = @date.strftime('%m/%d/%Y')
     gon.ruby_date = @date.strftime('%d/%m/%Y')
     @day =  view_context.format_day(@date)
-    
     @previous = (@date - (24*60*60)).to_i
     @next = (@date + (24*60*60)).to_i
     @day_of_week = @date.wday
@@ -51,10 +53,5 @@ class CalendarsController < ApplicationController
         end
       end
     end
-    
-    @num_rooms = 8
-    @num_rows = 56
-    @first_slot_time = Time.utc(2000,1,1,6,0,0)
-    
   end
 end

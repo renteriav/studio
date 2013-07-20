@@ -1,0 +1,14 @@
+<% if params[:year] and params[:month] and params[:id]%>
+	<% @date = Date.new(y=params[:year].to_i, m=params[:month].to_i) %>
+<% end %>
+<% @lessons.each do |lesson| %>
+	<% @attendances = lesson.attendances.where("date >= ? AND date <= ? AND status != ?", @date, @date.end_of_month, "s").order("date ASC") %>
+	<% @attendances.each do |attendance| %>
+		<% @status = status_name(attendance.status) %>
+		<% @day = format_day(attendance.date) %>
+		<p>
+			<%= link_to "#{@day}", daily_path(date: attendance.date.to_time.to_i), method: "get" %>
+			<%= "#{@status}" %>
+		</p>
+	<% end %> 
+<% end %>

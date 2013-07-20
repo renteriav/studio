@@ -12,6 +12,5 @@ module ExtrasHelper
   def extra_category_description(c)
     extras_categories.select{ |name, code| code == c}[0][0]
   end
-    
-  
+      
 end
