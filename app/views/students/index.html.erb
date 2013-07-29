@@ -13,6 +13,7 @@
     <th></th>
   </tr>
   <% for student in @students %>
+  <% @customer = Customer.find(student.customer_id) %>
     <tr>
       <td><%= student.first %></td>
       <td><%= student.last %></td>
@@ -20,7 +21,7 @@
       <td><%= student.email %></td>
       <td><%= student.birthdate.strftime('%b %d, %Y') %></td>
       <td class = "center"><%= student.grade %></td>
-      <td><%= student.customer_id %></td>
+      <td><%= "#{@customer.first.first}. #{@customer.last}" %></td>
       <td><%= link_to 'Show', student %></td>
       <td><%= link_to 'Edit', edit_student_path(student) %></td>
       <td><%= link_to 'Destroy', student, method: :delete, remote: true, class: "triger" %></td>

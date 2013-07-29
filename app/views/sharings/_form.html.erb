@@ -1,0 +1,50 @@
+<div class="form-container">
+<%= form_for(@sharing) do |f| %>
+  <% if @sharing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sharing.errors.count, "error") %> prohibited this teacher from being saved:</h2>
+
+      <ul>
+      <% @sharing.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+   <fieldset>
+	  <legend>Sharing Time Details</legend>
+	  <br/>
+  	  <div class="field">
+    	  <%= label_tag :date %>
+    	  <%= text_field_tag "date-box-sharing", @date %>
+  	  </div>
+  	  <div class="field">
+    	  <%= f.hidden_field :date, :class => "db-date", :id => "sharing-date" %>
+      </div>
+  
+  	  <div class="field input-append bootstrap-timepicker">
+    	  <%= f.label :start_time %>
+    	  <%= f.text_field :start_time, :id => "timepicker_start", :class => "input-sm timepicker" %>
+		  <span class="add-on"><i class="icon-time"></i></span>
+  	  </div>
+  	  <div class="field input-append bootstrap-timepicker">
+    	  <%= f.label :end_time %>
+    	  <%= f.text_field :end_time, :id => "timepicker_end", :class => "timepicker input-sm" %>
+		  <span class="add-on"><i class="icon-time"></i></span>
+  	  </div>
+  </fieldset>
+  <div id = "teacher_check_box">
+  <% for teacher in Teacher.find(:all) %>  
+      <div>  
+        <%= check_box_tag "sharing[teacher_ids][]", teacher.id, @sharing.teachers.include?(teacher), :class => 'checkbox' %>  
+        <%= teacher.first %>  
+      </div>  
+  <% end %>
+	</br>
+  </div>  
+		
+  <div class="actions">
+    <%= f.submit submit_button_message(yield(:button_message)), class: "btn btn-large btn-primary" %>
+  </div>
+<% end %>
+</div>

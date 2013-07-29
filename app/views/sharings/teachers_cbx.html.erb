@@ -1,0 +1,10 @@
+<div id = "teacher_check_box">
+    <% for teacher in Teacher.find(:all) %>  
+        <div> 
+
+          <%= check_box_tag "sharing[teacher_ids][]", teacher.id, @teachers.include?(teacher.id), :class => 'checkbox' %>  
+          <%= teacher.first %>  
+        </div>  
+    <% end %>
+	</br> 
+</div>

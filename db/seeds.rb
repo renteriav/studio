@@ -12,6 +12,7 @@ instruments = [
   "Voice",
   "Violin",
   "Flute",
+  "Saxophone",
   "Theory"
 ]
 
@@ -20,7 +21,7 @@ instruments.each do |instrument|
 end
 
 rooms = [
-  ["Symphony", "main"],
+  ["Concert", "main"],
   ["Ensemble", "kitchen"],
   ["Allegro", "living room"],
   ["Vivace", "office"],
@@ -36,8 +37,8 @@ end
 
 teachers = [
   ["Francisco", "Renteria", "renteriav@hotmail.com", "9085 N. Sweet Acacia Pl", "Tucson", "AZ", "85742", "5204042918", "Cell"],
-  ["Jose", "Perez", "perez@hotmail.com", "2345 N. Calle Rica", "Tucson", "AZ", "85743", "5201423456", "Cell"],
-  ["Ying", "Zung", "Zung@hotmail.com", "2546 S. Calle Otra", "Tucson", "AZ", "85764", "5203567878", "Cell"]
+  ["W. Mark", "Akin", "gibson610@yahoo.com", "721 N. Olsen Ave", "Tucson", "AZ", "85719", "7317801491", "Home"],
+  ["Elizabeth", "Bunt", "elizbunt@yahoo.com", "715 E. Lee St #18", "Tucson", "AZ", "85719", "5202356546", "Home"]
 ]
 
 teachers.each do |teacher|

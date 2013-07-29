@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+	<b>Sharing:</b>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= format_day @sharing.date %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= format_time @sharing.start_time %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= format_time @sharing.end_time %>
+   
+   <h4>Teachers:</h4>
+<p>
+	<ul>
+     <% for teacher in @teachers %> 
+	 	<li>
+ 			<%= link_to "#{teacher.first}", teacher_path(teacher) %>
+		</li>
+	<% end %>
+	</ul>
+</p>
+
+
+
+
+<%= link_to 'Edit', edit_sharing_path(@sharing) %> |
+<%= link_to 'Back', sharings_path %>

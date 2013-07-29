@@ -24,14 +24,25 @@ class CalendarsController < ApplicationController
     @day_of_week = @date.wday
     @sunday = @date - (@day_of_week*24*60*60)
     
-    if @teacher != nil
-      @lessons = @teacher.lessons.where("weekday = ? AND start_date <= ? AND (end_date >= ? OR end_date IS NULL)", @day_of_week, @date, @date).order("start_time ASC, end_time ASC")
-    else
-      @lessons = Lesson.where("weekday = ? AND start_date <= ? AND (end_date >= ? OR end_date IS NULL)", @day_of_week, @date, @date).order("start_time ASC, end_time ASC")
-    end
+    @sharing = Sharing.where("date = ?", @date.to_date)
     
-    @lessons.each do |lesson|
+    if @sharing.any? 
+      @sharing.each do |sharing|
+      sharing.comp_id = sharing.id.to_s + "-sharing"
+      sharing.room_id = 3
+      end
+      @lessons = @sharing
+      
+    else
+      if @teacher != nil
+      @lessons = @teacher.lessons.where("weekday = ? AND start_date <= ? AND (end_date >= ? OR end_date IS NULL)", @day_of_week, @date, @date).order("start_time ASC, end_time ASC")
+      else
+      @lessons = Lesson.where("weekday = ? AND start_date <= ? AND (end_date >= ? OR end_date IS NULL)", @day_of_week, @date, @date).order("start_time ASC, end_time ASC")
+      end
+    
+      @lessons.each do |lesson|
       lesson.comp_id = lesson.id.to_s + "-lesson"
+      end
     end
     
     @attendances = Attendance.where("date = ?", @date.to_date)

@@ -7,6 +7,7 @@
 #  teacher_id    :integer
 #  instrument_id :integer
 #  room_id       :integer
+#  date          :date
 #  start_time    :time
 #  end_time      :time
 #  category      :string(255)

@@ -17,12 +17,15 @@ module CalendarsHelper
         @lesson_length = (@end_time - @start_time)/60/15
         @slot_number = (@start_time - first_slot_time)/60/15
         lesson.status.nil? ? @status = "s" : @status = lesson.status
+        lesson.student_id.nil? ? @student = "" : @student = "#{lesson.student.first.first}. #{lesson.student.last}"
+        lesson.teacher_id.nil? ? @teacher = "SHARING" : @teacher = lesson.teacher.first
+      
       
         @columns[@room].push({ 
           :id => lesson.comp_id, 
           :room => @room, 
-          :teacher => lesson.teacher.first,
-          :student => lesson.student.last, 
+          :teacher => @teacher,
+          :student => @student, 
           :start_time => @start_time, 
           :end_time => @end_time, 
           :slot => @slot_number,  

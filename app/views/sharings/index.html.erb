@@ -1,0 +1,27 @@
+<% provide(:title, 'Sharings') %>
+<table class="table table-hover">
+  <tr>
+    <th>Date</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sharings.each do |sharing| %>
+  <tr>
+    <td><%= format_day(sharing.date) %></td>
+    <td><%= format_time(sharing.start_time) %></td>
+    <td><%= format_time(sharing.end_time) %></td>
+    <td><%= link_to 'Show', sharing %></td>
+    <td><%= link_to 'Edit', edit_sharing_path(sharing) %></td>
+    <td><%= link_to 'Destroy', sharing, method: :delete, remote: true, class: "triger" %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sharing', new_sharing_path, class: "btn btn-small btn-primary" %>
+<%= render :partial => 'shared/alert' %>

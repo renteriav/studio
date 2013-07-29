@@ -21,6 +21,10 @@ Studio::Application.routes.draw do
   resources :rooms
 
   resources :teachers
+  
+  get 'teachers_cbx', to: 'sharings#teachers_cbx'
+  
+  resources :sharings
 
   get 'attendance_search', to: 'students#attendance_search'
   

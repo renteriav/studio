@@ -13,7 +13,7 @@ module TelephonesHelper
   def phone_collection(type)
     case type
     when "A"
-      [['Home', 'Home'], ['Mr. cell', 'Mr. cell'], ['Mrs. cell', 'Mrs. cell'], ['Mr. work', 'Mr. work'], ['Mrs. work', 'Mrs. work']]
+      [['Home', 'Home'], ['Mr. cell', 'Mr. cell'], ['Mrs. cell', 'Mrs. cell'], ['Mr. work', 'Mr. work'], ['Mrs. work', 'Mrs. work'], ['Fax', 'Fax']]
     when "B"
       [['Cell', 'Cell'], ['Home', 'Home']] 
     end

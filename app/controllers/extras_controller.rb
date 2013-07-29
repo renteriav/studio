@@ -21,7 +21,8 @@ class ExtrasController < ApplicationController
     @extra = Extra.new
     @extra.attendances.build
     @teachers = ""
-
+    gon.start_time = "03:00 PM"
+    gon.end_time = "03:30 PM"
     respond_to do |format|
       format.html # new.html.erb
     end
