@@ -26,7 +26,7 @@
 	<div id="day-container">
 
 		<% d = 1 %>
-		<% while d < 9 do %>
+		<% while d < @num_rooms+1 do %>
 			<% @room = d %>
 
 			<div class="grid-day" id="<%= '#{@room}' %>">

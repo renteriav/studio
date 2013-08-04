@@ -63,7 +63,8 @@ class TeachersController < ApplicationController
     @teacher.destroy
 
     respond_to do |format|
-      format.html { redirect_to teachers_url }
+      #format.html { redirect_to teachers_url }
+      format.js
     end
   end
 end

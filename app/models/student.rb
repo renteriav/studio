@@ -25,6 +25,7 @@ class Student < ActiveRecord::Base
   
   has_many :lessons
   has_many :extras
+  has_many :detailed_sharings
   
   attr_accessible :first, :last, :telephones_attributes, :email, :birthdate, :grade, :customer_id
   

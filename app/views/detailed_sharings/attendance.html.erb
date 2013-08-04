@@ -1,0 +1,37 @@
+<% provide(:title, 'Sharing Attendance') %>
+<h1>Sharing attendance</h1>
+<h2><%= "#{format_day(@sharing.date)} #{format_time(@sharing.start_time)}" %></h2>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Attended</th>
+			<th>Memory</th>
+			<th>Practice</th>
+		</tr>
+	</thead>
+	
+<%= form_for :detailed_sharing, :url => update_attendance_path, :remote => true, :html => { :method => :put } do  %>
+	<%= hidden_field_tag 'sharing_id', @sharing.id %>
+	<% @students.each do |student| %>
+		<% @share = DetailedSharing.where("student_id = ?", student.id).first %>
+		<tr>
+			<td><%= "#{student.last} #{student.first}" %></td>
+			
+		<%= fields_for "detailed_sharing[]", @share do |f| %>	
+			<td>
+				<%= f.check_box("attendance", {:class => 'checkbox sharing-cbx'}) %>  			  			  </td>
+			<td>
+				<%= f.check_box("memory", {:class => 'checkbox sharing-cbx'}) %>  			  			  </td>
+			<td>
+				<%= f.check_box("practice", {:class => 'checkbox sharing-cbx'}) %>  			  			  </td>
+  		</tr>
+  	<% end %>
+  <% end %>
+  </table>
+  <div class="actions">
+    <%= submit_tag "", :style => "display:none" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', "" %>

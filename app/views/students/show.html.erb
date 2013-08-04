@@ -1,3 +1,4 @@
+<p id="notice"><%= notice %></p>
 	<b>Student:</b>
 	<%= "#{@student.first} #{@student.last}" %>
 </p>
@@ -53,9 +54,11 @@
 	</tr>		
 	<% end %>
 </table>
+
 <p>
 	<b>Upcoming Make Up and Extra Lessons:</b></br>
 </p>
+<% if @extras.any? %>
 <table class="table table-hover">
 	<thead>
 		<tr>
@@ -90,17 +93,31 @@
 	</tr>		
 	<% end %>
 </table>
+<% else %>
+<p>No make ups scheduled.</p></br>
+<% end %>
 <p>
 	<b>Attendance:</b></br>
 </p>
 <%= select_date Date.current, {:order => [:year, :month], :use_short_month => true, :end_year => Time.now.year}, {:class => "input-sm date-search"} %>
+
 
 <input type="hidden" id="hidden_field" value='<%= "#{@student.id}" %>' />
 <div id="attendance_result">
 	<%= render file: "/students/attendance_search" %>
 </div>
 
+<p>
+	<b>Sharing Sign Up:</b></br>
+	<% for sharing in @sharing_signup %>
+	<% @detailed_sharing = @student.detailed_sharings.where("sharing_id = ?", sharing.id).first %>
+	<%= "#{format_day(sharing.date)} at #{format_time(sharing.start_time)}" %>
+	<%= link_to 'Change', edit_student_detailed_sharing_path(@student, @detailed_sharing ) %>
+	<% end %>
+</p>
+
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Customer Info', customer_path(@student.customer) %> |
 <%= link_to 'Add Lesson', new_student_lesson_path(@student) %> |
-<%= link_to 'Add Make Up/Extra Lesson', new_student_extra_path(@student) %>
+<%= link_to 'Add Make Up/Extra Lesson', new_student_extra_path(@student) %> |
+<%= link_to 'Sign Up For Sharing', new_student_detailed_sharing_path(@student) %>

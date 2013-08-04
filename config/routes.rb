@@ -24,13 +24,20 @@ Studio::Application.routes.draw do
   
   get 'teachers_cbx', to: 'sharings#teachers_cbx'
   
-  resources :sharings
+  get 'sharing_search', to: 'detailed_sharings#sharing_search'
+  
+  match "update_attendance", to: "detailed_sharings#update_attendance", :via => :put
+  
+  resources :sharings do
+    get "attendance", to: "detailed_sharings#attendance"
+  end
 
   get 'attendance_search', to: 'students#attendance_search'
   
   resources :students do
     resources :lessons
     resources :extras
+    resources :detailed_sharings
   end
   
   get "customers/live_search"

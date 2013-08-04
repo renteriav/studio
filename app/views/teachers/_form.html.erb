@@ -35,8 +35,8 @@
         <%= check_box_tag "teacher[instrument_ids][]", instrument.id, @teacher.instruments.include?(instrument), :class => 'checkbox' %>  
         <%= instrument.name %>  
       </div>  
-  <% end %>  
-		
+  <% end %>
+  
   <div class="actions">
     <%= f.submit submit_button_message(yield(:button_message)), class: "btn btn-large btn-primary" %>
   </div>

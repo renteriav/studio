@@ -1,0 +1,43 @@
+<% provide(:button_message, 'Sign Up') %>
+<%= form_for [@student, @detailed_sharing] do |f| %>
+
+<% if @detailed_sharing.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@detailed_sharing.errors.count, "error") %> prohibited this student from being signed up:</h2>
+
+    <ul>
+    <% @detailed_sharing.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<table class="table table-hover" style = "width: 200px;">
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>Time</th>
+		</tr>
+	</thead>
+		
+
+<% for sharing in @sharings %>
+	<tr>
+		<td>
+    		<div class = "radio">  
+      		  <%= f.radio_button :sharing_id, sharing.id %>  
+      		<%= "#{format_day(sharing.date)} " %>  
+    		</div>
+		</td>
+		<td> 
+			<%= "#{format_time(sharing.start_time)} " %>
+		</td>
+	</tr>
+<% end %>
+</table>
+  
+<div class = "actions">
+	<%= f.submit submit_button_message(yield(:button_message)), class: "btn btn-large btn-primary" %>
+</div>
+<% end %>

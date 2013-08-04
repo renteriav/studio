@@ -1,7 +1,9 @@
 <% if params[:year] and params[:month] and params[:id]%>
 	<% @date = Date.new(y=params[:year].to_i, m=params[:month].to_i) %>
 <% end %>
+<% @extra_attendances = @student.extras.where("date >= ? AND date <= ?", @date, @date.end_of_month).order("date ASC") %>
 <% @lessons.each do |lesson| %>
+<p><b><%= Instrument.find(lesson.instrument_id).name %></b></p>
 	<% @attendances = lesson.attendances.where("date >= ? AND date <= ? AND status != ?", @date, @date.end_of_month, "s").order("date ASC") %>
 	<% @attendances.each do |attendance| %>
 		<% @status = status_name(attendance.status) %>
@@ -11,4 +13,13 @@
 			<%= "#{@status}" %>
 		</p>
 	<% end %> 
+<% end %>
+<p><b>Make Ups And Extra Lessons</b></p>
+<% for extra in @extra_attendances %>
+	<% @day = format_day(extra.date) %>
+	<% @status = status_name(extra.attendances.first.status) %>
+<p>
+	<%= link_to "#{@day}", daily_path(date: extra.date.to_time.to_i), method: "get" %>
+	<%= " #{@status}" %>
+</p>
 <% end %>
