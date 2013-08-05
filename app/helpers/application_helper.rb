@@ -59,4 +59,9 @@ module ApplicationHelper
         "Missed"
       end
     end
+    
+    def join_date_time(d, t)
+      dt = DateTime.new(d.year, d.month, d.day, t.hour, t.min, t.sec)
+    end
+      
 end

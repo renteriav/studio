@@ -2,6 +2,21 @@
 	<% @date = Date.new(y=params[:year].to_i, m=params[:month].to_i) %>
 <% end %>
 <% @extra_attendances = @student.extras.where("date >= ? AND date <= ?", @date, @date.end_of_month).order("date ASC") %>
+
+<% @sharings = Sharing.where("date >= ? AND date <= ?", @date, @date.end_of_month).order("date ASC") %>
+<% @detailed_sharing  = Array.new %>
+<% @sharing_signup = Array.new %>
+<% for sharing in @sharings %>
+  <% @sharing = DetailedSharing.where("sharing_id = ? AND student_id = ?", sharing.id, @student.id).first %>
+  <% @detailed_sharing.push(@sharing) unless @sharing.nil? %>    
+<% end %>
+<% if @detailed_sharing.any? %>
+  <% for detailed_sharing in @detailed_sharing %>
+   <% @sharing = Sharing.find(detailed_sharing.sharing_id) %>
+   <% @sharing_signup.push(@sharing) %>
+  <% end %>
+<% end %>
+
 <% @lessons.each do |lesson| %>
 <p><b><%= Instrument.find(lesson.instrument_id).name %></b></p>
 	<% @attendances = lesson.attendances.where("date >= ? AND date <= ? AND status != ?", @date, @date.end_of_month, "s").order("date ASC") %>
@@ -23,3 +38,22 @@
 	<%= " #{@status}" %>
 </p>
 <% end %>
+<p>
+	<b>Sharing:</b>
+</p>
+	<% if @sharing_signup.any?%>
+<p>
+		<% for sharing in @sharing_signup %>
+		<% @detailed_sharing = @student.detailed_sharings.where("sharing_id = ?", sharing.id).first %>
+		<%= "#{format_day(sharing.date)} at #{format_time(sharing.start_time)}" %>
+		<% @time = join_date_time(sharing.date, sharing.start_time) %>
+			<% if @time >= Time.now %>
+				<%= link_to 'Change', edit_student_detailed_sharing_path(@student, @detailed_sharing ) %>
+			<% else %>
+				<%= sharing_attendance(@detailed_sharing.attendance) %>
+			<% end %>
+</p>
+		<% end %>
+	<% else %>
+<p>This student is not signed up for any upcoming sharing.</p>
+	<% end %>

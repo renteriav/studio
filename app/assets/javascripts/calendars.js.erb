@@ -37,34 +37,40 @@ $(document).ready(function(){
 	$('.event').click(function(){
 		var id = $(this).attr('id').split("-");
 		if (id[1] == "lesson" || id[1]== "extra"){
-		$.ajax({
-	    	url: "/attendances/dialog",
-	        data: id[1]+"_id="+id[0]+"&date="+gon.ruby_date,
-	        type: "GET",
-			success: function(result)
-			{
-				$('#attendance-dialog').html(result);
-			}
-	   	}); 
+			$.ajax({
+	    		url: "/attendances/dialog",
+	        	data: id[1]+"_id="+id[0]+"&date="+gon.ruby_date,
+	        	type: "GET",
+				success: function(result)
+				{
+					$('#attendance-dialog').html(result);
+				}
+	   		}); 
 		
-		$( "#attendance-dialog" ).dialog(
-			{buttons:[
-                {
-                    text: "Cancel", click: function() {
-                        $( this ).dialog( "close" );
-                    }
-                },
-                {
-                	text: "Submit", click: function() {
-						var scrollCookie = $(document).scrollTop();
-						$.cookie('scroll_cookie', scrollCookie);
-						$('#submit').trigger('click');
-                       // $( this ).dialog( "close" );
-                    }
-                }
-            ]},
-            {"modal": "true"}
-        );
+			$( "#attendance-dialog" ).dialog(
+				{buttons:[
+                	{
+                    	text: "Cancel", click: function() {
+                        	$( this ).dialog( "close" );
+                    	}
+                	},
+                	{
+                		text: "Submit", click: function() {
+							var scrollCookie = $(document).scrollTop();
+							$.cookie('scroll_cookie', scrollCookie);
+							$('#submit').trigger('click');
+                       	 	// $( this ).dialog( "close" );
+                    	}
+                	}
+            		]},
+            	{"modal": "true"}
+        	);
+		}
+		else if (id[1] == "sharing"){
+			window.location = 'sharings/'+ id[0]; 
+		}
+		else{
+			alert("unknown type");
 		};
 	});
 });

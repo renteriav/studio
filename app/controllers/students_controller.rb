@@ -53,8 +53,8 @@ class StudentsController < ApplicationController
     @id = @student.id
     @lessons = @student.lessons.order("weekday ASC, start_time ASC")
     @extras =  @student.extras.where("date >= ?", Time.now.to_date).order("date ASC")
+    @sharings = Sharing.where("date >= ? AND date <= ?", Time.now.beginning_of_month, Time.now.end_of_month)
     @date = Time.now.beginning_of_month
-    @sharings = Sharing.where("date >= ?", Time.now.to_date)
     @detailed_sharing  = Array.new
     @sharing_signup = Array.new
     for sharing in @sharings
@@ -62,10 +62,10 @@ class StudentsController < ApplicationController
       @detailed_sharing.push(@sharing) unless @sharing.nil?     
     end
     if @detailed_sharing.any?
-      for detail_sharing in @detailed_sharing
-       @sharing = Sharing.find(detail_sharing.sharing_id)
+      for detailed_sharing in @detailed_sharing
+       @sharing = Sharing.find(detailed_sharing.sharing_id)
        @sharing_signup.push(@sharing)
-     end
+      end
     end
   end
   

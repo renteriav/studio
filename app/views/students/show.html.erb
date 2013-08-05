@@ -107,14 +107,6 @@
 	<%= render file: "/students/attendance_search" %>
 </div>
 
-<p>
-	<b>Sharing Sign Up:</b></br>
-	<% for sharing in @sharing_signup %>
-	<% @detailed_sharing = @student.detailed_sharings.where("sharing_id = ?", sharing.id).first %>
-	<%= "#{format_day(sharing.date)} at #{format_time(sharing.start_time)}" %>
-	<%= link_to 'Change', edit_student_detailed_sharing_path(@student, @detailed_sharing ) %>
-	<% end %>
-</p>
 
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Customer Info', customer_path(@student.customer) %> |

@@ -29,7 +29,17 @@
 	</ul>
 </p>
 
-
+   <h4>Students:</h4>
+<p>
+	<ul>
+     <% for sharing in @detailed_sharings %>
+	 	<% @student = Student.find(sharing.student_id) %> 
+	 	<li>
+ 			<%= link_to "#{@student.last} #{@student.first}", student_path(@student) %>
+		</li>
+	<% end %>
+	</ul>
+</p>
 
 
 <%= link_to 'Edit', edit_sharing_path(@sharing) %> |

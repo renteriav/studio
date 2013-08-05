@@ -7,6 +7,7 @@ class SharingsController < ApplicationController
   def show
     @sharing = Sharing.find(params[:id])
     @teachers = @sharing.teachers
+    @detailed_sharings = DetailedSharing.where("sharing_id = ?", @sharing.id)
   end
 
   def new

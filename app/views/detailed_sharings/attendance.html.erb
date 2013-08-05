@@ -4,10 +4,10 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Name</th>
-			<th>Attended</th>
-			<th>Memory</th>
-			<th>Practice</th>
+			<th class = "center">Name</th>
+			<th class = "center">Attended</th>
+			<th class = "center">Memory</th>
+			<th class = "center">Practice</th>
 		</tr>
 	</thead>
 	
@@ -16,14 +16,14 @@
 	<% @students.each do |student| %>
 		<% @share = DetailedSharing.where("student_id = ?", student.id).first %>
 		<tr>
-			<td><%= "#{student.last} #{student.first}" %></td>
+			<td><%= link_to "#{student.last} #{student.first}", student_path(student) %></td>
 			
 		<%= fields_for "detailed_sharing[]", @share do |f| %>	
-			<td>
+			<td class = "center">
 				<%= f.check_box("attendance", {:class => 'checkbox sharing-cbx'}) %>  			  			  </td>
-			<td>
+			<td class = "center">
 				<%= f.check_box("memory", {:class => 'checkbox sharing-cbx'}) %>  			  			  </td>
-			<td>
+			<td class = "center">
 				<%= f.check_box("practice", {:class => 'checkbox sharing-cbx'}) %>  			  			  </td>
   		</tr>
   	<% end %>
