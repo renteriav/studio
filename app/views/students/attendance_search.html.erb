@@ -25,7 +25,7 @@
 		<% @day = format_day(attendance.date) %>
 		<p>
 			<%= link_to "#{@day}", daily_path(date: attendance.date.to_time.to_i), method: "get" %>
-			<%= "#{@status}" %>
+			<%= @status %>
 		</p>
 	<% end %> 
 <% end %>
@@ -35,25 +35,24 @@
 	<% @status = status_name(extra.attendances.first.status) %>
 <p>
 	<%= link_to "#{@day}", daily_path(date: extra.date.to_time.to_i), method: "get" %>
-	<%= " #{@status}" %>
+	<%= @status %>
 </p>
 <% end %>
-<p>
-	<b>Sharing:</b>
-</p>
-	<% if @sharing_signup.any?%>
+
+<% if @sharing_signup.any?%>
+	<p>
+		<b>Sharing:</b>
+	</p>
 <p>
 		<% for sharing in @sharing_signup %>
 		<% @detailed_sharing = @student.detailed_sharings.where("sharing_id = ?", sharing.id).first %>
-		<%= "#{format_day(sharing.date)} at #{format_time(sharing.start_time)}" %>
+		<%= link_to "#{format_day(sharing.date)} at #{format_time(sharing.start_time)}", sharing_path(sharing) %>
 		<% @time = join_date_time(sharing.date, sharing.start_time) %>
 			<% if @time >= Time.now %>
-				<%= link_to 'Change', edit_student_detailed_sharing_path(@student, @detailed_sharing ) %>
+				<span class = "text-info">Signed up</span>
 			<% else %>
 				<%= sharing_attendance(@detailed_sharing.attendance) %>
 			<% end %>
 </p>
 		<% end %>
-	<% else %>
-<p>This student is not signed up for any upcoming sharing.</p>
-	<% end %>
+<% end %>

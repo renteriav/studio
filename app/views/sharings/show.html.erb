@@ -1,8 +1,7 @@
+<% provide(:title, 'Sharings') %>
 <p id="notice"><%= notice %></p>
 
-<p>
-	<b>Sharing:</b>
-</p>
+<h1>Sharing summary</h1>
 
 <p>
   <b>Date:</b>
@@ -30,17 +29,49 @@
 </p>
 
    <h4>Students:</h4>
-<p>
-	<ul>
-     <% for sharing in @detailed_sharings %>
-	 	<% @student = Student.find(sharing.student_id) %> 
-	 	<li>
- 			<%= link_to "#{@student.last} #{@student.first}", student_path(@student) %>
-		</li>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th class = "center">Attendance</th>
+			<th class = "center">Memory</th>
+			<th class = "center">Practice</th>
+		</tr>
+	</thead>
+	<tr>
+     <% for student in @students %>
+	 	<% @student = DetailedSharing.where("student_id = ? AND sharing_id = ?", student.id, @sharing.id).first %>
+	 	<td>
+ 			<%= link_to "#{student.last} #{student.first}", student_path(student) %>
+		</td>
+		<td class = "center">
+			<%= sharing_attendance(@student.attendance) %>
+		</td>
+		<td class = "center">
+			<%= @student.memory == true ? "X" : "" %>
+		</td>
+		<td class = "center">
+			<%= @student.practice == true ? "X" : "" %>
+		</td>
+	</tr>
 	<% end %>
-	</ul>
-</p>
+	<tr>
+		<td>
+			<b>Total</b>
+		</td>
+		<td class = "center">
+			<%= @attendance_total %>
+		</td>
+		<td class = "center">
+			<%= @memory_total %>
+		</td>
+		<td class = "center">
+			<%= @practice_total %>
+		</td>
+	</tr>
+</table>
 
 
 <%= link_to 'Edit', edit_sharing_path(@sharing) %> |
-<%= link_to 'Back', sharings_path %>
+<%= link_to 'Back', sharings_path %> |
+<%= link_to 'Sharing Attendance', sharing_attendance_path(@sharing) %>

@@ -50,13 +50,22 @@ module ApplicationHelper
     def status_name(status)
       case status
       when "s" 
-        "Scheduled"
+        '<span class="text-info">Scheduled</span>'.html_safe
       when "c" 
-        "Canceled"
+        '<span class="text-warning">Canceled</span>'.html_safe
       when "a" 
-        "Attended"
+        '<span class="text-success">Attended</span>'.html_safe
       when "m" 
-        "Missed"
+        '<span class="text-error">Missed</span>'.html_safe
+      end
+    end
+    
+    def sharing_attendance(attendance)
+      case attendance
+      when true
+        '<span class="text-success">Attended</span>'.html_safe
+      when false
+        '<span class="text-error">Missed</span>'.html_safe
       end
     end
     

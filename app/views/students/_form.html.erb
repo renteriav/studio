@@ -17,9 +17,14 @@
     <%= f.date_select :birthdate, {:order => [:month, :day, :year], :start_year => 1950, :use_short_month => true, :prompt => [:day => 'Select day', :month => 'Select month', :year => 'Select year']}, {:class => "input-sm"} %>
 </div>
 
-<div class="field">
+<div class="field inline">
     <%= f.label :grade %>
-    <%= f.number_field :grade %>
+    <%= f.select :grade, school_grades, {include_blank: 'Select'}, :class => "input-med" %>
+</div>
+
+<div class="field inline">
+    <%= f.label :schoolyear, "as of &nbsp;".html_safe, :class => "inline" %>
+    <%= f.date_select :schoolyear, {:order => [:year], :start_year => 2010, :prompt => [:year => 'Select year']}, {:class => "input-sm"} %>
 </div>
   
 <div class = "actions">

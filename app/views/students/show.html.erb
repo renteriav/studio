@@ -97,6 +97,22 @@
 <p>No make ups scheduled.</p></br>
 <% end %>
 <p>
+	<b>Upcoming Sharings:</b></br>
+</p>
+<% %>
+<% if @upcoming_detailed_sharings.any? %>
+	<% for sharing in @upcoming_detailed_sharings %>
+		<% @sharing = Sharing.find(sharing.sharing_id) %>
+<p>
+		<%= link_to "#{format_day(@sharing.date)} at #{format_time(@sharing.start_time)}", sharing_path(@sharing) %>
+<%= link_to 'Change', edit_student_detailed_sharing_path(@student, sharing ) %>
+</p>
+	<% end %>
+</br>
+<% else %>
+<p>This Student is not signed up for any upcoming sharing</p>
+<% end %>
+<p>
 	<b>Attendance:</b></br>
 </p>
 <%= select_date Date.current, {:order => [:year, :month], :use_short_month => true, :end_year => Time.now.year}, {:class => "input-sm date-search"} %>

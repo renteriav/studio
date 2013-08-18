@@ -29,7 +29,7 @@ class CalendarsController < ApplicationController
     if @sharing.any? 
       @sharing.each do |sharing|
       sharing.comp_id = sharing.id.to_s + "-sharing"
-      sharing.room_id = 3
+      sharing.room_id = 1
       end
       @lessons = @sharing
       

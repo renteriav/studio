@@ -8,13 +8,21 @@ class SharingsController < ApplicationController
     @sharing = Sharing.find(params[:id])
     @teachers = @sharing.teachers
     @detailed_sharings = DetailedSharing.where("sharing_id = ?", @sharing.id)
+    @students = Array.new
+    @detailed_sharings.each do |detailed_sharing|
+      @students.push(Student.find(detailed_sharing.student_id))
+      @students.sort_by!{ |m| [m.last, m.first] }
+    end
+    @attendance_total = @detailed_sharings.where("attendance = true").count
+    @memory_total = @detailed_sharings.where("memory = true").count
+    @practice_total = @detailed_sharings.where("practice = true").count
   end
 
   def new
     @sharing = Sharing.new
     @teachers = ""
-    gon.start_time = "03:00 PM"
-    gon.end_time = "04:00 PM"
+    gon.start_time = "04:00 PM"
+    gon.end_time = "05:00 PM"
   end
 
   def edit

@@ -21,14 +21,14 @@ instruments.each do |instrument|
 end
 
 rooms = [
-  ["Concert", "main"],
-  ["Ensemble", "kitchen"],
-  ["Allegro", "living room"],
-  ["Vivace", "office"],
-  ["Presto", "room left"],
-  ["Andante", "room right"],
-  ["Crescendo", "upstairs"],
-  ["Off Site", "off site"]
+  ["Vivace", "Main"],
+  ["Allegro", "Room Left"],
+  ["Presto", "Room Right"],
+  ["Crescendo", "Apartment"],
+  ["Symphony", "Office"],
+  ["Concert", "Up Stairs"],
+  ["Ensemble", "Kitchen"],
+  ["Off-Site", "Off-Site"]
 ]
 
 rooms.each do |room|

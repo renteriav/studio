@@ -7,6 +7,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string :email
       t.date :birthdate
       t.integer :grade
+      t.date :schoolyear
       t.integer :customer_id
       t.timestamps
     end

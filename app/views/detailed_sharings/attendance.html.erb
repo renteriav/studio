@@ -14,7 +14,7 @@
 <%= form_for :detailed_sharing, :url => update_attendance_path, :remote => true, :html => { :method => :put } do  %>
 	<%= hidden_field_tag 'sharing_id', @sharing.id %>
 	<% @students.each do |student| %>
-		<% @share = DetailedSharing.where("student_id = ?", student.id).first %>
+		<% @share = DetailedSharing.where("student_id = ? AND sharing_id = ?", student.id, @sharing.id).first %>
 		<tr>
 			<td><%= link_to "#{student.last} #{student.first}", student_path(student) %></td>
 			
@@ -34,4 +34,4 @@
   </div>
 <% end %>
 
-<%= link_to 'Back', "" %>
+<%= link_to 'Sharing Summary', sharing_path(@sharing) %>

@@ -27,7 +27,7 @@ class Student < ActiveRecord::Base
   has_many :extras
   has_many :detailed_sharings
   
-  attr_accessible :first, :last, :telephones_attributes, :email, :birthdate, :grade, :customer_id
+  attr_accessible :first, :last, :telephones_attributes, :email, :birthdate, :grade, :customer_id, :schoolyear
   
   before_validation { |student| student.nameize :first, :last }
   before_validation { |student| student.email = student.email.strip.downcase }

@@ -131,6 +131,7 @@ ActiveRecord::Schema.define(:version => 20130730232836) do
     t.string   "email"
     t.date     "birthdate"
     t.integer  "grade"
+    t.date     "schoolyear"
     t.integer  "customer_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false

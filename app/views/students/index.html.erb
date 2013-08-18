@@ -14,13 +14,19 @@
   </tr>
   <% for student in @students %>
   <% @customer = Customer.find(student.customer_id) %>
+  <% if student.schoolyear and student.grade %>
+  	<% @grade = current_grade(student.schoolyear.year, student.grade) %>
+  	<% @grade < 0 ? @current_grade = "Pre-school" : @current_grade = grade_display[@grade] %>
+  <% else %>
+  	<% @current_grade = "N/A" %>
+  <% end %>
     <tr>
       <td><%= student.first %></td>
       <td><%= student.last %></td>
-      <td><%= student.cell %></td>
+      <td><%= student.telephones.any? ? formated_phone(student.telephones.first.number) : "" %></td>
       <td><%= student.email %></td>
       <td><%= student.birthdate.strftime('%b %d, %Y') %></td>
-      <td class = "center"><%= student.grade %></td>
+      <td class = "center"><%= @current_grade %></td>
       <td><%= "#{@customer.first.first}. #{@customer.last}" %></td>
       <td><%= link_to 'Show', student %></td>
       <td><%= link_to 'Edit', edit_student_path(student) %></td>
