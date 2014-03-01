@@ -67,4 +67,5 @@ class TeachersController < ApplicationController
       format.js
     end
   end
+  
 end

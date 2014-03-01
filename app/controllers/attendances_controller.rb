@@ -21,8 +21,10 @@ class AttendancesController < ApplicationController
     
     if @lesson.attendances.where("date = ?", @date).any?
       @attendance = @lesson.attendances.where("date = ?", @date).first
+      @teacher_id = @attendance.teacher_id
     else
       @attendance = Attendance.new(:status => "s")
+      @teacher_id = @lesson.teacher_id
     end
     
     @student = @lesson.student
@@ -63,10 +65,32 @@ class AttendancesController < ApplicationController
 
   def update
     @attendance = Attendance.find(params[:id])
+    @lesson = Lesson.find(@attendance.attendable_id)
+    @student = Student.find(@lesson.student_id)
     if @attendance.update_attributes(params[:attendance])
-      redirect_to :back
+      @attendance.teacher_id == "" or @attendance.teacher_id.nil? ? @notice = "Request for sub saved." : @notice = "#{Teacher.find(@attendance.teacher_id).first} has been succesfully assigned to sub for #{Teacher.find(@lesson.teacher_id).first}." 
+      redirect_to :back, notice: @notice
     else
       render :action => 'edit'
+    end
+  end
+  
+  def sub_request
+    @lesson = Lesson.find(params[:lesson_id])
+    @student = Student.find(@lesson.student_id)
+    @teacher = Teacher.find(@lesson.teacher_id)
+    @instrument = Instrument.find(@lesson.instrument_id)
+    @status = "s"
+    ENV["TZ"] = "US/Phoenix"
+    @date = DateTime.parse(params[:date])
+    @sub_teachers = @lesson.instrument.teachers.map{|i| [i.first, i.id]}
+    if @lesson.attendances.where("date = ?", @date).any?
+      @selected = @lesson.attendances.where("date = ?", @date).first.teacher_id
+    end
+    if @lesson.attendances.where("date = ?", @date).any?
+      @attendance = @lesson.attendances.where("date = ?", @date).first
+    else
+      @attendance = Attendance.new
     end
   end
   

@@ -9,6 +9,7 @@
 #  email       :string(255)
 #  birthdate   :date
 #  grade       :integer
+#  schoolyear  :date
 #  customer_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

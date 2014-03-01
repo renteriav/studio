@@ -1,0 +1,32 @@
+<h1>Substitute for</h1>
+<h3><%= @teacher.first %></h3>
+<p>
+	<b>Student:</b> <%= "#{@student.first} #{@student.last}" %>
+</p>
+<p>
+	<b>Instrument:</b> <%= "#{@instrument.name}" %>
+</p>
+<p>
+	<b>Date:</b> <%= link_to "#{format_day(@date)}", daily_path(date: @date.to_time.to_i), method: "get" %>
+</p>
+<p>
+	<b>Time:</b> <%= "#{format_time(@lesson.start_time)} to #{format_time(@lesson.end_time)}" %>
+</p></br>
+
+<%= form_for [@lesson, @attendance] do |f| %>
+
+<div class="field">
+  <%= f.label :teacher_id, "Substitute Teacher" %>
+  <%= f.select :teacher_id, options_for_select(@sub_teachers, @selected), {:include_blank => "Pending"}  %>
+</div>
+	
+	<%= f.hidden_field :date, :value => @date %>
+	<%= f.hidden_field :status, :value => @status %>
+
+<div class="actions">
+    <%= f.submit submit_button_message('Save'), class: "btn btn-med btn-primary link-class", id: "submit" %>
+</div>
+<% end %>
+<p id="notice"><%= notice %></p>
+<%= link_to 'Back to Student Info', student_path(@student) %> 
+

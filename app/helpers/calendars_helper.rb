@@ -18,7 +18,12 @@ module CalendarsHelper
         @slot_number = (@start_time - first_slot_time)/60/15
         lesson.status.nil? ? @status = "s" : @status = lesson.status
         lesson.student_id.nil? ? @student = "" : @student = "#{lesson.student.first.first}. #{lesson.student.last}"
-        lesson.teacher_id.nil? ? @teacher = "SHARING" : @teacher = lesson.teacher.first
+        
+        if lesson.status == "sh"
+          @teacher = "SHARING"
+        else
+        lesson.teacher_id.nil? ? @teacher = "Need Sub" : @teacher = lesson.teacher.first
+        end
       
       
         @columns[@room].push({ 
@@ -242,6 +247,8 @@ module CalendarsHelper
         0x66EE60
       when "m" #missed
         0XFF1050
+      when "sh" #sharing
+        0XFF50AA
       end
     end
     

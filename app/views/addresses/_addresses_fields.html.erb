@@ -22,7 +22,7 @@
 </div>
 <div class="field">
   <%= f.label :zip %>
-  <%= f.text_field :zip %>
+  <%= f.text_field :zip, maxlength: 5 %>
 </div>
 <%= f.fields_for :preferred_addresses do |preferred| %>
 	<%= preferred.hidden_field :description, :value => @address_description %>

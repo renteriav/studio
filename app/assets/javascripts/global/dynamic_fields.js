@@ -9,4 +9,10 @@ function add_fields(link, association, content) {
   $(link).parent().before(content.replace(regexp, new_id));
   $(link).parent().prev().hide().slideDown();
   $('.phone').mask('(999) 999-9999');
+  $(".tooltip_right").tooltip({ 
+	position: { my: "left+15 center", at: "right center" } 
+  });
+  $(".tooltip_right").click(function(){
+	$(".tooltip_right").tooltip("close");
+  }); 
 }

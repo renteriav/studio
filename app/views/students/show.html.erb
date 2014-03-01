@@ -1,5 +1,5 @@
-<p id="notice"><%= notice %></p>
-	<b>Student:</b>
+<b>Student:</b>
+<p>
 	<%= "#{@student.first} #{@student.last}" %>
 </p>
 <% if @student.email != "" %>
@@ -8,17 +8,17 @@
   <%= @student.email %>
 </p>
 <% end %>
-	<% if @student.telephones.any? %>
+<% if @student.telephones.any? %>
 <p>
 	<b>Telephones:</b></br>
 	<ul>
-		<% for telephone in @student.telephones %>
-			<li>
-				<%= formated_phone(telephone.number) %>&nbsp;
-				<%= telephone.description %>
-			</li>
-		<% end %>
+	<% for telephone in @student.telephones %>
+		<li>
+			<%= formated_phone(telephone.number) %>&nbsp;
+			<%= telephone.description %>
+		</li>
 	<% end %>
+<% end %>
 	</ul>
 </p>
 <p>
@@ -27,14 +27,17 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Instrument</th>
-			<th>Day</th>
-			<th>Start Time</th>
-			<th>End Time</th>
-			<th>Teacher</th>
+			<th class = "span2">Instrument</th>
+			<th class = "span3">Day</th>
+			<th class = "span3">Time</th>
+			<th class = "span2">Teacher</th>
+			<th class = "span3"></th>
+			<th></th>
 		</tr>
 	</thead>
 	<% for lesson in @lessons %>
+	<% @start = format_time(lesson.start_time) %>
+	<% @end = format_time(lesson.end_time) %>
 	<tr>
 		<td>
 			<%= Instrument.find(lesson.instrument_id).name %>
@@ -43,13 +46,14 @@
 			<%= Date::DAYNAMES[lesson.weekday]%>
 		</td>
 		<td>
-			<%= format_time(lesson.start_time) %>
-		</td>
-		<td>
-			<%= format_time(lesson.end_time) %>
+			<%= "#{@start} - #{@end}" %>
 		</td>
 		<td>
 			<%= Teacher.find(lesson.teacher_id).first %>
+		</td>
+		<td></td>
+		<td>
+			<%= link_to 'Edit', edit_lesson_path(lesson), class: "btn btn-mini btn-primary" %>
 		</td>
 	</tr>		
 	<% end %>
@@ -62,15 +66,17 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Instrument</th>
-			<th>Date</th>
-			<th>Start Time</th>
-			<th>End Time</th>
-			<th>Teacher</th>
+			<th class = "span2">Instrument</th>
+			<th class = "span3">Date</th>
+			<th class = "span3">Time</th>
+			<th class = "span2">Teacher</th>
+			<th class = "span3">Type</th>
 			<th></th>
 		</tr>
 	</thead>
 	<% for extra in @extras %>
+	<% @start = format_time(extra.start_time) %>
+	<% @end = format_time(extra.end_time) %>
 	<tr>
 		<td>
 			<%= Instrument.find(extra.instrument_id).name %>
@@ -79,16 +85,16 @@
 			<%= format_day(extra.date)%>
 		</td>
 		<td>
-			<%= format_time(extra.start_time) %>
-		</td>
-		<td>
-			<%= format_time(extra.end_time) %>
+			<%= "#{@start} - #{@end}" %>
 		</td>
 		<td>
 			<%= Teacher.find(extra.teacher_id).first %>
 		</td>
 		<td>
-			<%= link_to 'Edit', edit_student_extra_path(@student, extra) %>
+			<%= extra_category_description(extra.category) %>
+		</td>
+		<td>
+			<%= link_to 'Edit', edit_student_extra_path(@student, extra), class: "btn btn-mini btn-primary" %>
 		</td>
 	</tr>		
 	<% end %>
@@ -97,35 +103,44 @@
 <p>No make ups scheduled.</p></br>
 <% end %>
 <p>
-	<b>Upcoming Sharings:</b></br>
+	<b>Sharing Sign Up:</b></br>
 </p>
 <% %>
 <% if @upcoming_detailed_sharings.any? %>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th class = "span3">Date</th>
+			<th class = "span3">Time</th>
+			<th></th>
+		</tr>
+	</thead>
+
 	<% for sharing in @upcoming_detailed_sharings %>
 		<% @sharing = Sharing.find(sharing.sharing_id) %>
-<p>
-		<%= link_to "#{format_day(@sharing.date)} at #{format_time(@sharing.start_time)}", sharing_path(@sharing) %>
-<%= link_to 'Change', edit_student_detailed_sharing_path(@student, sharing ) %>
-</p>
+		<% @start = format_time(@sharing.start_time) %>
+		<% @end = format_time(@sharing.end_time) %>
+		<tr>
+			<td>
+				<%= link_to "#{format_day(@sharing.date)}", sharing_path(@sharing) %>
+			</td> 
+			<td>
+				<%= "#{@start} - #{@end}" %>
+			</td>
+			<td>
+				<%= link_to 'Change', edit_student_detailed_sharing_path(@student, sharing ), class: "btn btn-mini btn-primary" %>
+			</td>
+		</tr>
 	<% end %>
+</table>
 </br>
 <% else %>
-<p>This Student is not signed up for any upcoming sharing</p>
+<p>This Student is not signed up for any upcoming sharings</p>
 <% end %>
-<p>
-	<b>Attendance:</b></br>
-</p>
-<%= select_date Date.current, {:order => [:year, :month], :use_short_month => true, :end_year => Time.now.year}, {:class => "input-sm date-search"} %>
-
-
-<input type="hidden" id="hidden_field" value='<%= "#{@student.id}" %>' />
-<div id="attendance_result">
-	<%= render file: "/students/attendance_search" %>
-</div>
-
 
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Customer Info', customer_path(@student.customer) %> |
 <%= link_to 'Add Lesson', new_student_lesson_path(@student) %> |
 <%= link_to 'Add Make Up/Extra Lesson', new_student_extra_path(@student) %> |
-<%= link_to 'Sign Up For Sharing', new_student_detailed_sharing_path(@student) %>
+<%= link_to 'Sign Up For Sharing', new_student_detailed_sharing_path(@student) %> |
+<%= link_to 'Attendance', student_attendance_path(@student) %>

@@ -7,6 +7,7 @@ Studio::Application.routes.draw do
   get 'update_teachers', to: 'shared#update_teachers'
   
   resources :lessons do
+    get "sub_request", to: "attendances#sub_request"
     resources :attendances
   end
   
@@ -20,7 +21,9 @@ Studio::Application.routes.draw do
 
   resources :rooms
 
-  resources :teachers
+  resources :teachers do
+    get 'weekly', to: 'calendars#weekly'
+  end
   
   get 'teachers_cbx', to: 'sharings#teachers_cbx'
   
@@ -35,6 +38,7 @@ Studio::Application.routes.draw do
   get 'attendance_search', to: 'students#attendance_search'
   
   resources :students do
+    get 'attendance', to: 'students#attendance'
     resources :lessons
     resources :extras
     resources :detailed_sharings

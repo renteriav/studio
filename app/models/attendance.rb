@@ -15,6 +15,6 @@
 class Attendance < ActiveRecord::Base
   belongs_to :attendable, :polymorphic => true
   
-  attr_accessible :attendable_id, :attendable_type, :date, :status
+  attr_accessible :attendable_id, :attendable_type, :date, :status, :teacher_id
   
 end

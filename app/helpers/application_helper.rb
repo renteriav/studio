@@ -13,7 +13,7 @@ module ApplicationHelper
 	end
 
 	def link_to_remove_fields(name, f, classes)
-    	f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)", class: classes)
+    	f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)", class: classes, title: "Remove phone number")
 	end
  
 	def link_to_add_fields(name, f, association, classes)
@@ -21,7 +21,7 @@ module ApplicationHelper
     	fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       		render(association.to_s + "/" + association.to_s.singularize + "_fields", :f => builder)
       end
-    	link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", class: classes)
+    	link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", class: classes, title: "Add phone number")
   end
   
   def active_link(c)
@@ -57,6 +57,8 @@ module ApplicationHelper
         '<span class="text-success">Attended</span>'.html_safe
       when "m" 
         '<span class="text-error">Missed</span>'.html_safe
+      when "u" 
+      '<span style ="color:orange;">Needs Attention</span>'.html_safe
       end
     end
     

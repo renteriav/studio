@@ -1,0 +1,11 @@
+<h1>Attendance for</h1>
+<h3><%= "#{@student.first} #{@student.last}" %></h3>
+</p>
+<%= select_date Date.current, {:order => [:year, :month], :use_short_month => true, :end_year => Time.now.year + 2}, {:class => "input-sm date-search"} %>
+
+
+<input type="hidden" id="hidden_field" value='<%= "#{@student.id}" %>' />
+<div id="attendance_result">
+	<%= render file: "/students/attendance_search" %>
+</div></br>
+<%= link_to 'Back to Student Info', student_path(@student) %>

@@ -1,5 +1,5 @@
 class CalendarsController < ApplicationController
-  layout "calendars"
+  #layout "calendars"
   def daily
     
     if params[:teacher_id]
@@ -30,6 +30,7 @@ class CalendarsController < ApplicationController
       @sharing.each do |sharing|
       sharing.comp_id = sharing.id.to_s + "-sharing"
       sharing.room_id = 1
+      sharing.status = "sh"
       end
       @lessons = @sharing
       
@@ -54,6 +55,7 @@ class CalendarsController < ApplicationController
           @lesson_index = @lessons.find_index{|n| n['id'] == attendance.attendable_id }
           if @lesson_index
             @lessons[@lesson_index].status = attendance.status
+            @lessons[@lesson_index].teacher_id = attendance.teacher_id
           end
           
         
@@ -65,4 +67,9 @@ class CalendarsController < ApplicationController
       end
     end
   end
+  
+  def weekly
+    @teacher = Teacher.find(params[:teacher_id])
+  end
+  
 end

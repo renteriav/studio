@@ -1,9 +1,9 @@
 <% if params[:year] and params[:month] and params[:student_id]%>
-	<% @date = Date.new(y=params[:year].to_i, m=params[:month].to_i) %>
+	<% @date = Date.new(y=params[:year].to_i, m=params[:month].to_i).beginning_of_month %>
 <% elsif @detailed_sharing.sharing_id.nil?  %>
     <% @date = Time.now.beginning_of_month %>
 <% else %>
-	<% @date = Sharing.find(@detailed_sharing.sharing_id).date %>
+	<% @date = Sharing.find(@detailed_sharing.sharing_id).date.beginning_of_month %>
 <% end %>
 		
 <% @sharings = Sharing.where("date >= ? AND date <= ?", @date, @date.end_of_month).order("date ASC") %>
