@@ -1,12 +1,24 @@
 <div class="fields">
-<div class="field phone_fields inline">
-    <%= f.label :number, "Phone" %>
-    <%= f.text_field :number, class: "phone input-med", autocomplete: "off" %>
-</div>
-<div class="field inline">
-    <%= phone_description(@collection, f, "input-med field") %> 
-</div>
-<div class="field inline">
-    <%= link_to_remove_fields '<i class="icon-minus icon-white"></i>'.html_safe, f, "btn btn-danger bold tooltip_right" %>
-</div>
+	<% if @person.errors.messages[:"telephones.number"].present? %>
+		<div class="field phone_fields inline field_with_errors">
+	<% else %>
+		<div class="field phone_fields inline">
+	<% end %>
+    		<%= f.label :number, "Phone" %>
+    		<%= f.text_field :number, class: "phone input-med", autocomplete: "off" %>
+		</div>
+		<div class="inline">
+			<% params[:controller] == "customers" ? @collection = "A" : @collection = "B"%>
+			<%= f.select(:description, phone_collection(@collection), {:include_blank => false }, {class: "input-med field"}) %>
+	</div>
+	<div class="field inline">
+    	<%= link_to_remove_fields '<i class="icon-minus icon-white"></i>'.html_safe, f, "btn btn-danger bold tooltip_right" %>
+	</div>
+	<% if @person.errors[:"telephones.number"].present? %>
+		<%= display_error(@person, "telephones.number") %>
+	<% elsif @person.errors[:"telephones.description"].present? %>
+		<%= display_error(@person, "telephones.description") %>
+	<% else %>
+		<%= display_error(@person, "telephones") %>
+	<% end %>
 </div>

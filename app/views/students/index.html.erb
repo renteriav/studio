@@ -1,8 +1,8 @@
 <% provide(:title, 'Students') %>
 <table class="table table-hover">
   <tr>
-    <th>First</th>
     <th>Last</th>
+    <th>First</th>
     <th>Cell</th>
     <th>Email</th>
     <th>Birthdate</th>
@@ -21,16 +21,16 @@
   	<% @current_grade = "N/A" %>
   <% end %>
     <tr>
-      <td><%= student.first %></td>
       <td><%= student.last %></td>
+      <td><%= student.first %></td>
       <td><%= student.telephones.any? ? formated_phone(student.telephones.first.number) : "" %></td>
       <td><%= student.email %></td>
-      <td><%= student.birthdate.strftime('%b %d, %Y') %></td>
+      <td><%= student.birthdate.strftime('%b %d, %Y') unless student.birthdate.nil? %></td>
       <td class = "center"><%= @current_grade %></td>
-      <td><%= "#{@customer.first.first}. #{@customer.last}" %></td>
-      <td><%= link_to 'Show', student %></td>
+      <td><%= link_to "#{@customer.first.first}. #{@customer.last}", customer_path(@customer) %></td>
+      <td><%= link_to 'Info', student %></td>
       <td><%= link_to 'Edit', edit_student_path(student) %></td>
-      <td><%= link_to 'Destroy', student, method: :delete, remote: true, class: "triger" %></td>
+      <td><%= link_to 'Delete', student, method: :delete, remote: true, class: "triger" %></td>
       </tr>
     <% end %>
 </table>

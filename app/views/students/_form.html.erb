@@ -1,11 +1,10 @@
 <%= form_for [@customer, @student] do |f| %>
   
-<%= render "layouts/basic_info_form", :f => f %>
+<%= render "layouts/basic_info_form", :f => f, :@person => @student %>
 
 <div>
 	<%= f.fields_for :telephones do |builder| %>
-	<% @collection = [['Cell', 'Cell']] %>
-  	<%= render "telephones/telephone_fields", :f => builder %>
+  	<%= render "telephones/telephone_fields", :f => builder, :@person => @student %>
 	<% end %>
 </div>
 <div class="field">

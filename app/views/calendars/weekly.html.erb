@@ -1,3 +1,73 @@
+<% provide(:title, 'Weekly Calendar') %>
+<% prerender_weekly_calendar(@lessons, @num_columns, @num_rows, @first_slot_time) %>
+<%= render 'weekly_header' %>
+<% @calendar_start_time = Time.new(2000, 1, 1, 6, 0, 0 ) %>
+<% i = 6 %>
+<div id="grid-hour">
+	<table id="hour-column" >		
+		
+		<% while i < 20 do %>
+			<% @hour = @calendar_start_time.strftime("%l : %M %p") %>
+		
+			<tr>
+				<td class="time-header">
+					<p class="time-display"><%= "#{@hour}"%></p>
+				</td>
+			</tr>
+			<% @calendar_start_time += (60 * 60) %>
+			<% i +=1 %>
+			
+		<% end %>
+			
+	</table>
+</div>
+<div id="test">
+	<div id="day-container">
 
-<%= "#{@teacher.first}" %> |
-<%= link_to 'Back', teachers_path %>
+		<% d = 0 %>
+		<% while d < 7 do %>
+			<% @room = d %>
+
+			<div class="grid-day" id="<%= '#{@room}' %>">
+				<table class="day-column" >
+					<% i = 0 %>
+					<% while i < 14 do %>
+						<% e = 0 %>
+						<% while e < 4 do %>
+							<% if e < 3 %>
+								<tr><td class="time-slot"></td></tr>
+							<% else %>	
+								<tr><td class="time-slot-hour"></td></tr>
+							<% end %>
+							<% e += 1 %>
+						<% end %>
+						<% i += 1 %>
+					<% end %>			
+				</table>
+				
+				<% if @columns[d] != nil
+					@columns[d].each do |column|
+						@height = (column[:length]*25).to_i
+						@width = (100/@max_num[d][column[:id]]*@num_slots[column[:id]]).to_i
+						@x_ind = (100/@max_num[d][column[:id]]*@index_array[d][column[:id]]).to_i
+						@top = (column[:slot]*25).to_i
+						@lesson_id = column[:id] 
+						@teacher = column[:teacher] 
+						@student = column[:student]
+						@room = column[:room]
+						@status = column[:status]
+						@color = event_color(column[:status])
+						@h_color = @color - 50
+						@description = lesson_category_decoder(@lesson_id) %>
+				
+				<div id = "<%= "#{@lesson_id}" %>" class="event" style="position:absolute; top: <%= @top %>px; left: <%= @x_ind %>%; height: <%= @height %>px; width: <%= @width %>%; background-color: #<%= @color.to_s(16) %>; color:black;">
+					<h4 class="event_heading" style = "background-color: #<%= @h_color.to_s(16) %>;"><%= @student %></h4>
+					<p class="purpose"><%= @description %></p>
+				</div>
+					<% end %>
+				<% end %>
+			</div>
+			<% d += 1 %>
+		<% end %>		
+	</div>
+</div>

@@ -6,7 +6,7 @@ $navbarLinkColorActive:           #E0E0EB;
 $navbarLinkBackgroundActive:      #A4748E;
 $navbarBackgroundHighlight: rgb(2, 0, 49); 
 $navbarBackground: rgb(109, 51, 83);
-@import "twitter/bootstrap";
+@import "bootstrap";
 
 /* universal */
 h1 {
@@ -182,6 +182,10 @@ ul {
 	color: #B94A48;
 }
 
+.calendar-icon{
+	width:18px;
+}
+
 /* jquery dialog*/
 span.ui-icon {
 	margin: 0 !important;
@@ -197,28 +201,43 @@ span.ui-icon {
 	border-top:1px solid #CD0A0A !important;
 }
 .alert-header {
-	background: url("/assets/jquery-ui/start/ui-bg_gloss-wave_45_e14f1c_500x100.png")  repeat-x scroll 50% 50% #E14F1C !important;
+	background: url("/assets/jquery-ui/blitzer/ui-bg_diagonals-thick_75_f3d8d8_40x40.png") !important;
+}
+
+.alert-content{
+	background:none !important;
+	background-color: white !important;	
 }
 p.alert-content{
-	background: none !important;
-	color: #CD0A0A;
+	
+	background-color: white !important;
+	color: black;
 }
+	
 .alert-button {
 	color: #CD0A0A !important;
-	background: url("/assets/jquery-ui/start/ui-bg_glass_55_f8da4e_1x400.png") repeat-x scroll 50% 50% #E14F1C !important;
+	background: url("/assets/jquery-ui/blitzer/ui-bg_highlight-hard_100_eeeeee_1x100.png") repeat-x scroll 50% 50% #E14F1C !important;
 }
 .alert-button:visited{
 	color: #CD0A0A !important;
 }
 
 .alert-button:hover {
-	background: url("/assets/jquery-ui/start/ui-bg_gloss-wave_45_e14f1c_500x100.png")  repeat-x scroll 50% 50% #E14F1C !important;
+	background: url("/assets/jquery-ui/blitzer/ui-bg_highlight-hard_100_f6f6f6_1x100.png")  repeat-x scroll 50% 50% #E14F1C !important;
 }
 
 .alert-icon {
-	background-image: url("/assets/jquery-ui/start/ui-icons_f7a50d_256x240.png") !important;
+	background-image: url("/assets/jquery-ui/blitzer/ui-icons_cc0000_256x240.png") !important;
 }
 
 .alert-icon:hover {
-	background-image: url("/assets/jquery-ui/start/ui-icons_fcd113_256x240.png") !important;
+	background-image: url("/assets/jquery-ui/blitzer/ui-icons_cc0000_256x240.png") !important;
+}
+.ui-widget-overlay {
+	position: fixed !important;
+	z-index: 1040 !important;
+}
+
+.ui-dialog {
+	z-index: 1050 !important;
 }

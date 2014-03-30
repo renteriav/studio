@@ -23,8 +23,9 @@ class Sharing < ActiveRecord::Base
   attr_accessor :room_id
   
   accepts_nested_attributes_for :teachers
+  accepts_nested_attributes_for :detailed_sharings
   
-  attr_accessible :end_time, :date, :start_time, :teacher_ids
+  #attr_accessible :end_time, :date, :start_time, :teacher_ids
   
   #:comp_id, :status
 end

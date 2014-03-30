@@ -13,6 +13,7 @@ $(document).ready(function(){
 	
 
 	$('.triger').click(function(){
+		$('html').css("overflow", "hidden");
 		var link = $(this);
 
 		var row = $(this).parent().parent();
@@ -30,7 +31,6 @@ $(document).ready(function(){
                         link.addClass('delete');
                         link.trigger('click');
                         $( this ).dialog( "close" );
-                        //row.css({"background": "red", "color": "white"});
                         row.css({"color": "#b94a48"});
                         row.effect('highlight', {color: "#eed3d7"}, 'slow');
                         row.hide('slow');
@@ -44,8 +44,12 @@ $(document).ready(function(){
 		$(".ui-dialog").addClass("alert-dialog");
 		$(".ui-widget-header").addClass("alert-header");
 		$(".ui-dialog-content").addClass("alert-content");
+		$(".ui-widget-content").addClass("alert-content");
 		$(".ui-dialog-buttonpane").addClass("alert-buttonpane");
 		$(".ui-button").addClass("alert-button");
+		$( "#alert-dialog" ).on( "dialogclose", function( event, ui ) {
+			$('html').css("overflow", "scroll");
+		});
 		if (link.hasClass('delete')){
 			return true;
 		}

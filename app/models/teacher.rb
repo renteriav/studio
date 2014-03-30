@@ -24,13 +24,16 @@ class Teacher < ActiveRecord::Base
   has_many :lessons
   has_many :extras
   
-  attr_accessible :address_id, :email, :first, :last, :telephones_attributes, :addresses_attributes, :instrument_ids
+  attr_accessible :address_id, :email, :status, :first, :last, :telephones_attributes, :addresses_attributes, :instrument_ids
   
   before_validation { |teacher| teacher.nameize :first, :last }
   before_validation { |teacher| teacher.email = teacher.email.strip.downcase }
   
-	validates :first, presence: true, length: { maximum: 30 }
-	validates :last, presence: true, length: { maximum: 30 }
-	validates :email, presence: true, length: { maximum: 80 }
-	validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }
+  validates_associated :telephones, presence: { message: "Please enter a valid number." }
+  validates_presence_of :telephones, message: "Enter a valid number"
+  
+	validates :first, presence: {message: "Enter first name"}, length: { maximum: 30 } 
+	validates :last, presence: {message: "Enter last name"}, length: { maximum: 30 }
+	validates :email, presence: {message: "Enter a valid email"}, length: { maximum: 80 }
+	validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/, message: "Enter a valid email" }
 end

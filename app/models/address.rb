@@ -23,8 +23,9 @@ class Address < ActiveRecord::Base
   
   before_validation { |address| address.nameize :street, :city }
   
-  validates :street, presence: { message: "Please enter a street name." }
-  validates :city, presence: true
-  
+  validates :street, presence: { message: "Enter a street name." }
+  validates :city, presence: { message: "Enter a city name." }
+  validates :zip, length: { is: 5, message: "Enter a valid zip code." }
+  validates :zip, :format => { :with => /\A^\d{5}$\z/, message: "Enter a valid zip code." }
 end
 

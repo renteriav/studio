@@ -33,11 +33,11 @@ class TeachersController < ApplicationController
       if @teacher.save
         format.html { redirect_to @teacher, notice: 'Teacher was successfully created.' }
       else
+        @selected = params[:teacher][:addresses_attributes].values.first[:state]
+        format.html { render action: "new" }
         if @teacher.telephones.empty? 
           @teacher.telephones.build
         end
-        @selected = params[:teacher][:addresses_attributes].values.first[:state]
-        format.html { render action: "new" }
         @address_description = 'mailing'
       end
     end
@@ -54,6 +54,9 @@ class TeachersController < ApplicationController
         format.html { redirect_to @teacher, notice: 'Teacher was successfully updated.' }
       else
         format.html { render action: "edit" }
+        if @teacher.telephones.empty? 
+          @teacher.telephones.build
+        end
       end
     end
   end

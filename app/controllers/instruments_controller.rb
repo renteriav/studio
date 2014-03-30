@@ -16,7 +16,7 @@ class InstrumentsController < ApplicationController
   end
 
   def create
-    @instrument = Instrument.new(params[:instrument])
+    @instrument = Instrument.new(instrument_params)
 
     respond_to do |format|
       if @instrument.save
@@ -31,7 +31,7 @@ class InstrumentsController < ApplicationController
     @instrument = Instrument.find(params[:id])
 
     respond_to do |format|
-      if @instrument.update_attributes(params[:instrument])
+      if @instrument.update_attributes(instrument_params)
         format.html { redirect_to instruments_url, notice: 'Instrument was successfully updated.' }
       else
         format.html { render action: "edit" }
@@ -47,4 +47,11 @@ class InstrumentsController < ApplicationController
       format.html { redirect_to instruments_url }
     end
   end
+  
+  private
+  
+  def instrument_params
+    params.require(:instrument).permit(:name)
+  end
+  
 end

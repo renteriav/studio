@@ -1,8 +1,11 @@
 <% @item = params[:controller].singularize %>
 <div id="alert-dialog" style="display:none;">
   <p class="alert-content">
-    Are you sure?</br>
+	  <span class="ui-icon ui-icon-alert alert-icon" style="float: left;"></span>
+    &nbsp;Are you sure?</br>
+	<% if controller.action_name == "index" %>
     This <%= @item %> and all of its data will be deleated.</br>
     This action is not reversible!
+	<% end %>
   </P>
 </div>

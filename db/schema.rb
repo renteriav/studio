@@ -9,50 +9,53 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730232836) do
+ActiveRecord::Schema.define(version: 20130730232836) do
 
-  create_table "addresses", :force => true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "addresses", force: true do |t|
     t.string   "street"
     t.string   "city"
     t.string   "state"
     t.string   "zip"
     t.integer  "addressable_id"
     t.string   "addressable_type"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
-  create_table "attendances", :force => true do |t|
+  create_table "attendances", force: true do |t|
     t.integer  "attendable_id"
     t.string   "attendable_type"
     t.integer  "teacher_id"
     t.date     "date"
     t.string   "status"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
-  create_table "customers", :force => true do |t|
+  create_table "customers", force: true do |t|
     t.string   "first"
     t.string   "last"
     t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "detailed_sharings", :force => true do |t|
+  create_table "detailed_sharings", force: true do |t|
     t.integer  "student_id"
     t.integer  "sharing_id"
     t.boolean  "attendance"
     t.boolean  "memory"
     t.boolean  "practice"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "extras", :force => true do |t|
+  create_table "extras", force: true do |t|
     t.integer  "student_id"
     t.integer  "teacher_id"
     t.integer  "instrument_id"
@@ -61,22 +64,22 @@ ActiveRecord::Schema.define(:version => 20130730232836) do
     t.time     "start_time"
     t.time     "end_time"
     t.string   "category"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  create_table "instruments", :force => true do |t|
+  create_table "instruments", force: true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "instruments_teachers", :id => false, :force => true do |t|
+  create_table "instruments_teachers", id: false, force: true do |t|
     t.integer "instrument_id"
     t.integer "teacher_id"
   end
 
-  create_table "lessons", :force => true do |t|
+  create_table "lessons", force: true do |t|
     t.integer  "student_id"
     t.integer  "teacher_id"
     t.integer  "instrument_id"
@@ -87,44 +90,44 @@ ActiveRecord::Schema.define(:version => 20130730232836) do
     t.integer  "frequency"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  create_table "preferred_addresses", :force => true do |t|
+  create_table "preferred_addresses", force: true do |t|
     t.integer  "address_id"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  create_table "rooms", :force => true do |t|
+  create_table "rooms", force: true do |t|
     t.string   "name"
     t.string   "location"
     t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  create_table "sharings", :force => true do |t|
+  create_table "sharings", force: true do |t|
     t.date     "date"
     t.time     "start_time"
     t.time     "end_time"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "sharings_students", :id => false, :force => true do |t|
+  create_table "sharings_students", id: false, force: true do |t|
     t.integer "sharing_id"
     t.integer "student_id"
   end
 
-  create_table "sharings_teachers", :id => false, :force => true do |t|
+  create_table "sharings_teachers", id: false, force: true do |t|
     t.integer "sharing_id"
     t.integer "teacher_id"
   end
 
-  create_table "students", :force => true do |t|
+  create_table "students", force: true do |t|
     t.string   "first"
     t.string   "last"
     t.string   "cell"
@@ -133,25 +136,26 @@ ActiveRecord::Schema.define(:version => 20130730232836) do
     t.integer  "grade"
     t.date     "schoolyear"
     t.integer  "customer_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  create_table "teachers", :force => true do |t|
+  create_table "teachers", force: true do |t|
     t.string   "first"
     t.string   "last"
     t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "telephones", :force => true do |t|
+  create_table "telephones", force: true do |t|
     t.string   "number"
     t.string   "description"
     t.integer  "phoneable_id"
     t.string   "phoneable_type"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
 end

@@ -20,12 +20,14 @@ class Extra < ActiveRecord::Base
   belongs_to :student
   belongs_to :teacher
   belongs_to :instrument
-  has_many :attendances, :as => :attendable
+  has_many :attendances, :as => :attendable, dependent: :destroy
   
   accepts_nested_attributes_for :attendances
   
   attr_accessor :status
   
-  attr_accessible :end_time, :date, :instrument_id, :room_id, :start_time, :student_id, :teacher_id, :category, :attendances_attributes
+  #attr_accessible :end_time, :date, :instrument_id, :room_id, :start_time, :student_id, :teacher_id, :category, :attendances_attributes
+  
+  validates :room_id, presence: { message: "Select a room." }
     
 end

@@ -10,12 +10,18 @@
 			<th class = "center">Practice</th>
 		</tr>
 	</thead>
+
+	
+	<%# form_for [@sharing], :url => update_attendance_path, :remote => true, :html => { :method => :put } do  %>
 	
 <%= form_for :detailed_sharing, :url => update_attendance_path, :remote => true, :html => { :method => :put } do  %>
-	<%= hidden_field_tag 'sharing_id', @sharing.id %>
 	<% @students.each do |student| %>
+	
+	
+	
+		<%= hidden_field_tag 'sharing_id', @sharing.id %>
 		<% @share = DetailedSharing.where("student_id = ? AND sharing_id = ?", student.id, @sharing.id).first %>
-		<tr>
+		<tr class = '<%= "#{@share.id}" %>'>
 			<td><%= link_to "#{student.last} #{student.first}", student_path(student) %></td>
 			
 		<%= fields_for "detailed_sharing[]", @share do |f| %>	
@@ -24,14 +30,15 @@
 			<td class = "center">
 				<%= f.check_box("memory", {:class => 'checkbox sharing-cbx'}) %>  			  			  </td>
 			<td class = "center">
-				<%= f.check_box("practice", {:class => 'checkbox sharing-cbx'}) %>  			  			  </td>
+				<%= f.check_box("practice", {:class => 'checkbox sharing-cbx'}) %>  			</td>
   		</tr>
   	<% end %>
   <% end %>
+  
+
   </table>
-  <div class="actions">
-    <%= submit_tag "", :style => "display:none" %>
+	<div class="actions">
+    <%= submit_tag "", :class => @share.id, :style => "display:none" %>
   </div>
 <% end %>
-
 <%= link_to 'Sharing Summary', sharing_path(@sharing) %>

@@ -30,4 +30,8 @@ class Lesson < ActiveRecord::Base
   attr_accessor :comp_id
   
   attr_accessible :end_date, :end_time, :frequency, :instrument_id, :room_id, :start_date, :start_time, :student_id, :teacher_id, :weekday, :attendances_attributes, :comp_id, :status
+  
+  validates :room_id, presence: { message: "Select a room." }
+  validates :teacher_id, presence: { message: "Select a teacher." }
+  validates :weekday, presence: { message: "Select a day of the week." }
 end

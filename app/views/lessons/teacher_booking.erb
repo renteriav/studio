@@ -1,0 +1,25 @@
+<% if @lesson %>
+<p class="alert-content">
+	<%= "#{@teacher.first} is booked teaching" %>
+</p>
+<p class="alert-content">
+	<b>Student:</b><%= " #{@student.first} #{@student.last}" %>
+</p>
+<p class="alert-content">
+	<b>Day:</b><%= " #{@weekday_name}" %>
+</p>
+<p class="alert-content">
+	<b>Time:</b>
+	<%= "#{format_time(@lesson.start_time)} to #{format_time(@lesson.end_time)}" %>
+</p>
+<p class="alert-content">Do you still want to book this lesson?</p>
+
+<% elsif @room_conflict %>
+<p class="alert-content">
+	The <b><%= "#{Room.find(@room_conflict.room_id).name}" %></b> room is booked"
+</p>
+<p class="alert-content">
+	<%= "from #{format_time(@room_conflict.start_time)} to #{format_time(@room_conflict.end_time)}" %>
+</p>
+<p class="alert-content">Do you still want to book this lesson?</p>
+<% end %>

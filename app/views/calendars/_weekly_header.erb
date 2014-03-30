@@ -2,16 +2,12 @@
 	<div class = "navbar-fixed-top">
 		<div class = "header-top" >
 			<div id="day">
-					
-					<%= link_to "<", daily_path(date: @previous), method: "get", class: "link-button", id: "previous"  %>
-				
-					<%= link_to "Today", daily_path, method: "get", class: "link-button", id: "today"%>
-					
-					<%= link_to ">", daily_path(date: @next), method: "get", class: "link-button", id: "next"  %>
-					
+					<%= link_to "<", teacher_weekly_path(@teacher, date: @previous), method: "get", class: "link-button", id: "previous"  %>
+					<%= link_to "This Week", teacher_weekly_path(@teacher), method: "get", class: "link-button", id: "today"%>
+					<%= link_to ">", teacher_weekly_path(@teacher, date: @next), method: "get", class: "link-button", id: "next"  %>
 					<input  id = "date-select" class ="link-button" type="text" readonly="readonly">
 					<p class="inline day">
-						<%= @day %>
+						<%= "Weekly schedule for #{@teacher.first}" %>
 					</p>
 			</div>
 		</div>
@@ -49,13 +45,16 @@
 		<div id="rooms">
 			<table id="days">
 				<tr>
-					<td class="blank">&nbsp;</td>
-						<% for room in @rooms do %>
-					<td class="room-header"><%= room.name %></td>
-						<% end %>
+				<td class="blank">&nbsp;</td>
+
+			<% d = 0 %>
+			<% while d < 7 do %>
+			<% @day = @date + d*24*60*60 %>
+				<td class="day-header"><%= @day.strftime("%A") %><br><%= @day.strftime("%b #{@day.day.ordinalize}, %Y") %></td>
+				<% d += 1 %>
+			<% end %>
 				</tr>
 			</table>
 		</div>
 	</div>
-	
 </header>

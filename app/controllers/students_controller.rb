@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   def index
-    @students = Student.all
+    @students = Student.order("last ASC")
   end
 
   def new
@@ -11,13 +11,17 @@ class StudentsController < ApplicationController
 
   def create
     @customer = Customer.find(params[:customer_id])
-    @student = @customer.students.build(params[:student])
+    #@student = @customer.students.build(params[:student])
+    @student = @customer.students.build(student_params)
     respond_to do |format|
       if @student.save
-        format.html { redirect_to customer_path(@customer), 
+        format.html { redirect_to student_path(@student), 
         notice: 'Student was successfully created.' }
       else
-      render :action => 'new'
+      format.html { render action: "new" }
+        if @student.telephones.empty? 
+          @student.telephones.build
+        end
       end
     end
   end
@@ -31,10 +35,13 @@ class StudentsController < ApplicationController
 
   def update
     @student = Student.find(params[:id])
-    if @student.update_attributes(params[:student])
-      redirect_to students_url, :notice  => "Successfully updated student."
+    if @student.update_attributes(student_params)
+      redirect_to @student, notice: 'Student was successfully updated.'
     else
       render :action => 'edit'
+      if @student.telephones.empty? 
+        @student.telephones.build
+      end
     end
   end
   
@@ -51,7 +58,7 @@ class StudentsController < ApplicationController
   def show
     @student = Student.find(params[:id])
     @id = @student.id
-    @lessons = @student.lessons.order("weekday ASC, start_time ASC")
+    @lessons = @student.lessons.where("(end_date > ? OR end_date IS NULL)",Time.now).order("weekday ASC, start_time ASC")
     @extras =  @student.extras.where("date >= ?", Time.now.to_date).order("date ASC")
     @sharings = Sharing.where("date >= ? AND date <= ?", Time.now.beginning_of_month, Time.now.end_of_month)
     @upcoming_sharings = Sharing.where("date >= ?", Time.now)
@@ -97,5 +104,11 @@ class StudentsController < ApplicationController
     @student = Student.find(params[:id])
     @lessons = @student.lessons
     render :layout => false
+  end
+  
+  private
+  
+  def student_params
+  params.require(:student).permit(:first, :last, :email, :birthdate, :grade, :customer_id, :schoolyear, telephones_attributes: [ :id, :_destroy, :number, :description ]) 
   end
 end

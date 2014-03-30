@@ -1,24 +1,16 @@
 <div class="form-container">
 <%= form_for(@teacher) do |f| %>
-  <% if @teacher.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@teacher.errors.count, "error") %> prohibited this teacher from being saved:</h2>
-
-      <ul>
-      <% @teacher.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
   
   <fieldset><legend>Contact Info</legend>
-	<%= render "layouts/basic_info_form", :f => f %>
+	<%= render "layouts/basic_info_form", :f => f, :@person => @teacher %>
+	
+	<%= f.label :status, "Status" %>
+	<%= f.select(:status, options_for_select([['Regular','r'],['Substitute', 's'],['Inactive', 'i']]), {:include_blank => false }, {class: "input-med field"}) %>
 	  
   	<%= f.fields_for :telephones do |builder| %>
 	<% @collection = phone_collection "B" %>
 	<!-- view telephones_helper for available collections -->
-    	<%= render "telephones/telephone_fields", :f => builder %>
+    	<%= render "telephones/telephone_fields", :f => builder, :@person => @teacher %>
   	<% end %>
   <div class="field">
    <%= link_to_add_fields '<i class="icon-plus icon-white"></i>'.html_safe, f, :telephones, "btn btn-success" %>
@@ -26,11 +18,11 @@
 </fieldset>
   <div>
 	<%= f.fields_for :addresses do |builder| %>
-  		<%= render "addresses/addresses_fields", :f => builder, :person => @teacher %>
+  		<%= render "addresses/addresses_fields", :f => builder, :@person => @teacher %>
 	<% end %>
   </div>
   
-  <% for instrument in Instrument.find(:all) %>  
+  <% for instrument in Instrument.all %>  
       <div>  
         <%= check_box_tag "teacher[instrument_ids][]", instrument.id, @teacher.instruments.include?(instrument), :class => 'checkbox' %>  
         <%= instrument.name %>  

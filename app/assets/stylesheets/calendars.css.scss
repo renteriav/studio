@@ -1,7 +1,7 @@
 html, body{
 	width:100%;
 	margin:0px;
-	padding:0px;
+	padding-top:10px;
 	overflow:scroll;
 	font-family:helvetica;
 }
@@ -32,14 +32,22 @@ a.attendance_dialog:hover {
 	overflow-y:scroll;
 }
 #day{
-	font-size:30px;
+	font-size:25px;
 	font-weight:bold;
 	position:absolute;
-	left:35%;
-	top:10px;
+	left:9%;
+	top:25px;
 	width:auto;
-	height:50px;
+	height:30px;
+	color:white;
 }
+
+p.day{
+	margin-left:30px;
+	font-size:25px;
+	font-weight:bold;
+}
+
 #buttons{
 	float:right;
 	width:auto;
@@ -50,20 +58,42 @@ a.attendance_dialog:hover {
 	margin-top:50px;
 }
 
-button.link-button .ui-button-text {	
-padding:2px 15px;
-font-size:18px;
-}
-
 .link-button {
-	margin: 0px !important;
-	color: white !important;
+	font-size:0.6em !important;
+	font-weight:normal !important;
+	padding:0px 5px !important;
+	margin-right: 2px;
+	margin-bottom: 5px;
 	visibility: hidden;
+	color: rgb(102, 88, 116) !important;
+	text-shadow: 0px 0px !important;
+	position: absolute;
+	
 }
 
-input#date-select {
+.link-button:hover{
+	color: #6D3353 !important;
+}
+
+.navbar {
+	margin-bottom: 0px !important;
+}
+
+.button-last{
+	margin-right: 20px;
+}
+
+span.ui-button-text{
+	line-height: 0.7em !important;
+}
+
+#date-select {
 	cursor: pointer;
 	width:110px;
+	height: 1.45em !important;
+	padding-bottom: 1px !important;
+	margin-top: 5px;
+
 }
 
 #grid-container{
@@ -76,18 +106,33 @@ input#date-select {
 }
 table#days{
 	width:100%;
-	background-color:#7092B1;
+	background: url('/assets/jquery-ui/eggplant/ui-bg_highlight-soft_25_30273a_1x100.png') repeat-x scroll 50% 50% #30273A;
+	/*background-color:#7092B1;*/
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
 }
 .blank{
-	background-color:#7092B1;
 	width:7%;
 	height:50px;
 }
-td.day-header{
+
+#weekly_header{
+	font-size:30px;
+	font-weight:bold;
+	position:absolute;
+	left:30%;
+	top:10px;
+	width:auto;
+	height:50px;
+}
+td.room-header{
 	padding:5px;
 	width:11.5%;
+	color:white;
+}
+td.day-header{
+	padding:5px;
+	width:13.1%;
 	color:white;
 }
 table{
@@ -122,7 +167,7 @@ table.day-column{
 	margin:0;
 	right:0;
 }
-.grid-day{
+.grid-room{
 		position:relative;
 		margin-top:0px;
 		float:left;
@@ -130,10 +175,18 @@ table.day-column{
 		background-color:white;
 		height:auto;
 }
+.grid-day{
+		position:relative;
+		margin-top:0px;
+		float:left;
+		width:14.28%;
+		background-color:white;
+		height:auto;
+}
 td.time-header{
 	border-bottom: 1px solid black;
 	height:97px;
-	background-color:#E1F3FB;
+	background-color:#EEE;
 }
 td.time-slot{
 	height:24px;

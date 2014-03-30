@@ -11,11 +11,10 @@ class AttendancesController < ApplicationController
   
   def dialog
     @date = Time.parse(params[:date]).to_date
-    if params[:lesson_id]
-      @lesson = Lesson.find(params[:lesson_id])
-    end
     
-    if params[:extra_id]
+    if params[:lesson_id]
+      @lesson = Lesson.find(params[:lesson_id])  
+    elsif params[:extra_id]
       @lesson = Extra.find(params[:extra_id])
     end
     
@@ -26,7 +25,6 @@ class AttendancesController < ApplicationController
       @attendance = Attendance.new(:status => "s")
       @teacher_id = @lesson.teacher_id
     end
-    
     @student = @lesson.student
     render :layout => false
   end
@@ -42,17 +40,18 @@ class AttendancesController < ApplicationController
     @date = params[:date]
     if params[:lesson_id]
       @lesson = Lesson.find(params[:lesson_id])
-    end
-    if params[:extra_id]
-      @lesson = Lesson.find(params[:lesson_id])
+    elsif params[:extra_id]
+      @lesson = Extra.find(params[:lesson_id])
     end
     @attendance = @lesson.attendances.where("date = ?", @date).first
   end
 
   def create
     @date = params[:date]
+    
     @lesson = Lesson.find(params[:lesson_id])
-    @attendance = @lesson.attendances.build(params[:attendance])
+ 
+    @attendance = @lesson.attendances.build(attendance_params)
 
     respond_to do |format|
       if @attendance.save
@@ -65,9 +64,15 @@ class AttendancesController < ApplicationController
 
   def update
     @attendance = Attendance.find(params[:id])
+    if params[:lesson_id]
+      @lesson = Lesson.find(params[:lesson_id])  
+    elsif params[:extra_id]
+      @lesson = Extra.find(params[:extra_id])
+    else
     @lesson = Lesson.find(@attendance.attendable_id)
+    end
     @student = Student.find(@lesson.student_id)
-    if @attendance.update_attributes(params[:attendance])
+    if @attendance.update_attributes(attendance_params)
       @attendance.teacher_id == "" or @attendance.teacher_id.nil? ? @notice = "Request for sub saved." : @notice = "#{Teacher.find(@attendance.teacher_id).first} has been succesfully assigned to sub for #{Teacher.find(@lesson.teacher_id).first}." 
       redirect_to :back, notice: @notice
     else
@@ -94,4 +99,10 @@ class AttendancesController < ApplicationController
     end
   end
   
+  private
+  
+  def attendance_params
+  params.require(:attendance).permit(:attendable_id, :attendable_type, :date, :status, :teacher_id) 
+  end
+    
 end

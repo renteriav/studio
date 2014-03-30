@@ -7,9 +7,18 @@
 		<%= f.label :last %>
 		<%= f.text_field :last, class: "span2", autocomplete: "off" %>
 	</div>
+	<% if @person.errors[:first].present? %>
+		<%= display_error(@person, :first) %>
+	<% elsif @person.errors[:last].present? %>
+		<%= display_error(@person, :last) %>
+	<% end %>
 </div>
-
-<div class="field">
-	<%= f.label :email %>
-	<%= f.text_field :email, autocomplete: "off", class: "input-lrg" %>
+<div>
+	<div>
+		<%= f.label :email %>
+	</div>
+	<div class="field inline">
+		<%= f.text_field :email, autocomplete: "off", class: "input-lrg" %>
+	</div>
+	<%= display_error(@person, :email) %>
 </div>

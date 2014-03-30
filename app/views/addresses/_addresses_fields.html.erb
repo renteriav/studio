@@ -1,28 +1,35 @@
-
-	<div>
+<div>
 	<%= f.label :street %>
-</div><div>
-<div class="field inline">
-	<%= f.text_field :street %>
 </div>
-<% if person.errors.any? %>
-<div class="field inline alert alert-error">
-	 <i class="icon-warning-sign icon-white"></i>
-	 <%= "#{person.errors[:'addresses.street'].first}" %>
+<div>
+	<div class="field inline">
+		<%= f.text_field :street, class: "input-lrg", autocomplete: "off" %>
+	</div>
+	<%= display_error(@person, "addresses.street") %>
 </div>
-<% end %>
+<div>
+	 <%= f.label :city %>
 </div>
-<div class="field">
-  <%= f.label :city %>
-  <%= f.text_field :city %>
+<div>
+	<div class="field inline">
+		<%= f.text_field :city, class: "input-lrg", autocomplete: "off", value: "Tucson" %>
+	</div>
+	<%= display_error(@person, "addresses.city") %>
 </div>
-<div class="field"> 
+<div class="field inline"> 
   <%= f.label :state %>
-  <%= f.select :state, options_for_select(us_states, @selected) %>
+  <%= f.select :state, options_for_select(us_states, @selected), {:include_blank => false }, { class: "span2" } %>
 </div>
-<div class="field">
-  <%= f.label :zip %>
-  <%= f.text_field :zip, maxlength: 5 %>
+<div  class="inline">
+	<div>
+		<%= f.label :zip %>
+	</div>
+	<div>
+		<div class="field inline">
+		<%= f.text_field :zip, maxlength: 5, class: "span2 zip" %>
+  		</div>
+  	<%= display_error(@person, "addresses.zip") %>
+	</div>
 </div>
 <%= f.fields_for :preferred_addresses do |preferred| %>
 	<%= preferred.hidden_field :description, :value => @address_description %>

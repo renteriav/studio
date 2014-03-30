@@ -16,6 +16,9 @@ class DetailedSharing < ActiveRecord::Base
   
   belongs_to :student
   belongs_to :sharing
+  has_many :detailed_sharings
+  
+  accepts_nested_attributes_for :detailed_sharings
   
   attr_accessible :student_id, :sharing_id, :attendance, :memory, :practice
 end

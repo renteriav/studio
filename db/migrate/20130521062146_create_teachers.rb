@@ -4,7 +4,7 @@ class CreateTeachers < ActiveRecord::Migration
       t.string :first
       t.string :last
       t.string :email
-
+      t.string :status
       t.timestamps
     end
   end

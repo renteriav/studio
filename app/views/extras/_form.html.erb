@@ -11,46 +11,52 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field lesson_field">
     <%= f.label :instrument %>
     <%= collection_select(:extra, :instrument_id, Instrument.all, :id, :name, {:include_blank => "Select an instrument"}, {:id => 'instrument_select'})%>
   </div>
-  <div class="field">
+  <div class="field lesson_field">
     <%= f.label :teacher %>
     <%= f.select :teacher_id, options_for_select(@teachers, @selected), {:include_blank => "Select a teacher"}, {:id => "teacher_list"}  %>
   </div>
-  <div class="field">
+ <div class="field lesson_field">
     <%= f.label :room %>
     <%= collection_select(:extra, :room_id, Room.find(:all, :order => "id ASC"), :id, :room_description, {:include_blank => "Select a room"})%>
   </div>
-  <div class="field">
+  <div class="field lesson_field">
     <%= f.label :category, "Type" %>
 	<%= f.select :category, extras_categories %> 
   </div>
-  <div class="field">
+  <div class="field lesson_field">
     <%= label_tag :date %>
     <%= text_field_tag "date-box", @date %>
   </div>
-  <div class="field">
+  <div class="field lesson_field">
     <%= f.hidden_field :date, :class => "db-date" %>
   </div>
-  <div class="field">
+  <div class="field lesson_field">
 	<%= f.fields_for :attendances do |a| %>
     <%= a.hidden_field :date, :class => "db-date" %>
 	<%= a.hidden_field :status, :value => "s" %>
+	<%= a.hidden_field :teacher_id, :id => "t_id" %>
 	<% end %>
   </div>
-  <div class="field input-append bootstrap-timepicker">
+  <div class="field lesson_field input-append bootstrap-timepicker">
     <%= f.label :start_time %>
     <%= f.text_field :start_time, :id => "timepicker_start", :class => "input-sm dateselect-time" %>
 	<span class="add-on"><i class="icon-time"></i></span>
   </div>
-  <div class="field input-append bootstrap-timepicker">
+  <div class="field lesson_field input-append bootstrap-timepicker">
     <%= f.label :end_time %>
     <%= f.text_field :end_time, :id => "timepicker_end", :class => "timepicker input-sm" %>
 	<span class="add-on"><i class="icon-time"></i></span>
   </div>
   <div class="actions">
-    <%= f.submit submit_button_message(yield(:button_message)), {class: "btn btn-large btn-primary"} %>
+    <%= f.submit submit_button_message(yield(:button_message)), {class: "btn btn-large btn-primary", id: "remote_submit" } %>
   </div>
 <% end %>
+<% if @lesson_id %>
+<input type='hidden' id= 'lesson_id' value='<%="#{@lesson_id}"%>'>
+<input type='hidden' id= 'current_page' value='<%="#{controller.controller_name}"%>'>
+<% end %>
+<div id = "teacher_booking_alert" style = "display:none;"></div>

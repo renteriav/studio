@@ -13,9 +13,9 @@
         <td><%= customer.last %></td>
         <td><%= customer.first %></td>
         <td><%= customer.email %></td>
-        <td><%= link_to 'Show', customer %></td>
+        <td><%= link_to 'Info', customer %></td>
         <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-        <td><%= link_to 'Destroy', customer, method: :delete, remote: true, class: "triger" %></td>
+        <td><%= link_to 'Delete', customer, method: :delete, remote: true, class: "triger" %></td>
       </tr>
     <% end %>
 </table>

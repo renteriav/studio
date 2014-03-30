@@ -19,6 +19,10 @@ Studio::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+  
+  config.whiny_nils = true
+  
+  config.eager_load = true
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH

@@ -17,6 +17,12 @@ class Telephone < ActiveRecord::Base
 	attr_accessible :number, :description, :phoneable_id, :phoneable_type
 
   before_validation { |telephone| telephone.number = telephone.number.to_s.gsub(/[^0-9]/, "") }
-	#validates :number, presence: true, length: { minimum: 3 }
-	#validates :description, presence: true
+  
+  validates :description, presence: {message: "Select a phone description"}, if: :number_presence?
+  
+	validates :number, :length => { :is => 10, message: "Enter a valid number" }, if: :number_presence?
+  
+  def number_presence?
+    self.number.present?
+  end
 end

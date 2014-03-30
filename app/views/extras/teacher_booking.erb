@@ -1,0 +1,37 @@
+<% if @lesson %>
+<p class="alert-content">
+	<%= "#{@teacher.first} is booked teaching" %>
+</p>
+<p class="alert-content">
+	<b>Student:</b><%= " #{@student.first} #{@student.last}" %>
+</p>
+<p class="alert-content">
+	<b>Type:</b><%= " #{@type}" %>
+</p>
+<p class="alert-content">
+	<b>Date:</b><%= " #{format_day(@lesson.start_date)}" %>
+</p>
+<p class="alert-content">
+	<b>Time:</b>
+	<%= "#{format_time(@lesson.start_time)} to #{format_time(@lesson.end_time)}" %>
+</p>
+<p class="alert-content">Do you still want to book this lesson?</p>
+
+<% elsif @room_conflict %>
+<p class="alert-content">
+	The <b><%= "#{Room.find(@room_conflict.room_id).name}" %></b> room is booked
+</p>
+<p class="alert-content">
+	<%= "from #{format_time(@room_conflict.start_time)} to #{format_time(@room_conflict.end_time)}" %>
+</p>
+<p class="alert-content">Do you still want to book this lesson?</p>
+
+<% elsif @sharing_room_conflicts %>
+<p class="alert-content">
+	The <b><%= "#{Room.find(1).name}" %></b> room is booked for sharing
+</p>
+<p class="alert-content">
+	<%= "from #{format_time(@sharing_room_conflicts.start_time)} to #{format_time(@sharing_room_conflicts.end_time)}" %>
+</p>
+<p class="alert-content">Do you still want to book this lesson?</p>
+<% end %>

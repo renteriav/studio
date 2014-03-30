@@ -33,7 +33,7 @@ class SharingsController < ApplicationController
   end
 
   def create
-    @sharing = Sharing.new(params[:sharing])
+    @sharing = Sharing.new(sharing_params)
     respond_to do |format|
       if @sharing.save
         format.html { redirect_to @sharing, notice: 'Sharing was successfully created.' }
@@ -48,7 +48,7 @@ class SharingsController < ApplicationController
     @sharing = Sharing.find(params[:id])
 
     respond_to do |format|
-      if @sharing.update_attributes(params[:sharing])
+      if @sharing.update_attributes(sharing_params)
         format.html { redirect_to @sharing, notice: 'Sharing was successfully updated.' }
       else
         format.html { render action: "edit" }
@@ -75,6 +75,35 @@ class SharingsController < ApplicationController
     end 
     
     render :layout => false
+  end
+  
+  def attendance
+    @sharing = Sharing.find(params[:sharing_id])
+    @detailed_sharings = @sharing.detailed_sharings
+    @students = Array.new
+    @detailed_sharings.each do |detailed_sharing|
+      @students.push(Student.find(detailed_sharing.student_id))
+      @students.sort_by!{ |m| [m.last, m.first] }
+    end
+  end
+  
+  def update_attendance
+    @sharing = Sharing.find(params[:sharing_id])
+    #params['detailed_sharing'].keys.each do |id|
+      #@detailed_sharing = DetailedSharing.find(id.to_i)
+      #@detailed_sharing.update_attributes(sharing_params)
+      @sharing.update_attributes(update_params)
+      #end
+    respond_to do |format|
+      
+      format.js
+    end
+  end
+  
+  private
+  
+  def sharing_params
+  params.require(:sharing).permit(:end_time, :date, :start_time, teacher_ids: []) 
   end
   
 end

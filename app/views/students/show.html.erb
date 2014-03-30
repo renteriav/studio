@@ -2,7 +2,7 @@
 <p>
 	<%= "#{@student.first} #{@student.last}" %>
 </p>
-<% if @student.email != "" %>
+<% if @student.email  %>
 <p>
   <b>Email:</b>
   <%= @student.email %>
@@ -21,6 +21,7 @@
 <% end %>
 	</ul>
 </p>
+<% if @lessons.any? %>
 <p>
 	<b>Regular Lessons:</b></br>
 </p>
@@ -58,7 +59,7 @@
 	</tr>		
 	<% end %>
 </table>
-
+<% end %>
 <p>
 	<b>Upcoming Make Up and Extra Lessons:</b></br>
 </p>
@@ -95,6 +96,9 @@
 		</td>
 		<td>
 			<%= link_to 'Edit', edit_student_extra_path(@student, extra), class: "btn btn-mini btn-primary" %>
+		</td>
+		<td>
+			<%= link_to '<i class="icon-minus icon-white"></i>'.html_safe, extra, method: :delete, remote: true, title: "Delete Lesson", class: "triger btn btn-mini btn-danger bold tooltip_right" %>
 		</td>
 	</tr>		
 	<% end %>
@@ -144,3 +148,5 @@
 <%= link_to 'Add Make Up/Extra Lesson', new_student_extra_path(@student) %> |
 <%= link_to 'Sign Up For Sharing', new_student_detailed_sharing_path(@student) %> |
 <%= link_to 'Attendance', student_attendance_path(@student) %>
+
+<%= render :partial => 'shared/alert' %>

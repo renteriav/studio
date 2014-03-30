@@ -7,6 +7,7 @@
     <th></th>
     <th></th>
     <th></th>
+	<th></th>
   </tr>
 
 <% @teachers.each do |teacher| %>
@@ -14,9 +15,10 @@
     <td><%= teacher.first %></td>
     <td><%= teacher.last %></td>
     <td><%= teacher.email %></td>
-    <td><%= link_to 'Show', teacher %></td>
+    <td><%= link_to 'Info', teacher %></td>
     <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
-    <td><%= link_to 'Destroy', teacher, method: :delete, remote: true, class: "triger" %></td>
+	<td><%= link_to image_tag("calendar.jpg",title: "weekly calendar", class: "calendar-icon tooltip_right"), teacher_weekly_path(teacher) %></td>
+    <td><%= link_to '<i class="icon-minus icon-white"></i>'.html_safe, teacher, method: :delete, remote: true, title: "Delete teacher", class: "triger btn btn-mini btn-danger bold tooltip_right" %></td>
   </tr>
 <% end %>
 </table>

@@ -13,7 +13,8 @@ module ApplicationHelper
 	end
 
 	def link_to_remove_fields(name, f, classes)
-    	f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)", class: classes, title: "Remove phone number")
+    f.hidden_field(:_destroy) + link_to(name, " ", :onclick =>"remove_fields(this); return false", class: classes, title: "Remove phone number")
+    	#f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)", class: classes, title: "Remove phone number")
 	end
  
 	def link_to_add_fields(name, f, association, classes)
@@ -21,7 +22,8 @@ module ApplicationHelper
     	fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       		render(association.to_s + "/" + association.to_s.singularize + "_fields", :f => builder)
       end
-    	link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", class: classes, title: "Add phone number")
+       link_to(name, " ", :onclick=>"add_fields(this, \"#{ association }\", \"#{ escape_javascript(fields) }\"); return false", class: classes, title: "Add phone number")
+    	#link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", class: classes, title: "Add phone number")
   end
   
   def active_link(c)
@@ -73,6 +75,14 @@ module ApplicationHelper
     
     def join_date_time(d, t)
       dt = DateTime.new(d.year, d.month, d.day, t.hour, t.min, t.sec)
+    end
+    
+    def display_error(object, field)
+      if object.errors.any?
+        if object.errors[field.to_sym].present?
+        '<div class="field inline alert alert-error"><i class="icon-warning-sign icon-white"></i>'.html_safe + " #{object.errors[field.to_sym].first}" + '</div>'.html_safe
+        end
+      end
     end
       
 end

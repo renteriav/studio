@@ -1,37 +1,30 @@
 <div class="form-container">
 <%= form_for(@customer) do |f| %>
-  <% if @customer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
-
-      <ul>
-      <% @customer.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
   
   <fieldset>
 	  <legend>Contact Info</legend>
 	  
-	  <%= render "layouts/basic_info_form", :f => f %>
+	  <%= render "layouts/basic_info_form", :f => f, :@person => @customer %>
 	  
 	  <%= f.fields_for :telephones do |builder| %>
-		<% @collection = phone_collection "A" %> 
 		<!-- view telephones_helper for available collections -->
-    	<%= render "telephones/telephone_fields", :f => builder %>
+		<div>
+    	<%= render "telephones/telephone_fields", :f => builder, :@person => @customer %>
+		</div>
 	  <% end %>
 	  <div class="field">
    	  	<%= link_to_add_fields '<i class="icon-plus icon-white"></i>'.html_safe, f, :telephones, "btn btn-success tooltip_right" %>
 	  </div>
    </fieldset>
+   <fieldset>
+ 	  <legend>Mailing Address</legend>
    
-  <div>
-	<%= f.fields_for :addresses do |builder| %>
-  		<%= render "addresses/addresses_fields", :f => builder, :person => @customer %>
-	<% end %>
-  </div>
+  		<div>
+			<%= f.fields_for :addresses do |builder| %>
+  				<%= render "addresses/addresses_fields", :f => builder, :@person => @customer %>
+				<% end %>
+  			</div>
+	</fieldset>
 		
   <div class="actions">
     <%= f.submit submit_button_message(yield(:button_message)), class: "btn btn-large btn-primary" %>

@@ -35,6 +35,7 @@ $(document).ready(function(){
 //  dialog for attendance	
 	
 	$('.event').click(function(){
+		$('html').css("overflow", "hidden");
 		var id = $(this).attr('id').split("-");
 		if (id[1] == "lesson" || id[1]== "extra"){
 			$.ajax({
@@ -52,6 +53,7 @@ $(document).ready(function(){
                 	{
                     	text: "Cancel", click: function() {
                         	$( this ).dialog( "close" );
+							$('html').css("overflow", "scroll");
                     	}
                 	},
                 	{
@@ -59,6 +61,7 @@ $(document).ready(function(){
 							var scrollCookie = $(document).scrollTop();
 							$.cookie('scroll_cookie', scrollCookie);
 							$('#submit').trigger('click');
+							$('html').css("overflow", "scroll");
                        	 	// $( this ).dialog( "close" );
                     	}
                 	}

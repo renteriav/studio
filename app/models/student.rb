@@ -22,14 +22,23 @@ class Student < ActiveRecord::Base
   belongs_to :customer
   
 	has_many :telephones, :as => :phoneable, :dependent => :destroy
-	accepts_nested_attributes_for :telephones, :allow_destroy => true, :reject_if => proc { |attributes| attributes['number'].blank? }
+	accepts_nested_attributes_for :telephones, :allow_destroy => true, :reject_if => proc { |a| a['number'].blank? }
   
   has_many :lessons
   has_many :extras
   has_many :detailed_sharings
   
-  attr_accessible :first, :last, :telephones_attributes, :email, :birthdate, :grade, :customer_id, :schoolyear
+  #attr_accessible :first, :last, :telephones_attributes, :email, :birthdate, :grade, :customer_id, :schoolyear
   
   before_validation { |student| student.nameize :first, :last }
-  before_validation { |student| student.email = student.email.strip.downcase }
+  before_validation { |student| (student.email = student.email.strip.downcase) unless student.email.nil? }
+  
+	validates :first, presence: {message: "Enter first name"}, length: { maximum: 30 } 
+	validates :last, presence: {message: "Enter last name"}, length: { maximum: 30 }
+	
+	validates :email, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/, message: "Enter a valid email or leave blank" }, if: :email_present?
+  
+  def email_present?
+    self.email.present?
+  end
 end

@@ -11,7 +11,7 @@ class DetailedSharingsController < ApplicationController
 
   def create
     @student = Student.find(params[:student_id])
-    @detailed_sharing = @student.detailed_sharings.build(params[:detailed_sharing])
+    @detailed_sharing = @student.detailed_sharings.build(detailed_sharing_params)
     respond_to do |format|
       if @detailed_sharing.save
         format.html { redirect_to student_path(@student), 
@@ -31,7 +31,7 @@ class DetailedSharingsController < ApplicationController
   def update
     @student = Student.find(params[:student_id])
     @detailed_sharing = DetailedSharing.find(params[:id])
-    if @detailed_sharing.update_attributes(params[:detailed_sharing])
+    if @detailed_sharing.update_attributes(detailed_sharing_params)
       redirect_to student_path(@student), :notice  => "Sharing sign up successfully updated."
     else
       render :action => 'edit'
@@ -79,12 +79,18 @@ class DetailedSharingsController < ApplicationController
     @sharing = Sharing.find(params[:sharing_id])
     params['detailed_sharing'].keys.each do |id|
       @detailed_sharing = DetailedSharing.find(id.to_i)
-      @detailed_sharing.update_attributes(params['detailed_sharing'][id])
+      @detailed_sharing.update_attributes(params[:detailed_sharing][id])
     end
     respond_to do |format|
       
       format.js
     end
+  end
+  
+  private
+  
+  def detailed_sharing_params
+  params.require(:detailed_sharing).permit(:sharing_id, :id, :student_id,  :attendance, :memory, :practice) 
   end
   
 end

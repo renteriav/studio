@@ -6,10 +6,14 @@ Studio::Application.routes.draw do
   
   get 'update_teachers', to: 'shared#update_teachers'
   
+  get "lessons/teacher_booking"
+  
   resources :lessons do
     get "sub_request", to: "attendances#sub_request"
     resources :attendances
   end
+  
+  get "extras/teacher_booking"
   
   resources :extras do
     resources :attendances
