@@ -24,7 +24,7 @@ Studio::Application.configure do
   
   config.eager_load = true
 
-  config.action_mailer.default_url_options = { 'shrouded-everglades-8798.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'shrouded-everglades-8798.herokuapp.com' }
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
