@@ -9,13 +9,14 @@ gem 'chronic'
 gem 'gon'
 gem 'protected_attributes'
 gem 'devise'
+gem 'thread_safe', '0.2.0'
+gem 'pg', '0.12.2'
+gem 'rspec-rails', '2.9.0'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 #gem 'sqlite3'
 
 group :development, :test do 
-  gem 'rspec-rails', '2.9.0'
-  gem 'pg', '0.12.2'
   gem 'guard-rspec', '0.5.5'
   gem 'annotate'
   gem 'factory_girl_rails', '1.4.0'
@@ -40,7 +41,6 @@ gem 'jquery-ui-rails', '4.0.2'
 gem 'jquery-ui-themes'
 
 group :test do
-gem 'rspec-rails', '2.9.0'
 gem 'capybara', '1.1.2'
 gem 'rb-fsevent', :require => false
 gem 'growl', '1.0.3'
@@ -50,7 +50,6 @@ gem 'mocha'
 end
 
 group :production do 
-  gem 'pg', '0.12.2'
 end
 
 # To use ActiveModel has_secure_password
