@@ -8,6 +8,7 @@ gem 'bootstrap-timepicker-rails'
 gem 'chronic'
 gem 'gon'
 gem 'protected_attributes'
+gem 'devise'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 #gem 'sqlite3'
