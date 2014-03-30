@@ -50,7 +50,8 @@ gem 'spork', '0.9.0'
 gem 'mocha'
 end
 
-group :production do 
+group :production do
+gem 'rails_12factor' 
 end
 
 # To use ActiveModel has_secure_password
