@@ -1,10 +1,10 @@
 development:
   adapter: postgresql
-  host: localhost
+  #host: localhost
   encoding: unicode
   database: studio_development
   pool: 5
-  username: renteriafamily
+  #username: renteriafamily
   password: 
 
 # Warning: The database defined as "test" will be erased and
@@ -21,6 +21,7 @@ test:
 
 production:
   adapter: postgresql
+  encoding: unicode
   database: studio_development
   pool: 5
   timeout: 5000
