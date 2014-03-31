@@ -20,7 +20,7 @@ Studio::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
   
-  config.whiny_nils = false
+  #config.whiny_nils = false
   
   config.eager_load = true
 

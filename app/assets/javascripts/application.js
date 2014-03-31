@@ -15,3 +15,4 @@
 //= require jquery.ui.all
 //= require_tree ../../../lib/assets/javascripts
 //= require bootstrap-timepicker
+//= require_tree .
