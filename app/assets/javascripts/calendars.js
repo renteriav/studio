@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	
+  if($('#day').length > 0){
+	
 	var scrollCookie = $.cookie('scroll_cookie');
 	$.removeCookie('scroll_cookie');
 	$(document).scrollTop(scrollCookie);
@@ -76,4 +78,5 @@ $(document).ready(function(){
 			alert("unknown type");
 		};
 	});
+  }
 });
