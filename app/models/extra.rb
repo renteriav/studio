@@ -26,7 +26,7 @@ class Extra < ActiveRecord::Base
   
   attr_accessor :status
   
-  #attr_accessible :end_time, :date, :instrument_id, :room_id, :start_time, :student_id, :teacher_id, :category, :attendances_attributes
+  attr_accessible :end_time, :date, :instrument_id, :room_id, :start_time, :student_id, :teacher_id, :category, :attendances_attributes
   
   validates :room_id, presence: { message: "Select a room." }
     

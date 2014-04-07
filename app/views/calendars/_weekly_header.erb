@@ -1,6 +1,11 @@
 <header >
 	<div class = "navbar-fixed-top">
 		<div class = "header-top" >
+			<% if user_signed_in? %>
+				<div class = "pull-right sign-out">
+					<%= link_to('Sign out', destroy_user_session_path, :method => :delete) %>
+				</div>
+			<% end %>
 			<div id="day">
 					<%= link_to "<", teacher_weekly_path(@teacher, date: @previous), method: "get", class: "link-button", id: "previous"  %>
 					<%= link_to "This Week", teacher_weekly_path(@teacher), method: "get", class: "link-button", id: "today"%>
@@ -15,8 +20,29 @@
 		<div class="navbar">
 			<div class="navbar-inner">
 				<ul class="nav pull-right">
-					<li class = "<%= current_page?(root_path) ? "active" : "" %>" >
+					<% if user_signed_in? %>
+					<li class = "<%= current_page?(root_path) ? "active" : "" %> dropdown" >
 						<%= link_to "Home", root_path %>
+						<% @teacher = Teacher.find(current_user.loginable_id) %>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<%= link_to "Change your password", edit_user_registration_path %>
+							</li>
+							<li>
+								<%= link_to 'Edit personal info', edit_teacher_path(@teacher) %>
+							</li>
+						</ul>
+					</li>
+					<li class = "<%= active_link("calendars") %> dropdown" >
+						<%= link_to "Calendar", daily_path %>
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<%= link_to "Daily attendance", teacher_daily_path(@teacher) %>
+							</li>
+							<li>
+								<%= link_to "Weekly schedule", teacher_weekly_path(@teacher) %>
+							</li>
+						</ul>
 					</li>
 					<li class = <%= active_link("customers") %> >
 						<%= link_to "Customers", customers_path %>
@@ -27,18 +53,21 @@
 					<li class = <%= active_link("teachers") %> >
 						<%= link_to "Teachers", teachers_path %>
 					</li>
-					<li class = <%= active_link("sharings") %> >
+					<li class = "dropdown" >
+						<%= link_to "Admin", root_path, disabled: true %>
+						<ul class="dropdown-menu" role="menu">
+							<li class = <%= active_link("sharings") %> >
 						<%= link_to "Sharings", sharings_path %>
 					</li>
-					<li class = <%= active_link("instruments") %> >
+							<li class = <%= active_link("instruments") %> >
 						<%= link_to "Instruments", instruments_path %>
+							</li>
+							<li class = <%= active_link("rooms") %> >
+								<%= link_to "Rooms", rooms_path %>
+							</li>
+						</ul>
 					</li>
-					<li class = <%= active_link("rooms") %> >
-						<%= link_to "Rooms", rooms_path %>
-					</li>
-					<li class = <%= active_link("calendars") %> >
-						<%= link_to "Calendar", daily_path %>
-					</li>
+					<% end %>
 				</ul>
 			</div>
         </div>

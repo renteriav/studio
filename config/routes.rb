@@ -1,7 +1,22 @@
 Studio::Application.routes.draw do
-  
-  root to: 'customers#index'
-  
+
+  devise_scope :user do
+
+    authenticated :user, lambda { |user| user.loginable_type == "Admin" } do
+      root to: "customers#index"
+    end
+
+    authenticated :user, lambda { |user| user.loginable_type == "Teacher" } do
+      root to: "teachers#personal", as: :teacher_root
+    end
+
+    unauthenticated :user do
+      root :to => 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+
+  devise_for :users, :controllers => {:registrations => "registrations"} 
+
   get '/daily', to: 'calendars#daily'
   
   get 'update_teachers', to: 'shared#update_teachers'
@@ -26,7 +41,9 @@ Studio::Application.routes.draw do
   resources :rooms
 
   resources :teachers do
+    devise_for :users, :controllers => {:registrations => "registrations"} 
     get 'weekly', to: 'calendars#weekly'
+    get '/daily', to: 'calendars#daily'
   end
   
   get 'teachers_cbx', to: 'sharings#teachers_cbx'

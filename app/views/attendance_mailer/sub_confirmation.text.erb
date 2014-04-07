@@ -1,0 +1,7 @@
+Hi <%= @sub.first %>,
+You are now subbing for <%= @teacher.first %> on <%= format_day @attendance.date %>.
+You are teaching <%= "#{@student.first} #{@student.last} from #{format_time @lesson.start_time} to #{format_time @lesson.end_time}" %>.
+
+Thank you,
+
+Marie

@@ -53,7 +53,17 @@ class ExtrasController < ApplicationController
     @extra = @student.extras.build(params[:extra])
     respond_to do |format|
       if @extra.save
-        format.html { redirect_to @extra, notice: 'Lesson was successfully created.' }
+
+        @teacher = Teacher.find(params[:extra][:teacher_id])
+        @date = Time.parse(params[:extra][:date])
+        @start_time = params[:extra][:start_time]
+        @end_time = params[:extra][:end_time]
+        @student = Student.find(params[:student_id])
+        if params[:extra_confirmation_email] == "send"
+          ExtraMailer.extra_confirmation(@teacher, @student, @date, @start_time, @end_time).deliver
+        end
+
+        format.html { redirect_to @extra, notice: 'Lesson successfully scheduled.' }
       else
         if params[:extra][:instrument_id] != ""
           @teachers = Instrument.find(params[:extra][:instrument_id]).teachers.map{|i| [i.first, i.id]}

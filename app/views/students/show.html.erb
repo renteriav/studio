@@ -54,7 +54,7 @@
 		</td>
 		<td></td>
 		<td>
-			<%= link_to 'Edit', edit_lesson_path(lesson), class: "btn btn-mini btn-primary" %>
+			<%= link_to 'Edit', edit_lesson_path(lesson), class: "btn btn-mini btn-info" %>
 		</td>
 	</tr>		
 	<% end %>
@@ -95,7 +95,7 @@
 			<%= extra_category_description(extra.category) %>
 		</td>
 		<td>
-			<%= link_to 'Edit', edit_student_extra_path(@student, extra), class: "btn btn-mini btn-primary" %>
+			<%= link_to 'Edit', edit_student_extra_path(@student, extra), class: "btn btn-mini btn-info" %>
 		</td>
 		<td>
 			<%= link_to '<i class="icon-minus icon-white"></i>'.html_safe, extra, method: :delete, remote: true, title: "Delete Lesson", class: "triger btn btn-mini btn-danger bold tooltip_right" %>
@@ -132,7 +132,7 @@
 				<%= "#{@start} - #{@end}" %>
 			</td>
 			<td>
-				<%= link_to 'Change', edit_student_detailed_sharing_path(@student, sharing ), class: "btn btn-mini btn-primary" %>
+				<%= link_to 'Change', edit_student_detailed_sharing_path(@student, sharing ), class: "btn btn-mini btn-info" %>
 			</td>
 		</tr>
 	<% end %>

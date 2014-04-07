@@ -37,7 +37,6 @@ $(document).ready(function(){
 //  dialog for attendance	
 	
 	$('.event').click(function(){
-		$('html').css("overflow", "hidden");
 		var id = $(this).attr('id').split("-");
 		if (id[1] == "lesson" || id[1]== "extra"){
 			$.ajax({
@@ -64,11 +63,10 @@ $(document).ready(function(){
 							$.cookie('scroll_cookie', scrollCookie);
 							$('#submit').trigger('click');
 							$('html').css("overflow", "scroll");
-                       	 	// $( this ).dialog( "close" );
                     	}
                 	}
             		]},
-            	{"modal": "true"}
+            	{"modal": true}
         	);
 		}
 		else if (id[1] == "sharing"){
@@ -79,4 +77,21 @@ $(document).ready(function(){
 		};
 	});
   }
+  $( "#attendance-dialog" ).on("dialogopen", function(event, ui) {
+  		$('html').css("overflow", "hidden");
+    	setTimeout(function(){
+  		$('.radio').on("change", function(){
+        	if($('#cancel_radio').is( ":checked" )){
+  				$('#cancel_cbx').prop( "disabled", false );
+  				$('#cancel_cbx').prop("checked", true);
+  				$('.checkbox').removeClass("disabled_input");
+  			}
+  			else{
+  				$('#cancel_cbx').prop("disabled", true);
+  				$('#cancel_cbx').prop("checked", false);
+  				$('.checkbox').addClass("disabled_input");
+  			}
+  		});
+  	}, 1000);
+  });
 });

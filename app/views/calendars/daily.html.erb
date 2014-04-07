@@ -71,5 +71,6 @@
 		<% end %>
 	</div>
 </div>
-<div id="attendance-dialog" style="display:none;">
-</div>
+<% if (current_user.loginable_type == "Teacher" and params[:teacher_id]) or current_user.loginable_type == "Admin" %>
+		<div id="attendance-dialog" style="display:none;"></div>
+<% end %>

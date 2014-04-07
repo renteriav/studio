@@ -3,14 +3,20 @@ class CalendarsController < ApplicationController
   def daily
     
     if params[:teacher_id]
-      @teacher = Teacher.find(params[:teacher_id])
+      if current_user
+        if current_user.loginable_type == "Teacher"
+          @teacher = Teacher.find(current_user.loginable_id)
+        end
+      end
     end
     
     @rooms = Room.all.order("id ASC")
     @num_rooms = Room.count
     @num_rows = 56
     @first_slot_time = Time.utc(2000,1,1,6,0,0)
-    
+    if params[:teacher_id]
+      @teacher_id = params[:teacher_id]
+    end
     if params[:date]
       @date = Time.at((params[:date]).to_i).midnight
     else
@@ -54,14 +60,17 @@ class CalendarsController < ApplicationController
         when "Lesson"
           @lesson_index = @lessons.find_index{|n| n['id'] == attendance.attendable_id }
           if @lesson_index
-            @lessons[@lesson_index].status = attendance.status
-            @lessons[@lesson_index].teacher_id = attendance.teacher_id
+           @lessons[@lesson_index].status = attendance.status
+           @lessons[@lesson_index].teacher_id = attendance.teacher_id
+          else
+            @lesson = Lesson.find(attendance.attendable_id)
+            @sub_lesson = Lesson.new(comp_id: @lesson.id.to_s + "-lesson", student_id: @lesson.student_id, teacher_id: attendance.teacher_id, room_id: @lesson.room_id, start_time: @lesson.start_time, end_time: @lesson.end_time, status: attendance.status)
+            @lessons = @lessons.to_a.push(@sub_lesson)
           end
                  
         when "Extra"
           @extra = Extra.find(attendance.attendable_id)
           @extra_lesson = Lesson.new(comp_id: @extra.id.to_s + "-extra", student_id: @extra.student_id, teacher_id: @extra.teacher_id, room_id: @extra.room_id, start_time: @extra.start_time, end_time: @extra.end_time, status: attendance.status)
-          #@lessons.push(@extra_lesson)
           @lessons = @lessons.to_a.push(@extra_lesson)
         end
       end

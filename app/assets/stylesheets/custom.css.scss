@@ -1,11 +1,11 @@
-$linkColor: #cfaa99;
+$linkColor: #47112E;
 $navbarText:                      white !default;
 $navbarLinkColor:                 white;
 $navbarLinkColorHover:            #B6819E;
 $navbarLinkColorActive:           #E0E0EB;
 $navbarLinkBackgroundActive:      #A4748E;
-$navbarBackgroundHighlight: rgb(2, 0, 49); 
-$navbarBackground: rgb(109, 51, 83);
+$navbarBackgroundHighlight: #020031; 
+$navbarBackground: #6D3353;
 @import "bootstrap";
 
 /* universal */
@@ -17,11 +17,11 @@ h1 {
 }
 
 html {
-	overflow-y: scroll;
+	overflow: scroll;
 }
 
 body {
-	padding-top: 145px;
+	padding-top: 155px;
 }
 
 section {
@@ -30,6 +30,10 @@ section {
 
 textarea {
 	resize: vertical;
+}
+
+.btn:first-child {
+	color: white;
 }
 
 .center { 
@@ -61,13 +65,66 @@ textarea {
 	text-transform: uppercase; 
 	letter-spacing: -1px;  
 	line-height: 1;
-	width: 100%;
+	width: 330px;
 }
+
 .logo:hover {
 	color: gray; 
 	text-decoration: none;
 }
 
+.login {
+	position: relative;
+	margin-left: 70px;
+	margin-top: 15px; 
+	font-size: 3em;
+	background: $navbarBackgroundHighlight;
+	float: left;
+	color: white !important; 
+	text-transform: uppercase; 
+	letter-spacing: -1px;  
+	line-height: 1;
+	width: 30%;
+}
+.sign-out{
+	margin-top:25px;
+	margin-right:50px;
+	a{
+		color: white !important;
+	}
+	a:hover{
+		color: #B6819E !important;
+		text-decoration: none;
+	}
+} 
+ul.nav>li{
+  margin: 0px;
+  padding-top: 10px;
+}
+
+.dropdown-menu{
+  display: none; 
+  background-color: $navbarBackground;       
+  /*background: url('background_3.png') repeat; /*
+  /* left: -20px !important;*/
+  top: 48px;
+  min-width: 100px !important;
+  a{
+  color: white !important;
+  border: none !important;
+  }
+  a, a.active, a:hover{
+    border: none !important;
+  }
+  a:hover{
+  	color: $navbarLinkColorHover !important;
+  }
+  li{
+  }
+}
+.dropdown-menu:after{
+    border-bottom: 6px solid $navbarBackground !important;
+  }
 /* footer */
 footer {
 	margin-top: 45px;
@@ -147,6 +204,18 @@ input, textarea, select, .uneditable-input {
 	color: black;
 }
 
+.disabled_input{
+	color: gray;
+}
+
+.bootstrap-timepicker-widget{
+	background-color: #EEEEEE;
+}
+
+.bootstrap-timepicker-widget.dropdown-menu:after{
+	border-bottom: 6px solid #EEEEEE !important;
+}
+
 .input-sm {
 	width:75px;
 }
@@ -159,7 +228,8 @@ input, textarea, select, .uneditable-input {
 	width:105px;
 }
 .field {
-	margin-right:10px;
+	margin-top:0px;
+	margin-right:10px !important;
 	a{
 		margin-bottom:10px !important;
 	}
@@ -167,7 +237,7 @@ input, textarea, select, .uneditable-input {
 
 .alert-error {
 	padding:6px !important;
-	vertical-align: middle !important;
+	vertical-align: text-bottom !important;
 }
 
 #error_explanation { 

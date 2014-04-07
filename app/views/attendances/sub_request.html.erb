@@ -16,8 +16,12 @@
 <%= form_for [@lesson, @attendance] do |f| %>
 
 <div class="field">
-  <%= f.label :teacher_id, "Substitute Teacher" %>
-  <%= f.select :teacher_id, options_for_select(@sub_teachers, @selected), {:include_blank => "Pending"}  %>
+  <%= f.label :teacher_id, "Substitute Teacher", class: "field" %>
+  <%= f.select :teacher_id, options_for_select(@sub_teachers, @selected), {:include_blank => "Pending"}, class: "field"  %>
+</div>
+<div class = "checkbox field">
+	<%= check_box_tag "sub_confirmation_email", "send" %>  
+        Send email to sub teacher. 
 </div>
 	
 	<%= f.hidden_field :date, :value => @date %>

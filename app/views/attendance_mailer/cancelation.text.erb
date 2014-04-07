@@ -1,0 +1,6 @@
+Hi <%= @current_teacher.first %>,
+Your lesson on <%= format_day @attendance.date %> with <%= "#{@student.first} #{@student.last} from #{format_time @lesson.start_time} to #{format_time @lesson.end_time}" %> has been canceled.
+
+Thank you,
+
+Marie

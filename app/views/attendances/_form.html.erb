@@ -10,7 +10,10 @@
 		<%= f.radio_button :status, "m" %>Missed
 	</label>
 	<label class="radio">
-		<%= f.radio_button :status, "c" %>Canceled
+		<%= f.radio_button :status, "c", id: "cancel_radio" %>Canceled
+	</label>
+	<label class = "checkbox disabled_input">
+		<%= check_box_tag "cancelation_email", "send", false, disabled: true, id: "cancel_cbx" %><i>Send cancelation email</i>   
 	</label>
 	
 	<%= f.hidden_field :date, :value => @date %>

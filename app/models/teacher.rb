@@ -23,8 +23,11 @@ class Teacher < ActiveRecord::Base
   
   has_many :lessons
   has_many :extras
+
+  has_one :user, as: :loginable
+  accepts_nested_attributes_for :user
   
-  attr_accessible :address_id, :email, :status, :first, :last, :telephones_attributes, :addresses_attributes, :instrument_ids
+  attr_accessible :address_id, :email, :status, :first, :last, :telephones_attributes, :addresses_attributes, :instrument_ids, :users_attributes
   
   before_validation { |teacher| teacher.nameize :first, :last }
   before_validation { |teacher| teacher.email = teacher.email.strip.downcase }

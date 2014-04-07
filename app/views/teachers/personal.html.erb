@@ -1,0 +1,6 @@
+<h1>Personal info</h1>
+<p><%= "Welcome #{@teacher.first}" %></p>
+<%= link_to "Change your password", edit_user_registration_path %> |
+<%= link_to "Weekly schedule", teacher_weekly_path(@teacher) %> |
+<%= link_to "Daily attendance", teacher_daily_path(@teacher) %> |
+<%= link_to 'Edit personal info', edit_teacher_path(@teacher) %>

@@ -50,11 +50,17 @@ class AttendancesController < ApplicationController
     @date = params[:date]
     
     @lesson = Lesson.find(params[:lesson_id])
+    @teacher = Teacher.find(@lesson.teacher_id)
  
     @attendance = @lesson.attendances.build(attendance_params)
 
     respond_to do |format|
       if @attendance.save
+        @sub = Teacher.find(params[:attendance][:teacher_id])
+        if @sub and params[:send_email] == "send"
+          AttendanceMailer.sub_confirmation(@sub, @teacher).deliver
+        end
+
         format.html { redirect_to :back }
       else
         format.html { render action: "new" }
@@ -69,15 +75,26 @@ class AttendancesController < ApplicationController
     elsif params[:extra_id]
       @lesson = Extra.find(params[:extra_id])
     else
-    @lesson = Lesson.find(@attendance.attendable_id)
+      @lesson = Lesson.find(@attendance.attendable_id)
     end
     @student = Student.find(@lesson.student_id)
+    @teacher = Teacher.find(@lesson.teacher_id)
+    @current_teacher = Teacher.find(@attendance.teacher_id)
+
     if @attendance.update_attributes(attendance_params)
-      @attendance.teacher_id == "" or @attendance.teacher_id.nil? ? @notice = "Request for sub saved." : @notice = "#{Teacher.find(@attendance.teacher_id).first} has been succesfully assigned to sub for #{Teacher.find(@lesson.teacher_id).first}." 
-      redirect_to :back, notice: @notice
+      if params[:attendance][:status].nil?
+      @attendance.teacher_id == "" or @attendance.teacher_id.nil? ? @notice = "Request for sub saved." : @notice = "#{Teacher.find(@attendance.teacher_id).first} has been succesfully assigned to sub for #{Teacher.find(@lesson.teacher_id).first}."
+      end
+      @sub = Teacher.find(params[:attendance][:teacher_id])
+      if @sub and params[:sub_confirmation_email] == "send"
+        AttendanceMailer.sub_confirmation(@sub, @teacher, @attendance, @lesson, @student).deliver
+      elsif params[:cancelation_email] == "send"
+        AttendanceMailer.cancelation(@current_teacher, @attendance, @lesson, @student).deliver
+      end
+       redirect_to :back, notice: @notice
     else
       render :action => 'edit'
-    end
+    end 
   end
   
   def sub_request
@@ -98,7 +115,6 @@ class AttendancesController < ApplicationController
       @attendance = Attendance.new
     end
   end
-  
   private
   
   def attendance_params

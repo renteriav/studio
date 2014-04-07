@@ -70,5 +70,14 @@ class TeachersController < ApplicationController
       format.js
     end
   end
+
+  def personal
+    if current_user
+      @user = current_user
+      if @user.loginable_type == "Teacher"
+        @teacher = Teacher.find(@user.loginable_id)
+      end
+    end
+  end
   
 end
