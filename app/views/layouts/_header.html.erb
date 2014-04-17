@@ -3,10 +3,10 @@
 		<div class = "header-top" >
 			<% if user_signed_in? %>
 				<div class = "pull-right sign-out">
-					<%= link_to('Sign out', destroy_user_session_path, :method => :delete) %>
+					<%= link_to('Sign out', destroy_user_session_path, :method => :delete, "data-ajax" => "false") %>
 				</div>
 			<% end %>
-			<%= link_to "Whitby Studio", root_path, class: "logo" %>
+			<p class= "logo">Whitby Studio</p>
 		</div>
 		<div class="navbar">
 			<div class="navbar-inner">

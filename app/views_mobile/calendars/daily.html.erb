@@ -1,0 +1,14 @@
+<input type="text" id="datebox" class="ui-btn ui-btn-inline" data-role="datebox" data-options='{"mode": "datebox", "useTodayButton": true, "usePlaceholder": true, "useNewStyle": true, "useHeader": true, "useFocus": true, "themeButton": "b", "themeHeader": "b", "overrideTitleDateDialogLabel": "Choose Date", "overrideTooltip": "", "themeInput": "b"}' readonly="readonly">
+					
+<%= link_to "Back", root_path, class: "ui-btn ui-btn-inline back-button", "data-ajax" => "false" %></br>
+<h4>Your schedule for</br><%= @day %></h4>
+<% if @lessons.any? %>
+	<% @lessons.each do |lesson| %>
+		<% @student = Student.find(lesson.student_id) %>
+		<p><%= "#{format_time lesson.start_time} #{@student.first} #{@student.last}" %></p>
+	<% end %>
+<% else %>
+<p> You don't have any lessons scheduled today.</p>
+<% end %>
+
+

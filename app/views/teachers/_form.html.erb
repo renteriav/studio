@@ -1,11 +1,12 @@
 <div class="form-container">
-<%= form_for(@teacher) do |f| %>
+<%= form_for(@teacher, :html => {'data-ajax' => 'false'}) do |f| %>
   
   <fieldset><legend>Contact Info</legend>
 	<%= render "layouts/basic_info_form", :f => f, :@person => @teacher %>
-	
+	<div class="field">
 	<%= f.label :status, "Status" %>
-	<%= f.select(:status, options_for_select([['Regular','r'],['Substitute', 's'],['Inactive', 'i']]), {:include_blank => false }, {class: "input-med field"}) %>
+	<%= f.select(:status, options_for_select([['Regular','r'],['Substitute', 's'],['Inactive', 'i']]), {:include_blank => false }, {class: "input-med", 'data-role' =>'none'}) %>
+  </div></br>
 	  
   	<%= f.fields_for :telephones do |builder| %>
 	<% @collection = phone_collection "B" %>
@@ -13,7 +14,8 @@
     	<%= render "telephones/telephone_fields", :f => builder, :@person => @teacher %>
   	<% end %>
   <div class="field">
-   <%= link_to_add_fields '<i class="icon-plus icon-white"></i>'.html_safe, f, :telephones, "btn btn-success" %>
+   <% mobile_device? ? @title = "" : @title = "Add phone number" %>
+   <%= link_to_add_fields '<i class="icon-plus icon-white"></i>'.html_safe, f, :telephones, {class: "btn btn-success", title: @title} %>
   </div>
 </fieldset>
   <div>
@@ -23,14 +25,16 @@
   </div>
   
   <% for instrument in Instrument.all %>  
-      <div>  
-        <%= check_box_tag "teacher[instrument_ids][]", instrument.id, @teacher.instruments.include?(instrument), :class => 'checkbox' %>  
-        <%= instrument.name %>  
+      <div class="field"> 
+      <label> 
+        <%= check_box_tag "teacher[instrument_ids][]", instrument.id, @teacher.instruments.include?(instrument), :class => 'checkbox', 'data-role' =>'none' %>  
+      <%= instrument.name %>
+      </label> 
       </div>  
   <% end %>
   
   <div class="actions">
-    <%= f.submit submit_button_message(yield(:button_message)), class: "btn btn-large btn-primary" %>
+    <%= f.submit submit_button_message(yield(:button_message)), class: "btn btn-large btn-primary", 'data-role' =>'none' %>
   </div>
 <% end %>
 </div>

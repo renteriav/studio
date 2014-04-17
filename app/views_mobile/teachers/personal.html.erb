@@ -1,0 +1,13 @@
+<ul data-role="listview" data-inset="true">
+    <li data-role="list-divider" data-theme="b"><h2><%= "Welcome #{@teacher.first}" %></h2></li>
+    <li>
+        Settings
+        <ul>
+            <li><%= link_to "Change your password", edit_user_registration_path, class: 'ui-btn ui-icon-carat-r ui-btn-icon-right', "data-ajax" => "false" %></li>
+			<li><%= link_to 'Edit personal info', edit_teacher_path(@teacher), class: 'ui-btn ui-icon-carat-r ui-btn-icon-right', "data-ajax" => "false" %></li>
+		</ul>
+	</li>
+	<li><%= link_to "Weekly schedule", teacher_weekly_path(@teacher), class: 'ui-btn ui-icon-carat-r ui-btn-icon-right', "data-ajax" => "false" %></li>
+	<li><%= link_to "Daily attendance", teacher_daily_path(@teacher), class: 'ui-btn ui-icon-carat-r ui-btn-icon-right', "data-ajax" => "false" %></li>
+</ul>
+<%= link_to('Sign out', destroy_user_session_path, :method => :delete, "data-ajax" => "false") %>

@@ -1,5 +1,6 @@
 Studio::Application.routes.draw do
 
+  devise_for :users, :controllers => {:sessions => "sessions"} 
   devise_scope :user do
 
     authenticated :user, lambda { |user| user.loginable_type == "Admin" } do
@@ -11,11 +12,9 @@ Studio::Application.routes.draw do
     end
 
     unauthenticated :user do
-      root :to => 'devise/sessions#new', as: :unauthenticated_root
+      root :to => 'sessions#new', as: :unauthenticated_root
     end
   end
-
-  devise_for :users, :controllers => {:registrations => "registrations"} 
 
   get '/daily', to: 'calendars#daily'
   

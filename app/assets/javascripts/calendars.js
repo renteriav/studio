@@ -94,4 +94,16 @@ $(document).ready(function(){
   		});
   	}, 1000);
   });
+  
+  $("#datebox").change(function(){
+  			var dateboxVal = $("#datebox").val();
+			var newdate = new Date(dateboxVal);
+			var ms = newdate.valueOf() + newdate.getTimezoneOffset() * 60000;
+			var timeStamp = ms/1000;
+			window.location = "?date="+timeStamp;
+			$('#datebox').val(gon.date);
+		});
+  $('#datebox').val(gon.date);
+
+
 });

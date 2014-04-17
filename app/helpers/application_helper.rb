@@ -12,18 +12,19 @@ module ApplicationHelper
 		"#{button_message}"
 	end
 
-	def link_to_remove_fields(name, f, classes)
-    f.hidden_field(:_destroy) + link_to(name, " ", :onclick =>"remove_fields(this); return false", class: classes, title: "Remove phone number")
-    	#f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)", class: classes, title: "Remove phone number")
+	def link_to_remove_fields(name, f, opt={})
+    opt.store(:onclick, "remove_fields(this); return false")
+    f.hidden_field(:_destroy) + link_to(name, " ", opt)
 	end
  
-	def link_to_add_fields(name, f, association, classes)
+	def link_to_add_fields(name, f, association, opt={})
     	new_object = f.object.class.reflect_on_association(association).klass.new
     	fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       		render(association.to_s + "/" + association.to_s.singularize + "_fields", :f => builder)
       end
-       link_to(name, " ", :onclick=>"add_fields(this, \"#{ association }\", \"#{ escape_javascript(fields) }\"); return false", class: classes, title: "Add phone number")
-    	#link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", class: classes, title: "Add phone number")
+      opt.store(:onclick, "add_fields(this, \"#{ association }\", \"#{ escape_javascript(fields) }\"); return false")
+      
+       link_to(name, " ", opt)
   end
   
   def active_link(c)

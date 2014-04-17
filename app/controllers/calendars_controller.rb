@@ -1,4 +1,5 @@
 class CalendarsController < ApplicationController
+  before_filter :check_for_mobile
   #layout "calendars"
   def daily
     

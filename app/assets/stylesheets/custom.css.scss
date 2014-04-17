@@ -20,8 +20,8 @@ html {
 	overflow: scroll;
 }
 
-body {
-	padding-top: 155px;
+body.padded {
+	padding-top: 154px;
 }
 
 section {
@@ -65,7 +65,7 @@ textarea {
 	text-transform: uppercase; 
 	letter-spacing: -1px;  
 	line-height: 1;
-	width: 330px;
+	width: 400px;
 }
 
 .logo:hover {
@@ -195,13 +195,19 @@ aside {
 }
 
 /* forms */
+form{
+	margin-bottom: 0px;
+}
 input, textarea, select, .uneditable-input { 
 	border: 1px solid #bbb;
 	/*width: 100%;*/
-	padding: 5px;
-	height: auto;
-	/*@include box_sizing;*/
+	/*height: auto !important; */
+	margin-bottom: 0px !important;  
 	color: black;
+}
+
+select{
+	height: 28px;
 }
 
 .disabled_input{
@@ -217,7 +223,7 @@ input, textarea, select, .uneditable-input {
 }
 
 .input-sm {
-	width:75px;
+	width:85px;
 }
 
 .input-lrg{
@@ -225,13 +231,16 @@ input, textarea, select, .uneditable-input {
 }
 
 .input-med{
-	width:105px;
+	width:120px !important; 
 }
 .field {
 	margin-top:0px;
 	margin-right:10px !important;
+	vertical-align: center !important;
+    
+    -webkit-box-sizing: border-box !important; /* Safari/Chrome, other WebKit */
 	a{
-		margin-bottom:10px !important;
+		margin-bottom:0px !important;
 	}
 }
 

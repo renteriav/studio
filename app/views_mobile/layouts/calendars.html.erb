@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+  <%= include_gon(:init=>true) %>
+    <%= stylesheet_link_tag    "application", "/jquery/jquery.mobile.structure-1.4.2.min.css", "/jquery/jquery.mobile.theme-1.4.2.min.css", "/jquery/jquery.mobile.icons-1.4.2.min.css", "/jquery/jquery.mobile.inline-svg-1.4.2.min.css", "/jquery/jquery.mobile.inline-png-1.4.2.min.css", "/jquery/jquery-mobile-datebox/css/jqm-datebox.css", media: "all" %>
+    <%= javascript_include_tag "application", "/jquery/jquery.mobile-1.4.2.min.js", "/jquery/jquery.mobile.nestedlists.js", "/jquery/mobile-datepicker.js", "/jquery/jquery.mobile.datepicker.js", "/jquery/jquery-mobile-datebox/js/jqm-datebox.core.js", "/jquery/jquery-mobile-datebox/js/jqm-datebox.mode.calbox.js", "/jquery/jquery-mobile-datebox/js/jqm-datebox.mode.datebox.js" %>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  </head>
+  <body>
+    <div data-role="content">
+      <header class="mobile-header">Whitby Studio</header>
+      <%= yield %>
+    </div>
+  </body>
+</html>

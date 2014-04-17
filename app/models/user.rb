@@ -5,5 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :loginable, polymorphic: true
-  attr_accessible :email, :password, :password_confirmation, :loginable_type, :loginable_id
+  attr_accessible :email, :password, :password_confirmation, :loginable_type, :loginable_id, :remember_me
 end

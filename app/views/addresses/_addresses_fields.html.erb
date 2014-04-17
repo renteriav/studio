@@ -18,7 +18,7 @@
 </div>
 <div class="field inline"> 
   <%= f.label :state %>
-  <%= f.select :state, options_for_select(us_states, @selected), {:include_blank => false }, { class: "span2" } %>
+  <%= f.select :state, options_for_select(us_states, @selected), {:include_blank => false }, { class: "span2", 'data-role' =>'none' } %>
 </div>
 <div  class="inline">
 	<div>

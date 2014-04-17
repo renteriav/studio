@@ -1,7 +1,9 @@
 <% provide(:title, 'Update Teacher') %>
 <% provide(:button_message, 'Update Teacher') %>
 
-<h1>Editing teacher</h1>
+<% unless mobile_device? %>
+	<h1>Editing teacher</h1>
+<% end %>
 
 <%= render 'form' %>
 

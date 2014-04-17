@@ -1,4 +1,5 @@
 class TeachersController < ApplicationController
+  before_filter :check_for_mobile, :only => [:personal, :edit, :show]
 
   def index
     @teachers = Teacher.all

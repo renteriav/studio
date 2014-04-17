@@ -6,6 +6,29 @@ html, body{
 	font-family:helvetica;
 }
 
+h1.ui-title{
+	background-image: none !important;
+	background-color: transparent !important;
+	padding: 0px !important;
+}
+
+.ui-input-text{
+	width: 40%;
+	display: inline-block;
+}
+.ui-icon-datebox{
+
+	cursor: pointer !important;
+}
+#datebox{
+	height: 42px;
+	font-size: 17px;
+}
+
+.back-button{
+	margin-top: 4px !important;
+	width: 42.7%;
+}
 a.attendance_dialog:hover {
 	background-color: inherit !important;
 }
@@ -63,7 +86,6 @@ p.day{
 	font-weight:normal !important;
 	padding:0px 5px !important;
 	margin-right: 2px;
-	margin-bottom: 5px;
 	visibility: hidden;
 	color: rgb(102, 88, 116) !important;
 	text-shadow: 0px 0px !important;
@@ -90,10 +112,9 @@ span.ui-button-text{
 #date-select {
 	cursor: pointer;
 	width:110px;
-	height: 1.45em !important;
-	padding-bottom: 1px !important;
-	margin-top: 5px;
-
+	height: 1.5em !important;
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box; 
 }
 
 #grid-container{
@@ -187,6 +208,8 @@ td.time-header{
 	border-bottom: 1px solid black;
 	height:97px;
 	background-color:#EEE;
+	-moz-box-sizing: content-box; 
+	-webkit-box-sizing: content-box;
 }
 td.time-slot{
 	height:24px;

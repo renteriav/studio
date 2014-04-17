@@ -13,6 +13,8 @@ gem 'devise'
 gem 'thread_safe', '0.2.0'
 gem 'pg', '0.12.2'
 gem 'rspec-rails', '2.9.0'
+#gem 'jquery_mobile_rails'
+#gem 'jquery-mobile-rails-assets'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 #gem 'sqlite3'
