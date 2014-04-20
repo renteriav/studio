@@ -1,14 +1,28 @@
-<input type="text" id="datebox" class="ui-btn ui-btn-inline" data-role="datebox" data-options='{"mode": "datebox", "useTodayButton": true, "usePlaceholder": true, "useNewStyle": true, "useHeader": true, "useFocus": true, "themeButton": "b", "themeHeader": "b", "overrideTitleDateDialogLabel": "Choose Date", "overrideTooltip": "", "themeInput": "b"}' readonly="readonly">
-					
-<%= link_to "Back", root_path, class: "ui-btn ui-btn-inline back-button", "data-ajax" => "false" %></br>
-<h4>Your schedule for</br><%= @day %></h4>
+<div class="ui-grid-b">
+    <div class="ui-block-a"><%= link_to "Home", root_path, class: "ui-btn ui-corner-all ui-btn-icon-left ui-icon-home small-font home-button", "data-ajax" => "false"%>
+    </div>
+  <div class="ui-block-b">
+	  <input type="text" id="datebox" class="ui-btn ui-btn-inline small-font" data-role="datebox" data-options='{"mode": "calbox", "useTodayButton": true, "usePlaceholder": true, "useNewStyle": true, "useHeader": true, "useFocus": true, "themeButton": "b", "themeHeader": "b", "overrideTitleDateDialogLabel": "Choose Date", "overrideTooltip": "", "themeInput": "b"}' readonly="readonly">
+  </div>
+</div>
+
+<h4 class="center">Your schedule for</br><%= @day %></h4>
 <% if @lessons.any? %>
+<% @lessons.sort_by!{|obj|obj.start_time} %>
 	<% @lessons.each do |lesson| %>
 		<% @student = Student.find(lesson.student_id) %>
-		<p><%= "#{format_time lesson.start_time} #{@student.first} #{@student.last}" %></p>
+		<% lesson.status = "s" if lesson.status.nil? %>
+		<% @color = event_color(lesson.status) %>
+		<% @id = lesson.comp_id.split("-") %>
+		<% @query_string = @id[1]+"_id="+@id[0]+"&date="+@date.strftime('%d/%m/%Y') %>
+<div>
+	<div class="grid-seventy inline">	
+	<a href="<%= "/attendances/dialog?#{@query_string}" %>" data-rel="dialog" id = "<%= lesson.comp_id %>" class="event-mobile"><%= "#{format_time_short lesson.start_time} - #{format_time_short lesson.end_time} #{@student.first.first} #{@student.last}" %></a>
+	</div>
+	<div class="inline status-mobile"><%= status_name(lesson.status) %></div>
+</div>
 	<% end %>
 <% else %>
-<p> You don't have any lessons scheduled today.</p>
+<p> No lessons scheduled today.</p>
 <% end %>
-
 

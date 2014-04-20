@@ -1,5 +1,5 @@
-<%= form_for [@lesson, @attendance] do |f| %>
-	
+<%= form_for [@lesson, @attendance], :html => {'data-ajax' => 'false'} do |f| %>
+	<fieldset data-role="controlgroup" data-mini="true">
 	<label class="radio">
 	<%= f.radio_button :status, "s" %>Scheduled
 	</label>  
@@ -9,17 +9,18 @@
 	<label class="radio">
 		<%= f.radio_button :status, "m" %>Missed
 	</label>
-	<label class="radio">
+	<label class="radio" id="cancel-radio-label">
 		<%= f.radio_button :status, "c", id: "cancel_radio" %>Canceled
 	</label>
-	<label class = "checkbox disabled_input">
+</fieldset>
+	<label class = "checkbox disabled_input" id="cancel-cbx-label">
 		<%= check_box_tag "cancelation_email", "send", false, disabled: true, id: "cancel_cbx" %><i>Send cancelation email</i>   
 	</label>
-	
 	<%= f.hidden_field :date, :value => @date %>
 	<%= f.hidden_field :teacher_id, :value => @teacher_id %>
 
-  <div class="actions" style="display:none;">
-    <%= f.submit submit_button_message('add'), class: "btn btn-large btn-primary link-class", id: "submit" %>
+	<% mobile_device? ? @display = "block" : @display = "none" %>
+  <div class="actions" style="display: <%= @display %>;">
+    <%= f.submit submit_button_message('save'), class: "btn btn-large btn-primary link-class", id: "submit" %>
   </div>
 <% end %>

@@ -12,3 +12,46 @@
 	letter-spacing: -1px;  
 	line-height: 1;
 }
+
+.ui-icon-datebox{
+	cursor: pointer !important;
+}
+
+#datebox{
+	height: 31px;
+}
+
+.grid-seventy{
+	width: 70%;
+	padding: 4px;
+}
+.event-mobile{
+	color: black !important;
+	vertical-align: middle;
+	min-width: 100%;
+	opacity:0.6;
+	font-weight: normal !important;
+	font-family: verdana,arial,helvetica,sans-serif;
+	font-size: 14px;
+	text-shadow: none !important;
+}
+.event-mobile:hover{
+	text-decoration: none;
+	background-color: transparent;
+}
+.radio{
+	cursor: pointer;
+}
+.status-mobile{
+	font-size: 14px;
+	width: 23%;
+	padding: 4px;
+}
+
+.small-font{
+	font-size: 12px !important;
+}
+.home-button{
+	margin-top: 8px !important;
+}
+

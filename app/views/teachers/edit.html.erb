@@ -3,9 +3,13 @@
 
 <% unless mobile_device? %>
 	<h1>Editing teacher</h1>
+<% else %>
+	<%= link_to "Home", root_path, class: "ui-btn ui-corner-all ui-btn-icon-left ui-icon-home", "data-ajax" => "false"%>
 <% end %>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @teacher %> |
-<%= link_to 'Back', teachers_path %>
+<% unless mobile_device? %>
+	<%= link_to 'Show', @teacher %> |
+	<%= link_to 'Back', teachers_path %>
+<% end %>

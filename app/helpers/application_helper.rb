@@ -37,6 +37,10 @@ module ApplicationHelper
       t.strftime("%I:%M %p") 
     end
     
+    def format_time_short(t)
+      t.strftime("%l:%M") 
+    end
+    
     def format_day(d)
       d.strftime("%A, %b #{d.day.ordinalize}, %Y")
     end
