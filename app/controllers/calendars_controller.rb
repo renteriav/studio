@@ -19,7 +19,7 @@ class CalendarsController < ApplicationController
     if params[:date]
       @date = Time.at((params[:date]).to_i).midnight
     else
-      @date = Time.now.midnight
+      @date = Time.now
     end
     gon.date = @date.strftime('%m/%d/%Y')
     gon.ruby_date = @date.strftime('%d/%m/%Y')
@@ -48,6 +48,7 @@ class CalendarsController < ApplicationController
     
       @lessons.each do |lesson|
       lesson.comp_id = lesson.id.to_s + "-lesson"
+      lesson.attendance_record = "N"
       end
     end
     
@@ -64,15 +65,16 @@ class CalendarsController < ApplicationController
           if @lesson_index
            @lessons[@lesson_index].status = attendance.status
            @lessons[@lesson_index].teacher_id = attendance.teacher_id
+           @lessons[@lesson_index].attendance_record = "Y"
           else
             @lesson = Lesson.find(attendance.attendable_id)
-            @sub_lesson = Lesson.new(comp_id: @lesson.id.to_s + "-lesson", student_id: @lesson.student_id, teacher_id: attendance.teacher_id, room_id: @lesson.room_id, start_time: @lesson.start_time, end_time: @lesson.end_time, status: attendance.status)
+            @sub_lesson = Lesson.new(comp_id: @lesson.id.to_s + "-lesson", student_id: @lesson.student_id, teacher_id: attendance.teacher_id, room_id: @lesson.room_id, start_time: @lesson.start_time, end_time: @lesson.end_time, status: attendance.status, attendance_record: "Y")
             @lessons = @lessons.to_a.push(@sub_lesson)
           end
                  
         when "Extra"
           @extra = Extra.find(attendance.attendable_id)
-          @extra_lesson = Lesson.new(comp_id: @extra.id.to_s + "-extra", student_id: @extra.student_id, teacher_id: @extra.teacher_id, room_id: @extra.room_id, start_time: @extra.start_time, end_time: @extra.end_time, status: attendance.status)
+          @extra_lesson = Lesson.new(comp_id: @extra.id.to_s + "-extra", student_id: @extra.student_id, teacher_id: @extra.teacher_id, room_id: @extra.room_id, start_time: @extra.start_time, end_time: @extra.end_time, status: attendance.status, attendance_record: "Y")
           @lessons = @lessons.to_a.push(@extra_lesson)
         end
       end
@@ -83,10 +85,15 @@ class CalendarsController < ApplicationController
       @student_name = @student.first + " " + @student.last.first + "."
       @start_time = view_context.format_time_short(lesson.start_time)
       lesson.status.nil? ? @status = view_context.status_name("s", "plain") : @status = view_context.status_name(lesson.status, "plain")
+      @comp_id = lesson.comp_id
+      @attendance_record = lesson.attendance_record
       @lesson_hash = Hash.new
       @lesson_hash["student"] = @student_name
       @lesson_hash["status"] = @status
       @lesson_hash["start_time"] = @start_time
+      @lesson_hash["end_time"] = @end_time
+      @lesson_hash["comp_id"] = @comp_id
+      @lesson_hash["attendance_record"] = @attendance_record
       @lessons_remote.push(@lesson_hash)
     end
     respond_to do |format|

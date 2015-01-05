@@ -28,8 +28,9 @@ class Lesson < ActiveRecord::Base
   
   attr_accessor :status
   attr_accessor :comp_id
+  attr_accessor :attendance_record
   
-  attr_accessible :end_date, :end_time, :frequency, :instrument_id, :room_id, :start_date, :start_time, :student_id, :teacher_id, :weekday, :attendances_attributes, :comp_id, :status
+  attr_accessible :end_date, :end_time, :frequency, :instrument_id, :room_id, :start_date, :start_time, :student_id, :teacher_id, :weekday, :attendances_attributes, :comp_id, :status, :attendance_record
   
   validates :room_id, presence: { message: "Select a room." }
   validates :teacher_id, presence: { message: "Select a teacher." }
