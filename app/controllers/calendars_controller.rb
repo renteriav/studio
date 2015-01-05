@@ -1,13 +1,13 @@
 class CalendarsController < ApplicationController
+  before_action :authenticate_user!
   before_filter :check_for_mobile
+  allow_oauth!
   #layout "calendars"
   def daily
     
-    if params[:teacher_id]
-      if current_user
-        if current_user.loginable_type == "Teacher"
-          @teacher = Teacher.find(current_user.loginable_id)
-        end
+    if current_user
+      if current_user.loginable_type == "Teacher"
+        @teacher = Teacher.find(current_user.loginable_id)
       end
     end
     
@@ -15,9 +15,7 @@ class CalendarsController < ApplicationController
     @num_rooms = Room.count
     @num_rows = 56
     @first_slot_time = Time.utc(2000,1,1,6,0,0)
-    if params[:teacher_id]
-      @teacher_id = params[:teacher_id]
-    end
+
     if params[:date]
       @date = Time.at((params[:date]).to_i).midnight
     else
@@ -42,7 +40,7 @@ class CalendarsController < ApplicationController
       @lessons = @sharing
       
     else
-      if @teacher != nil
+      if @teacher #!= nil
       @lessons = @teacher.lessons.where("weekday = ? AND start_date <= ? AND (end_date >= ? OR end_date IS NULL)", @day_of_week, @date, @date).order("start_time ASC, end_time ASC")
       else
       @lessons = Lesson.where("weekday = ? AND start_date <= ? AND (end_date >= ? OR end_date IS NULL)", @day_of_week, @date, @date).order("start_time ASC, end_time ASC")
@@ -53,8 +51,11 @@ class CalendarsController < ApplicationController
       end
     end
     
-    @attendances = Attendance.where("date = ?", @date.to_date)
-    
+    if @teacher != nil
+      @attendances = Attendance.where("date = ? AND teacher_id=?", @date.to_date, @teacher.id)
+    else
+      @attendances = Attendance.where("date = ?", @date.to_date )  
+    end
     if @attendances.any?
       @attendances.each do |attendance|
         case attendance.attendable_type
@@ -76,6 +77,24 @@ class CalendarsController < ApplicationController
         end
       end
     end
+    @lessons_remote = Array.new
+    @lessons.each do |lesson|
+      @student = Student.find(lesson.student_id)
+      @student_name = @student.first + " " + @student.last.first + "."
+      @start_time = view_context.format_time_short(lesson.start_time)
+      lesson.status.nil? ? @status = view_context.status_name("s", "plain") : @status = view_context.status_name(lesson.status, "plain")
+      @lesson_hash = Hash.new
+      @lesson_hash["student"] = @student_name
+      @lesson_hash["status"] = @status
+      @lesson_hash["start_time"] = @start_time
+      @lessons_remote.push(@lesson_hash)
+    end
+    respond_to do |format|
+      format.html
+      format.json { render :json => @lessons_remote }
+    end
+      
+      
   end
   
   def weekly
@@ -157,7 +176,10 @@ class CalendarsController < ApplicationController
         end
       end
     end
-    
+    respond_to do |format|
+      format.html
+      format.json { render :json => @lessons }
+    end
   end
   
 end

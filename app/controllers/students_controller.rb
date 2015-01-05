@@ -1,6 +1,14 @@
 class StudentsController < ApplicationController
+  before_filter :authenticate_user!
+  allow_oauth! :except => :delete
+  
   def index
     @students = Student.order("last ASC")
+    respond_to do |format|
+      format.html
+      format.json { render :json => @students }
+    end
+      
   end
 
   def new
@@ -74,6 +82,21 @@ class StudentsController < ApplicationController
     for sharing in @upcoming_sharings
       @sharing = DetailedSharing.where("sharing_id = ? AND student_id = ?", sharing.id, @student.id).first
       @upcoming_detailed_sharings.push(@sharing) unless @sharing.nil?     
+    end
+    
+      @json_student = @student.attributes
+      @customer = Customer.find(@student.customer_id)
+      @json_student["customer"] = @customer.attributes
+      @json_student["customer"]["telephones"] = @customer.telephones
+      @mailing_address = @customer.preferred_addresses.where("description = 'mailing'")
+      if @mailing_address.any?
+       @mailing_address_id = @mailing_address.first.id
+        @json_student["customer"]["mailing_address"] = Address.find(@mailing_address_id)
+      end
+    
+    respond_to do |format|
+      format.html
+      format.json { render :json => @json_student }
     end
   end
   

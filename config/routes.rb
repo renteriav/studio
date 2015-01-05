@@ -1,5 +1,6 @@
 Studio::Application.routes.draw do
 
+  mount_opro_oauth
   devise_for :users, :controllers => {:sessions => "sessions"} 
   devise_scope :user do
 
@@ -15,6 +16,8 @@ Studio::Application.routes.draw do
       root :to => 'sessions#new', as: :unauthenticated_root
     end
   end
+  
+  resources   :users
 
   get '/daily', to: 'calendars#daily'
   
@@ -46,6 +49,8 @@ Studio::Application.routes.draw do
   end
   
   get 'teachers_cbx', to: 'sharings#teachers_cbx'
+  
+  get 'teacher', to: 'teachers#personal'
   
   get 'sharing_search', to: 'detailed_sharings#sharing_search'
   

@@ -19,7 +19,7 @@
 	<div class="grid-seventy inline">	
 	<a href="<%= "/attendances/dialog?#{@query_string}" %>" data-rel="dialog" id = "<%= lesson.comp_id %>" class="event-mobile"><%= "#{format_time_short lesson.start_time} - #{format_time_short lesson.end_time} #{@student.first.first} #{@student.last}" %></a>
 	</div>
-	<div class="inline status-mobile"><%= status_name(lesson.status) %></div>
+	<div class="inline status-mobile"><%= status_name(lesson.status, "html") %></div>
 </div>
 	<% end %>
 <% else %>

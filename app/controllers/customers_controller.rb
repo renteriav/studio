@@ -1,6 +1,10 @@
 class CustomersController < ApplicationController
   def index
     @customers = Customer.order("last ASC")
+    respond_to do |format|
+      format.html
+      format.json { render :json => @customers }
+    end
   end
 
   def show

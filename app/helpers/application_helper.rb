@@ -54,18 +54,33 @@ module ApplicationHelper
 
     end  
     
-    def status_name(status)
-      case status
-      when "s" 
-        '<span class="text-info">Scheduled</span>'.html_safe
-      when "c" 
-        '<span class="text-warning">Canceled</span>'.html_safe
-      when "a" 
-        '<span class="text-success">Attended</span>'.html_safe
-      when "m" 
-        '<span class="text-error">Missed</span>'.html_safe
-      when "u" 
-      '<span style ="color:orange;">Needs Attention</span>'.html_safe
+    def status_name(status, option)
+      if option == "html"
+        case status
+        when "s" 
+          '<span class="text-info">Scheduled</span>'.html_safe
+        when "c" 
+          '<span class="text-warning">Canceled</span>'.html_safe
+        when "a" 
+          '<span class="text-success">Attended</span>'.html_safe
+        when "m" 
+          '<span class="text-error">Missed</span>'.html_safe
+        when "u" 
+          '<span style ="color:orange;">Needs Attention</span>'.html_safe
+        end
+      elsif option == "plain"
+        case status
+        when "s" 
+          'Scheduled'
+        when "c" 
+          'Canceled'
+        when "a" 
+          'Attended'
+        when "m" 
+          'Missed'
+        when "u"
+          'N/A'
+        end
       end
     end
     

@@ -35,7 +35,7 @@
 	
 	
 	<% @month_lessons.each do |attendance| %>
-		<% @status = status_name(attendance.status) %>
+		<% @status = status_name(attendance.status, "web") %>
 		<% @day = format_day(attendance.date) %>
 		<% @start = format_time(lesson.start_time) %>
 		<% @end = format_time(lesson.end_time) %>
@@ -75,9 +75,9 @@
 		<% @teacher = Teacher.find(extra.teacher_id) %>
 		<% @lesson_time = join_date_time(extra.date, extra.end_time) %>
 		<% if @lesson_time < Time.now and extra.attendances.first.status == "s" %>
-			<%@status = status_name("u") %>
+			<%@status = status_name("u", "web") %>
 		<% else %>
-			<% @status = status_name(extra.attendances.first.status) %>
+			<% @status = status_name(extra.attendances.first.status, "web") %>
 		<% end %>
 		
 <tr>

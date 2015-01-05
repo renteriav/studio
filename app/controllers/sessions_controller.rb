@@ -1,4 +1,6 @@
 class SessionsController < Devise::SessionsController
+  
+  skip_before_filter :authenticate_user!
   before_filter :check_for_mobile, :only => [:new]
 
   prepend_before_filter :require_no_authentication, only: [ :new, :create ]
